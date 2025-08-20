@@ -1,0 +1,141 @@
+<svg
+  viewBox="0 0 900 520"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-labelledby="title desc"
+  style="max-width:100%;height:auto"
+>
+  <title id="title">Chatting Illustration</title>
+  <desc id="desc">Two people chatting online with animated message bubbles and typing indicator.</desc>
+
+  <!-- ====== THEME (edit these) ====== -->
+  <defs>
+    <linearGradient id="bggrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f9f9ff"/>
+      <stop offset="1" stop-color="#e4e6ff"/>
+    </linearGradient>
+    <style>
+      :root {
+        --accent: #6c63ff;
+        --accent-2: #00bfa6;
+        --ink: #1f2240;
+        --muted: #7a7f9a;
+        --card: #ffffff;
+        --shadow: rgba(31, 34, 64, .12);
+      }
+      .card { fill: var(--card); }
+      .ink { fill: var(--ink); }
+      .muted { fill: var(--muted); }
+      .accent { fill: var(--accent); }
+      .accent2 { fill: var(--accent-2); }
+      .shadow { filter: drop-shadow(0 6px 18px var(--shadow)); }
+      .stroke { stroke: #e6e8fb; stroke-width: 2; }
+      .round { stroke-linecap: round; stroke-linejoin: round; }
+      .bubble { rx: 14; }
+      .typing-dot { animation: blink 1.2s infinite; }
+      .typing-dot:nth-child(2) { animation-delay: .2s; }
+      .typing-dot:nth-child(3) { animation-delay: .4s; }
+      .float-slow { animation: float 6s ease-in-out infinite; }
+      .float-fast { animation: float 4.5s ease-in-out infinite; }
+      .pulse { animation: pulse 2.8s ease-in-out infinite; }
+      @keyframes float {
+        0%,100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+      @keyframes pulse {
+        0%,100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.03); opacity: .92; }
+      }
+      @keyframes blink {
+        0%, 20% { opacity: .25; }
+        50% { opacity: 1; }
+        100% { opacity: .25; }
+      }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="520" fill="url(#bggrad)"/>
+
+  <!-- Decorative waves -->
+  <path d="M0,430 C180,390 300,500 470,470 C650,440 780,500 900,460 L900,520 L0,520 Z" fill="#dfe3ff" opacity=".5"/>
+  <path d="M0,450 C180,410 300,520 470,490 C650,460 780,520 900,480 L900,520 L0,520 Z" fill="#cfd5ff" opacity=".35"/>
+
+  <!-- Left device (caller) -->
+  <g class="float-slow">
+    <rect x="70" y="80" width="320" height="360" rx="22" class="card shadow"/>
+    <rect x="90" y="120" width="280" height="240" rx="12" fill="#f4f5ff"/>
+    <!-- avatar -->
+    <circle cx="230" cy="170" r="40" fill="#ffd3b6"/>
+    <circle cx="230" cy="165" r="40" fill="#ffc7a3"/>
+    <path d="M190,205 q40,30 80,0 v20 a40,40 0 0 1 -80,0 z" fill="#1f2240"/>
+    <circle cx="212" cy="160" r="5" class="ink"/>
+    <circle cx="248" cy="160" r="5" class="ink"/>
+    <path d="M218 178 q12 10 24 0" stroke="#1f2240" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- name bar -->
+    <rect x="90" y="120" width="280" height="36" rx="10" fill="#e9ebff"/>
+    <circle cx="110" cy="138" r="6" class="accent"/>
+    <rect x="125" y="130" width="80" height="16" rx="8" class="muted"/>
+    <!-- messages -->
+    <rect x="110" y="250" width="150" height="38" class="accent bubble pulse"/>
+    <rect x="120" y="258" width="120" height="8" rx="4" fill="#ffffff" opacity=".95"/>
+    <rect x="120" y="272" width="90" height="8" rx="4" fill="#ffffff" opacity=".9"/>
+
+    <rect x="150" y="300" width="180" height="38" class="card bubble shadow"/>
+    <rect x="160" y="308" width="150" height="8" rx="4" class="muted"/>
+    <rect x="160" y="322" width="110" height="8" rx="4" class="muted" opacity=".8"/>
+
+    <!-- bottom controls -->
+    <rect x="90" y="370" width="280" height="48" rx="12" fill="#eef0ff" class="stroke"/>
+    <circle cx="118" cy="394" r="10" class="accent"/>
+    <rect x="140" y="384" width="160" height="20" rx="10" fill="#d9dcff"/>
+    <circle cx="318" cy="394" r="10" class="accent2"/>
+  </g>
+
+  <!-- Right device (other caller) -->
+  <g class="float-fast">
+    <rect x="510" y="60" width="320" height="380" rx="22" class="card shadow"/>
+    <rect x="530" y="100" width="280" height="240" rx="12" fill="#f4f5ff"/>
+    <!-- avatar -->
+    <circle cx="670" cy="165" r="42" fill="#c0eaff"/>
+    <circle cx="670" cy="160" r="42" fill="#9dd8ff"/>
+    <path d="M630,202 q40,30 80,0 v18 a40,40 0 0 1 -80,0 z" fill="#1f2240"/>
+    <circle cx="652" cy="155" r="5" class="ink"/>
+    <circle cx="688" cy="155" r="5" class="ink"/>
+    <path d="M658 173 q12 10 24 0" stroke="#1f2240" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <!-- name bar -->
+    <rect x="530" y="100" width="280" height="36" rx="10" fill="#e9ebff"/>
+    <circle cx="550" cy="118" r="6" class="accent2"/>
+    <rect x="565" y="110" width="90" height="16" rx="8" class="muted"/>
+    <!-- messages -->
+    <rect x="610" y="240" width="180" height="38" class="card bubble shadow"/>
+    <rect x="620" y="248" width="150" height="8" rx="4" class="muted"/>
+    <rect x="620" y="262" width="110" height="8" rx="4" class="muted" opacity=".8"/>
+
+    <rect x="560" y="292" width="160" height="38" class="accent2 bubble pulse"/>
+    <rect x="570" y="300" width="130" height="8" rx="4" fill="#ffffff" opacity=".95"/>
+    <rect x="570" y="314" width="90" height="8" rx="4" fill="#ffffff" opacity=".9"/>
+
+    <!-- typing indicator -->
+    <g transform="translate(640,350)">
+      <rect x="-60" y="-16" width="120" height="32" class="card bubble shadow"/>
+      <circle cx="-20" cy="0" r="4" class="muted typing-dot"/>
+      <circle cx="0" cy="0" r="4" class="muted typing-dot"/>
+      <circle cx="20" cy="0" r="4" class="muted typing-dot"/>
+    </g>
+  </g>
+
+  <!-- Connection line + icons -->
+  <g class="round" stroke="#cfd2ff" fill="none">
+    <path d="M390,200 C470,150 640,150 720,200" stroke-width="3" />
+    <circle cx="390" cy="200" r="4" class="accent"/>
+    <circle cx="720" cy="200" r="4" class="accent2"/>
+  </g>
+
+  <!-- Tiny floating elements -->
+  <g class="float-fast">
+    <circle cx="120" cy="70" r="6" class="accent" opacity=".8"/>
+    <circle cx="840" cy="80" r="6" class="accent2" opacity=".8"/>
+    <circle cx="460" cy="60" r="4" class="muted" opacity=".7"/>
+  </g>
+</svg>

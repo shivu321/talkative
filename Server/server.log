@@ -1,0 +1,342 @@
+[2025-08-20T12:25:20.204Z] [WARN] Socket disconnected: zKhB1kE5i7Wv0FVbAAAL
+[2025-08-20T12:25:20.397Z] [INFO] Socket connected: P20lxEIkGuNajPdSAAAN
+[2025-08-20T12:25:20.400Z] [INFO] User registered: sessionId=2x32kghl5ws
+[2025-08-20T12:25:22.136Z] [WARN] Socket disconnected: P20lxEIkGuNajPdSAAAN
+[2025-08-20T12:25:22.290Z] [INFO] Socket connected: RwJivvgwC6v4COq8AAAP
+[2025-08-20T12:25:22.292Z] [INFO] User registered: sessionId=2x32kghl5ws
+[2025-08-20T12:25:27.985Z] [INFO] User queued: 2x32kghl5ws | mode=chat
+[2025-08-20T12:25:27.989Z] [WARN] Socket disconnected: RwJivvgwC6v4COq8AAAP
+[2025-08-20T12:25:28.000Z] [INFO] Socket connected: OTBJpoZVtTMxJ2zoAAAR
+[2025-08-20T12:25:28.004Z] [INFO] User registered: sessionId=2x32kghl5ws
+[2025-08-20T12:29:58.466Z] [WARN] Socket disconnected: OTBJpoZVtTMxJ2zoAAAR
+[2025-08-20T12:29:58.762Z] [INFO] Socket connected: wgZg3YZCXxl261jFAAAT
+[2025-08-20T12:29:58.764Z] [INFO] User registered: sessionId=2x32kghl5ws
+[2025-08-20T12:30:20.989Z] [WARN] Socket disconnected: BxzdJxJeV46nDkslAAAJ
+[2025-08-20T12:30:21.247Z] [INFO] Socket connected: m-ewxp5y5FVbMxsFAAAV
+[2025-08-20T12:30:21.253Z] [INFO] User registered: sessionId=vugksl47tq
+[2025-08-20T12:30:22.592Z] [WARN] Socket disconnected: m-ewxp5y5FVbMxsFAAAV
+[2025-08-20T12:30:22.849Z] [INFO] Socket connected: YIzC9O51Mq2sODdLAAAX
+[2025-08-20T12:30:22.851Z] [INFO] User registered: sessionId=vugksl47tq
+[2025-08-20T12:30:32.930Z] [INFO] User queued: vugksl47tq | mode=video
+[2025-08-20T12:30:32.933Z] [WARN] Socket disconnected: YIzC9O51Mq2sODdLAAAX
+[2025-08-20T12:30:32.945Z] [INFO] Socket connected: hXE4LcmN5v4VVv3NAAAZ
+[2025-08-20T12:30:32.947Z] [INFO] User registered: sessionId=vugksl47tq
+[2025-08-20T12:30:36.787Z] [INFO] User queued: 2x32kghl5ws | mode=video
+[2025-08-20T12:30:36.790Z] [WARN] Socket disconnected: wgZg3YZCXxl261jFAAAT
+[2025-08-20T12:30:36.798Z] [INFO] Socket connected: b86i1mQtEOnCL3E-AAAb
+[2025-08-20T12:30:36.800Z] [INFO] User registered: sessionId=2x32kghl5ws
+[2025-08-20T12:31:37.875Z] [WARN] Socket disconnected: hXE4LcmN5v4VVv3NAAAZ
+[2025-08-20T12:31:37.891Z] [INFO] Socket connected: M5T1zYX3hzdTu72zAAAd
+[2025-08-20T12:31:37.893Z] [INFO] User registered: sessionId=vugksl47tq
+[2025-08-20T12:31:48.207Z] [WARN] Socket disconnected: M5T1zYX3hzdTu72zAAAd
+[2025-08-20T12:31:48.477Z] [INFO] Socket connected: LuQZ8JrUnXuzSbhWAAAf
+[2025-08-20T12:31:54.907Z] [WARN] Socket disconnected: LuQZ8JrUnXuzSbhWAAAf
+[2025-08-20T12:31:55.050Z] [INFO] Socket connected: uz7Cy41n5eSLSgfTAAAh
+[2025-08-20T12:31:55.112Z] [WARN] Socket disconnected: uz7Cy41n5eSLSgfTAAAh
+[2025-08-20T12:31:55.296Z] [INFO] Socket connected: o3oIcwKWvIM9ldRoAAAj
+[2025-08-20T12:31:55.326Z] [WARN] Socket disconnected: o3oIcwKWvIM9ldRoAAAj
+[2025-08-20T12:31:55.500Z] [INFO] Socket connected: aisKLQaRCiWkJhAZAAAl
+[2025-08-20T12:32:08.273Z] [WARN] Socket disconnected: b86i1mQtEOnCL3E-AAAb
+[2025-08-20T12:32:08.290Z] [INFO] Socket connected: oITxSBNYbfkpTq7zAAAn
+[2025-08-20T12:32:08.291Z] [INFO] User registered: sessionId=2x32kghl5ws
+[2025-08-20T12:32:09.474Z] [INFO] User queued: 2x32kghl5ws | mode=chat
+[2025-08-20T12:32:09.476Z] [WARN] Socket disconnected: oITxSBNYbfkpTq7zAAAn
+[2025-08-20T12:32:09.491Z] [INFO] Socket connected: Ty7Q-dWyB-5c01yYAAAp
+[2025-08-20T12:32:09.493Z] [INFO] User registered: sessionId=2x32kghl5ws
+[2025-08-20T12:32:10.626Z] [WARN] Socket disconnected: Ty7Q-dWyB-5c01yYAAAp
+[2025-08-20T12:32:10.642Z] [INFO] Socket connected: vpqoGp7ON7GpMcdPAAAr
+[2025-08-20T12:32:10.643Z] [INFO] User registered: sessionId=2x32kghl5ws
+[2025-08-20T12:32:24.715Z] [WARN] Socket disconnected: vpqoGp7ON7GpMcdPAAAr
+[2025-08-20T12:32:24.891Z] [INFO] Socket connected: nQtW-2TwzQb5z734AAAt
+[2025-08-20T12:32:28.286Z] [WARN] Socket disconnected: nQtW-2TwzQb5z734AAAt
+[2025-08-20T12:32:28.496Z] [INFO] Socket connected: 2mPl1S0UIS8EubJEAAAv
+[2025-08-20T12:32:28.853Z] [WARN] Socket disconnected: 2mPl1S0UIS8EubJEAAAv
+[2025-08-20T12:32:29.008Z] [INFO] Socket connected: YbU1N9hf-cbE1MsBAAAx
+[2025-08-20T12:32:29.129Z] [WARN] Socket disconnected: YbU1N9hf-cbE1MsBAAAx
+[2025-08-20T12:32:29.281Z] [INFO] Socket connected: REwNzQaKEQGHJY-TAAAz
+[2025-08-20T12:32:53.234Z] [WARN] Socket disconnected: REwNzQaKEQGHJY-TAAAz
+[2025-08-20T12:32:53.701Z] [INFO] Socket connected: yd5wjWZql9dfJNeBAAA1
+[2025-08-20T12:33:02.460Z] [WARN] Socket disconnected: yd5wjWZql9dfJNeBAAA1
+[2025-08-20T12:33:02.595Z] [INFO] Socket connected: -8VaaAuYsPLqyiDfAAA3
+[2025-08-20T12:33:39.149Z] [WARN] Socket disconnected: -8VaaAuYsPLqyiDfAAA3
+[2025-08-20T12:33:39.157Z] [INFO] Socket connected: KDNQWYvqbqn3JRSWAAA5
+[2025-08-20T12:33:39.161Z] [WARN] Socket disconnected: aisKLQaRCiWkJhAZAAAl
+[2025-08-20T12:33:39.196Z] [INFO] Socket connected: NWMeQxOVVcRgW9iIAAA7
+[2025-08-20T12:33:40.759Z] [WARN] Socket disconnected: KDNQWYvqbqn3JRSWAAA5
+[2025-08-20T12:33:40.924Z] [INFO] Socket connected: 60MwNxgolNX5NXl-AAA9
+[2025-08-20T12:33:41.867Z] [WARN] Socket disconnected: 60MwNxgolNX5NXl-AAA9
+[2025-08-20T12:33:42.075Z] [INFO] Socket connected: lFitkgdsyKrpznjyAAA_
+[2025-08-20T12:33:42.139Z] [WARN] Socket disconnected: lFitkgdsyKrpznjyAAA_
+[2025-08-20T12:33:42.265Z] [INFO] Socket connected: HOpuPG-6rPm_ZwunAABB
+[2025-08-20T12:33:42.321Z] [WARN] Socket disconnected: HOpuPG-6rPm_ZwunAABB
+[2025-08-20T12:33:42.441Z] [INFO] Socket connected: eaNfvCJlJ58QvW4FAABD
+[2025-08-20T12:33:47.139Z] [WARN] Socket disconnected: NWMeQxOVVcRgW9iIAAA7
+[2025-08-20T12:33:47.143Z] [WARN] Socket disconnected: eaNfvCJlJ58QvW4FAABD
+[2025-08-20T12:33:47.151Z] [INFO] Socket connected: yApGFkP2XCZbFL5_AABG
+[2025-08-20T12:33:47.165Z] [INFO] Socket connected: Lw3Mo08UJf0S9wClAABH
+[2025-08-20T12:33:59.142Z] [WARN] Socket disconnected: Lw3Mo08UJf0S9wClAABH
+[2025-08-20T12:33:59.146Z] [WARN] Socket disconnected: yApGFkP2XCZbFL5_AABG
+[2025-08-20T12:33:59.152Z] [INFO] Socket connected: AKDhTi1oUTGnO-OPAABK
+[2025-08-20T12:33:59.161Z] [INFO] Socket connected: U5Mts5-U0s6qQZxXAABL
+[2025-08-20T12:34:00.570Z] [WARN] Socket disconnected: AKDhTi1oUTGnO-OPAABK
+[2025-08-20T12:34:00.680Z] [INFO] Socket connected: hII02Ln53x7NTSlKAABN
+[2025-08-20T12:34:02.462Z] [WARN] Socket disconnected: hII02Ln53x7NTSlKAABN
+[2025-08-20T12:34:02.565Z] [INFO] Socket connected: t1RqjJ8DXdUUV8_XAABP
+[2025-08-20T12:34:02.660Z] [WARN] Socket disconnected: t1RqjJ8DXdUUV8_XAABP
+[2025-08-20T12:34:02.762Z] [INFO] Socket connected: pRLtveWKMF4hE5ICAABR
+[2025-08-20T12:34:02.788Z] [WARN] Socket disconnected: pRLtveWKMF4hE5ICAABR
+[2025-08-20T12:34:03.038Z] [INFO] Socket connected: ZdM8xlv9YEqj2392AABT
+[2025-08-20T12:34:20.139Z] [WARN] Socket disconnected: U5Mts5-U0s6qQZxXAABL
+[2025-08-20T12:34:20.147Z] [WARN] Socket disconnected: ZdM8xlv9YEqj2392AABT
+[2025-08-20T12:34:20.159Z] [INFO] Socket connected: kozym4X4kTLgLP5zAABW
+[2025-08-20T12:34:20.162Z] [INFO] Socket connected: 9dLy_QIxM_XKTWXGAABX
+[2025-08-20T12:34:21.322Z] [WARN] Socket disconnected: 9dLy_QIxM_XKTWXGAABX
+[2025-08-20T12:34:21.430Z] [INFO] Socket connected: 73MceEfzhugeY68nAABZ
+[2025-08-20T12:34:22.292Z] [WARN] Socket disconnected: 73MceEfzhugeY68nAABZ
+[2025-08-20T12:34:22.424Z] [INFO] Socket connected: TYOMD2c5bGtL1BMHAABb
+[2025-08-20T12:34:22.493Z] [WARN] Socket disconnected: TYOMD2c5bGtL1BMHAABb
+[2025-08-20T12:34:22.593Z] [INFO] Socket connected: i_VNzw47LORrMeLpAABd
+[2025-08-20T12:34:22.659Z] [WARN] Socket disconnected: i_VNzw47LORrMeLpAABd
+[2025-08-20T12:34:22.766Z] [INFO] Socket connected: EXXOXtgK9oxC4VAHAABf
+[2025-08-20T12:34:22.881Z] [WARN] Socket disconnected: EXXOXtgK9oxC4VAHAABf
+[2025-08-20T12:34:22.982Z] [INFO] Socket connected: -faTFM3-1I6QQsrJAABh
+[2025-08-20T12:34:23.084Z] [WARN] Socket disconnected: -faTFM3-1I6QQsrJAABh
+[2025-08-20T12:34:23.193Z] [INFO] Socket connected: Nz2LxN3Nn31tphdYAABj
+[2025-08-20T12:34:23.212Z] [WARN] Socket disconnected: Nz2LxN3Nn31tphdYAABj
+[2025-08-20T12:34:23.448Z] [INFO] Socket connected: wGq_ypSfzoKwBx7NAABl
+[2025-08-20T12:35:13.140Z] [WARN] Socket disconnected: kozym4X4kTLgLP5zAABW
+[2025-08-20T12:35:13.146Z] [WARN] Socket disconnected: wGq_ypSfzoKwBx7NAABl
+[2025-08-20T12:35:13.155Z] [INFO] Socket connected: f32TNPY8OKcAPGSwAABo
+[2025-08-20T12:35:13.160Z] [INFO] Socket connected: PMBefrz4iCUOZlnpAABp
+[2025-08-20T12:35:21.479Z] [WARN] Socket disconnected: f32TNPY8OKcAPGSwAABo
+[2025-08-20T12:35:22.377Z] [INFO] Socket connected: INf_c9Ay9TG87CfRAABr
+[2025-08-20T12:35:22.381Z] [WARN] Socket disconnected: INf_c9Ay9TG87CfRAABr
+[2025-08-20T12:35:22.572Z] [INFO] Socket connected: dLTBecZik-xIxkfUAABt
+[2025-08-20T12:36:44.556Z] [WARN] Socket disconnected: dLTBecZik-xIxkfUAABt
+[2025-08-20T12:36:57.867Z] [INFO] Received consent request
+[2025-08-20T12:36:57.917Z] [INFO] Consent saved for sessionId=w0uo7pjmkbm
+[2025-08-20T12:36:57.939Z] [INFO] Socket connected: 6WJxah4ti56yJx-UAABv
+[2025-08-20T12:36:57.941Z] [INFO] User registered: sessionId=w0uo7pjmkbm
+[2025-08-20T12:37:04.606Z] [WARN] Socket disconnected: 6WJxah4ti56yJx-UAABv
+[2025-08-20T12:37:04.804Z] [INFO] Socket connected: kG0VGMhtzTDvd3mRAABx
+[2025-08-20T12:37:04.811Z] [INFO] User registered: sessionId=w0uo7pjmkbm
+[2025-08-20T12:37:09.473Z] [WARN] Socket disconnected: PMBefrz4iCUOZlnpAABp
+[2025-08-20T12:37:17.425Z] [INFO] Received consent request
+[2025-08-20T12:37:17.434Z] [INFO] Consent saved for sessionId=1ntdo3apkbr
+[2025-08-20T12:37:17.461Z] [INFO] Socket connected: rgWEGldjPYqmMOCxAABz
+[2025-08-20T12:37:17.463Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T12:37:20.346Z] [INFO] User queued: 1ntdo3apkbr | mode=chat
+[2025-08-20T12:37:23.422Z] [INFO] User queued: w0uo7pjmkbm | mode=chat
+[2025-08-20T12:37:23.424Z] [INFO] Room created 8f51e33a-84e2-49fe-a975-ab1395c89b87 for 1ntdo3apkbr & w0uo7pjmkbm | mode=chat
+[2025-08-20T12:38:24.332Z] [INFO] Room 8f51e33a-84e2-49fe-a975-ab1395c89b87 closed. w0uo7pjmkbm left; 1ntdo3apkbr idle.
+[2025-08-20T12:38:41.096Z] [INFO] Room created ca0aa02d-4315-4e89-b280-64f9fbc1dd91 for 1ntdo3apkbr & w0uo7pjmkbm | mode=chat
+[2025-08-20T12:38:44.087Z] [INFO] Room ca0aa02d-4315-4e89-b280-64f9fbc1dd91 closed. 1ntdo3apkbr left; w0uo7pjmkbm idle.
+[2025-08-20T12:38:59.155Z] [INFO] Room created fe1b123a-4b5a-4016-8d90-42d0ffe08127 for 1ntdo3apkbr & w0uo7pjmkbm | mode=chat
+[2025-08-20T12:39:00.987Z] [INFO] Room fe1b123a-4b5a-4016-8d90-42d0ffe08127 closed. w0uo7pjmkbm left; 1ntdo3apkbr idle.
+[2025-08-20T12:39:05.410Z] [INFO] Room created 6024bfbb-de75-4897-a16c-ff659089abcd for w0uo7pjmkbm & 1ntdo3apkbr | mode=chat
+[2025-08-20T12:39:06.516Z] [INFO] Room 6024bfbb-de75-4897-a16c-ff659089abcd closed. 1ntdo3apkbr left; w0uo7pjmkbm idle.
+[2025-08-20T12:39:13.745Z] [INFO] Room created f4d08811-c582-497a-a621-2d25b9196888 for 1ntdo3apkbr & w0uo7pjmkbm | mode=chat
+[2025-08-20T12:39:15.820Z] [INFO] Room f4d08811-c582-497a-a621-2d25b9196888 closed. w0uo7pjmkbm left; 1ntdo3apkbr idle.
+[2025-08-20T12:43:16.433Z] [INFO] User queued: 1ntdo3apkbr | mode=video
+[2025-08-20T12:45:22.099Z] [WARN] Socket disconnected: kG0VGMhtzTDvd3mRAABx
+[2025-08-20T12:45:47.471Z] [WARN] Socket disconnected: rgWEGldjPYqmMOCxAABz
+[2025-08-20T12:46:17.740Z] [INFO] Socket connected: hqxnwXJYp_SxJqo1AAB1
+[2025-08-20T12:46:17.749Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T12:46:28.017Z] [INFO] Socket connected: oQzhoU7W_s4nSqc9AAB3
+[2025-08-20T12:46:28.024Z] [INFO] User registered: sessionId=w0uo7pjmkbm
+[2025-08-20T12:46:33.863Z] [INFO] User queued: w0uo7pjmkbm | mode=video
+[2025-08-20T12:46:37.048Z] [INFO] User queued: 1ntdo3apkbr | mode=video
+[2025-08-20T12:46:37.049Z] [INFO] Room created fbf2a392-a426-4388-8778-28553052e89f for w0uo7pjmkbm & 1ntdo3apkbr | mode=video
+[2025-08-20T12:46:51.039Z] [INFO] Room fbf2a392-a426-4388-8778-28553052e89f closed. 1ntdo3apkbr left; w0uo7pjmkbm idle.
+[2025-08-20T12:47:10.766Z] [INFO] Room created b79aa6df-0fbf-47a3-b275-d6f54a5a36c8 for 1ntdo3apkbr & w0uo7pjmkbm | mode=video
+[2025-08-20T12:50:56.066Z] [INFO] Room b79aa6df-0fbf-47a3-b275-d6f54a5a36c8 closed. 1ntdo3apkbr left; w0uo7pjmkbm idle.
+[2025-08-20T12:50:56.071Z] [WARN] Socket disconnected: hqxnwXJYp_SxJqo1AAB1
+[2025-08-20T12:50:56.806Z] [INFO] Socket connected: aYT_hvJcjM92dhNEAAB5
+[2025-08-20T12:50:56.810Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T12:50:58.420Z] [WARN] Socket disconnected: aYT_hvJcjM92dhNEAAB5
+[2025-08-20T12:50:58.426Z] [INFO] Socket connected: 7_CiZG7T0jHXZ1eCAAB7
+[2025-08-20T12:50:58.432Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T12:50:59.142Z] [WARN] Socket disconnected: oQzhoU7W_s4nSqc9AAB3
+[2025-08-20T12:50:59.158Z] [INFO] Socket connected: U8lCI_e6PZCW05LGAAB9
+[2025-08-20T12:50:59.160Z] [INFO] User registered: sessionId=w0uo7pjmkbm
+[2025-08-20T12:52:36.127Z] [WARN] Mongoose disconnected
+[2025-08-20T12:52:36.128Z] [INFO] Mongoose closed due to app termination
+[2025-08-20T12:52:44.198Z] [INFO] MongoDB connected successfully
+[2025-08-20T12:52:44.204Z] [INFO] 🚀 Server running on http://localhost:5000
+[2025-08-20T12:52:44.454Z] [INFO] Socket connected: knkeF_SwPofFbPZLAAAC
+[2025-08-20T12:52:44.456Z] [INFO] Socket connected: VaeQlJVsrebUfKRAAAAD
+[2025-08-20T12:52:44.458Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T12:52:44.460Z] [INFO] User registered: sessionId=w0uo7pjmkbm
+[2025-08-20T12:52:51.498Z] [WARN] Socket disconnected: knkeF_SwPofFbPZLAAAC
+[2025-08-20T12:52:52.543Z] [INFO] Socket connected: C_v7J3WkUr41UbtUAAAF
+[2025-08-20T12:52:52.544Z] [INFO] User registered: sessionId=w0uo7pjmkbm
+[2025-08-20T12:53:31.263Z] [WARN] Socket disconnected: VaeQlJVsrebUfKRAAAAD
+[2025-08-20T12:53:31.628Z] [INFO] Socket connected: VyN3HoG2QwxDcOzmAAAH
+[2025-08-20T12:53:31.633Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T12:59:08.646Z] [WARN] Socket disconnected: C_v7J3WkUr41UbtUAAAF
+[2025-08-20T12:59:08.661Z] [WARN] Socket disconnected: VyN3HoG2QwxDcOzmAAAH
+[2025-08-20T12:59:09.768Z] [INFO] Socket connected: T0Y-oj8rbYfV0xwgAAAJ
+[2025-08-20T12:59:09.773Z] [INFO] User registered: sessionId=w0uo7pjmkbm
+[2025-08-20T12:59:09.844Z] [INFO] Socket connected: j23-dBLVWYAk6NIgAAAL
+[2025-08-20T12:59:09.847Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T12:59:14.071Z] [INFO] User queued: 1ntdo3apkbr | mode=chat
+[2025-08-20T12:59:16.661Z] [INFO] User queued: w0uo7pjmkbm | mode=chat
+[2025-08-20T12:59:16.664Z] [INFO] Room created 34237548-f1ab-48b6-b825-fea35735da9b for 1ntdo3apkbr & w0uo7pjmkbm | mode=chat
+[2025-08-20T13:00:10.511Z] [INFO] Room 34237548-f1ab-48b6-b825-fea35735da9b closed. w0uo7pjmkbm left; 1ntdo3apkbr idle.
+[2025-08-20T13:00:10.512Z] [INFO] User left queue: w0uo7pjmkbm
+[2025-08-20T13:00:29.059Z] [INFO] User queued: w0uo7pjmkbm | mode=chat
+[2025-08-20T13:00:29.061Z] [INFO] Room created fb189e11-f950-43e2-b8fc-835313cee1b1 for 1ntdo3apkbr & w0uo7pjmkbm | mode=chat
+[2025-08-20T13:02:32.007Z] [INFO] Room fb189e11-f950-43e2-b8fc-835313cee1b1 closed. 1ntdo3apkbr left; w0uo7pjmkbm idle.
+[2025-08-20T13:02:37.376Z] [INFO] User left queue: w0uo7pjmkbm
+[2025-08-20T13:02:39.197Z] [INFO] User left queue: 1ntdo3apkbr
+[2025-08-20T13:02:42.469Z] [INFO] User queued: 1ntdo3apkbr | mode=video
+[2025-08-20T13:02:53.497Z] [INFO] User queued: w0uo7pjmkbm | mode=video
+[2025-08-20T13:02:53.499Z] [INFO] Room created d7fddd4b-7879-4bdc-9e37-e467c4dc7342 for w0uo7pjmkbm & 1ntdo3apkbr | mode=video
+[2025-08-20T13:03:07.842Z] [INFO] Room d7fddd4b-7879-4bdc-9e37-e467c4dc7342 closed. w0uo7pjmkbm left; 1ntdo3apkbr idle.
+[2025-08-20T13:03:07.844Z] [INFO] User left queue: w0uo7pjmkbm
+[2025-08-20T13:03:17.189Z] [INFO] User queued: w0uo7pjmkbm | mode=video
+[2025-08-20T13:03:17.190Z] [INFO] Room created 40eb40bb-cc18-4115-bd2d-30c7a64e4d34 for w0uo7pjmkbm & 1ntdo3apkbr | mode=video
+[2025-08-20T13:03:24.681Z] [INFO] Room 40eb40bb-cc18-4115-bd2d-30c7a64e4d34 closed. 1ntdo3apkbr left; w0uo7pjmkbm idle.
+[2025-08-20T13:03:29.279Z] [INFO] User left queue: w0uo7pjmkbm
+[2025-08-20T13:03:32.924Z] [INFO] User left queue: 1ntdo3apkbr
+[2025-08-20T13:03:35.826Z] [INFO] User queued: 1ntdo3apkbr | mode=video
+[2025-08-20T13:03:38.088Z] [INFO] User queued: w0uo7pjmkbm | mode=video
+[2025-08-20T13:03:38.090Z] [INFO] Room created a5c95acb-1038-4014-b2d0-4eb9d0331023 for 1ntdo3apkbr & w0uo7pjmkbm | mode=video
+[2025-08-20T13:03:53.954Z] [INFO] Room a5c95acb-1038-4014-b2d0-4eb9d0331023 closed. w0uo7pjmkbm left; 1ntdo3apkbr idle.
+[2025-08-20T13:03:53.956Z] [WARN] Socket disconnected: T0Y-oj8rbYfV0xwgAAAJ
+[2025-08-20T13:03:59.256Z] [WARN] Socket disconnected: j23-dBLVWYAk6NIgAAAL
+[2025-08-20T13:03:59.496Z] [INFO] Socket connected: O7Ykfq4ZFeZlbYjKAAAN
+[2025-08-20T13:03:59.498Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T13:04:14.259Z] [WARN] Socket disconnected: O7Ykfq4ZFeZlbYjKAAAN
+[2025-08-20T13:04:14.269Z] [INFO] Socket connected: Y9wGWGoEKtybg8cbAAAP
+[2025-08-20T13:04:14.271Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T13:13:07.344Z] [WARN] Socket disconnected: Y9wGWGoEKtybg8cbAAAP
+[2025-08-20T13:13:11.469Z] [INFO] Socket connected: 0j1cBEwn4h0IAykQAAAR
+[2025-08-20T13:13:11.474Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T13:13:16.921Z] [WARN] Socket disconnected: 0j1cBEwn4h0IAykQAAAR
+[2025-08-20T13:13:17.301Z] [INFO] Socket connected: _amkEb6jK1VWC4h_AAAT
+[2025-08-20T13:13:17.307Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T13:13:18.429Z] [WARN] Socket disconnected: _amkEb6jK1VWC4h_AAAT
+[2025-08-20T13:13:18.666Z] [INFO] Socket connected: iXb3OujK7pDvRPZwAAAV
+[2025-08-20T13:13:18.673Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T13:20:24.176Z] [WARN] Socket disconnected: iXb3OujK7pDvRPZwAAAV
+[2025-08-20T13:20:24.661Z] [INFO] Socket connected: gNjf4KBculqwHD5HAAAX
+[2025-08-20T13:20:24.665Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T13:20:32.276Z] [WARN] Socket disconnected: gNjf4KBculqwHD5HAAAX
+[2025-08-20T13:20:32.534Z] [INFO] Socket connected: M9RWtWW5iQhAY_jGAAAZ
+[2025-08-20T13:20:32.539Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T13:20:50.723Z] [WARN] Socket disconnected: M9RWtWW5iQhAY_jGAAAZ
+[2025-08-20T13:20:52.207Z] [INFO] Socket connected: yAQB2bFN2nGN50T1AAAb
+[2025-08-20T13:20:52.211Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T13:20:57.761Z] [WARN] Socket disconnected: yAQB2bFN2nGN50T1AAAb
+[2025-08-20T13:20:58.197Z] [INFO] Socket connected: B1c6RhCUFtzWpQA5AAAd
+[2025-08-20T13:20:58.201Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T13:20:59.298Z] [WARN] Socket disconnected: B1c6RhCUFtzWpQA5AAAd
+[2025-08-20T13:20:59.537Z] [INFO] Socket connected: 6XBzwlWySJxHL9jYAAAf
+[2025-08-20T13:20:59.541Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T13:51:00.990Z] [WARN] Socket disconnected: 6XBzwlWySJxHL9jYAAAf
+[2025-08-20T13:58:14.798Z] [INFO] Socket connected: 1qzQloai7lrUdrLVAAAh
+[2025-08-20T13:58:14.810Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T14:04:57.131Z] [WARN] Socket disconnected: 1qzQloai7lrUdrLVAAAh
+[2025-08-20T14:38:16.844Z] [INFO] Socket connected: 6ApfCP3XJtrUKhE5AAAj
+[2025-08-20T14:38:16.894Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T15:29:30.803Z] [WARN] Socket disconnected: 6ApfCP3XJtrUKhE5AAAj
+[2025-08-20T15:29:38.159Z] [INFO] Socket connected: 4GSk2UhgdxS2Hq9eAAAl
+[2025-08-20T15:29:38.165Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T15:38:44.734Z] [WARN] Socket disconnected: 4GSk2UhgdxS2Hq9eAAAl
+[2025-08-20T15:52:20.851Z] [INFO] Socket connected: bJeVTrN7HH1e_vUyAAAn
+[2025-08-20T15:52:20.853Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T15:52:24.731Z] [WARN] Socket disconnected: bJeVTrN7HH1e_vUyAAAn
+[2025-08-20T16:38:39.506Z] [INFO] Socket connected: iE8uz-n6GU-2BrukAAAp
+[2025-08-20T16:38:39.511Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T16:39:44.595Z] [WARN] Socket disconnected: iE8uz-n6GU-2BrukAAAp
+[2025-08-20T16:45:20.179Z] [INFO] Socket connected: rfoJhmtUUx3FUt_2AAAr
+[2025-08-20T16:45:20.185Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T16:55:17.425Z] [INFO] Received consent request
+[2025-08-20T16:55:17.474Z] [INFO] Consent saved for sessionId=tvm8qxh584e
+[2025-08-20T16:55:17.502Z] [INFO] Socket connected: W37HxLgNvmB9_5E7AAAt
+[2025-08-20T16:55:17.506Z] [INFO] User registered: sessionId=tvm8qxh584e
+[2025-08-20T16:56:22.799Z] [INFO] Received consent request
+[2025-08-20T16:56:22.819Z] [INFO] Consent saved for sessionId=pvfctryxnzb
+[2025-08-20T16:56:22.869Z] [INFO] Socket connected: RiTtbZ3OcjBale20AAAv
+[2025-08-20T16:56:22.873Z] [INFO] User registered: sessionId=pvfctryxnzb
+[2025-08-20T16:56:48.965Z] [INFO] User queued: tvm8qxh584e | mode=chat
+[2025-08-20T16:57:15.565Z] [INFO] User queued: pvfctryxnzb | mode=chat
+[2025-08-20T16:57:15.567Z] [INFO] Room created 5cbd05aa-7de3-4011-a26e-603517b5072e for pvfctryxnzb & tvm8qxh584e | mode=chat
+[2025-08-20T16:59:04.311Z] [INFO] Room 5cbd05aa-7de3-4011-a26e-603517b5072e closed. pvfctryxnzb left; tvm8qxh584e idle.
+[2025-08-20T16:59:04.313Z] [INFO] User left queue: pvfctryxnzb
+[2025-08-20T16:59:38.176Z] [INFO] User left queue: tvm8qxh584e
+[2025-08-20T17:00:09.838Z] [WARN] Socket disconnected: W37HxLgNvmB9_5E7AAAt
+[2025-08-20T17:00:10.200Z] [INFO] Socket connected: VD4CUGQcWzrXPXtMAAAx
+[2025-08-20T17:00:10.205Z] [INFO] User registered: sessionId=tvm8qxh584e
+[2025-08-20T17:00:11.732Z] [WARN] Socket disconnected: RiTtbZ3OcjBale20AAAv
+[2025-08-20T17:00:11.922Z] [INFO] Socket connected: qxEXljQFmZ6-XY7vAAAz
+[2025-08-20T17:00:11.925Z] [INFO] User registered: sessionId=pvfctryxnzb
+[2025-08-20T17:00:31.379Z] [INFO] User queued: tvm8qxh584e | mode=video
+[2025-08-20T17:00:47.242Z] [INFO] User queued: pvfctryxnzb | mode=video
+[2025-08-20T17:00:47.249Z] [INFO] Room created 3c680314-f75d-4438-b04d-95e916eb25dc for tvm8qxh584e & pvfctryxnzb | mode=video
+[2025-08-20T17:01:07.071Z] [INFO] Room 3c680314-f75d-4438-b04d-95e916eb25dc closed. pvfctryxnzb left; tvm8qxh584e idle.
+[2025-08-20T17:01:07.077Z] [INFO] User left queue: pvfctryxnzb
+[2025-08-20T17:01:22.723Z] [INFO] User left queue: tvm8qxh584e
+[2025-08-20T17:04:59.691Z] [WARN] Socket disconnected: qxEXljQFmZ6-XY7vAAAz
+[2025-08-20T17:11:41.705Z] [WARN] Socket disconnected: rfoJhmtUUx3FUt_2AAAr
+[2025-08-20T17:11:43.817Z] [INFO] Socket connected: P7EJa2gum3lNRCrQAAA1
+[2025-08-20T17:11:43.824Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T17:12:37.225Z] [WARN] Socket disconnected: P7EJa2gum3lNRCrQAAA1
+[2025-08-20T17:12:37.243Z] [WARN] Socket disconnected: VD4CUGQcWzrXPXtMAAAx
+[2025-08-20T17:12:38.695Z] [INFO] Socket connected: agiRRNhNlR5-Jyt4AAA3
+[2025-08-20T17:12:38.717Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T17:12:39.310Z] [INFO] Socket connected: w3elTl2RctSLVzkOAAA5
+[2025-08-20T17:12:39.323Z] [INFO] User registered: sessionId=tvm8qxh584e
+[2025-08-20T17:12:45.655Z] [WARN] Socket disconnected: agiRRNhNlR5-Jyt4AAA3
+[2025-08-20T17:12:48.550Z] [INFO] Socket connected: QjiKrsPxBoT37aDKAAA7
+[2025-08-20T17:12:48.571Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T17:12:57.611Z] [WARN] Socket disconnected: QjiKrsPxBoT37aDKAAA7
+[2025-08-20T17:12:58.960Z] [INFO] Socket connected: id8PEPtFrJggZPwWAAA9
+[2025-08-20T17:12:58.981Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T17:13:02.784Z] [WARN] Socket disconnected: id8PEPtFrJggZPwWAAA9
+[2025-08-20T17:13:03.477Z] [INFO] Socket connected: DO84mJWanXzICnurAAA_
+[2025-08-20T17:13:03.485Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T17:14:35.964Z] [INFO] User queued: 1ntdo3apkbr | mode=chat
+[2025-08-20T17:15:07.748Z] [INFO] User queued: tvm8qxh584e | mode=chat
+[2025-08-20T17:15:07.750Z] [INFO] Room created 064bc29b-9aa7-443c-97c9-ed6bc65cb1df for tvm8qxh584e & 1ntdo3apkbr | mode=chat
+[2025-08-20T17:19:13.883Z] [INFO] Room 064bc29b-9aa7-443c-97c9-ed6bc65cb1df closed. tvm8qxh584e left; 1ntdo3apkbr idle.
+[2025-08-20T17:19:13.895Z] [WARN] Socket disconnected: w3elTl2RctSLVzkOAAA5
+[2025-08-20T17:26:34.529Z] [WARN] Socket disconnected: DO84mJWanXzICnurAAA_
+[2025-08-20T17:26:42.256Z] [INFO] Socket connected: xJz8zrnP8u_hROroAABC
+[2025-08-20T17:26:42.301Z] [INFO] User registered: sessionId=tvm8qxh584e
+[2025-08-20T17:26:42.461Z] [WARN] Socket disconnected: xJz8zrnP8u_hROroAABC
+[2025-08-20T17:26:43.981Z] [INFO] Socket connected: 8howMcn8Jud_7QPzAABE
+[2025-08-20T17:26:43.991Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T17:26:44.732Z] [INFO] Socket connected: iLv0M_lZUD7nKNpMAABG
+[2025-08-20T17:26:44.747Z] [INFO] User registered: sessionId=tvm8qxh584e
+[2025-08-20T17:26:59.721Z] [INFO] User queued: 1ntdo3apkbr | mode=video
+[2025-08-20T17:27:09.934Z] [INFO] User queued: tvm8qxh584e | mode=video
+[2025-08-20T17:27:09.937Z] [INFO] Room created 15504e59-356b-4b47-8194-11cc0f4e0335 for 1ntdo3apkbr & tvm8qxh584e | mode=video
+[2025-08-20T17:27:30.743Z] [INFO] Room 15504e59-356b-4b47-8194-11cc0f4e0335 closed. tvm8qxh584e left; 1ntdo3apkbr idle.
+[2025-08-20T17:27:30.747Z] [INFO] User left queue: tvm8qxh584e
+[2025-08-20T17:30:17.111Z] [INFO] User left queue: 1ntdo3apkbr
+[2025-08-20T17:30:22.188Z] [INFO] User queued: 1ntdo3apkbr | mode=chat
+[2025-08-20T17:30:23.809Z] [INFO] User queued: tvm8qxh584e | mode=chat
+[2025-08-20T17:30:23.820Z] [INFO] Room created 16434fd2-f753-4f38-b547-787d68e028e1 for tvm8qxh584e & 1ntdo3apkbr | mode=chat
+[2025-08-20T17:38:53.163Z] [INFO] Room 16434fd2-f753-4f38-b547-787d68e028e1 closed. 1ntdo3apkbr left; tvm8qxh584e idle.
+[2025-08-20T17:38:53.170Z] [WARN] Socket disconnected: 8howMcn8Jud_7QPzAABE
+[2025-08-20T17:38:53.176Z] [WARN] Socket disconnected: iLv0M_lZUD7nKNpMAABG
+[2025-08-20T17:38:53.228Z] [INFO] Socket connected: P8H_bpr4bsnO2GuFAABJ
+[2025-08-20T17:38:53.236Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T17:38:53.244Z] [INFO] Socket connected: 4t3DP7SMToTSCEG6AABK
+[2025-08-20T17:38:53.254Z] [INFO] User registered: sessionId=tvm8qxh584e
+[2025-08-20T17:40:23.648Z] [WARN] Socket disconnected: P8H_bpr4bsnO2GuFAABJ
+[2025-08-20T17:40:23.711Z] [INFO] Socket connected: -wfFvEL-qDWq-023AABM
+[2025-08-20T17:40:23.725Z] [INFO] User registered: sessionId=1ntdo3apkbr
+[2025-08-20T17:40:24.335Z] [WARN] Socket disconnected: 4t3DP7SMToTSCEG6AABK
+[2025-08-20T17:40:24.687Z] [INFO] Socket connected: UBtz_tUm62seia-xAABO
+[2025-08-20T17:40:24.700Z] [INFO] User registered: sessionId=tvm8qxh584e
+[2025-08-20T17:40:29.633Z] [INFO] User queued: 1ntdo3apkbr | mode=chat
+[2025-08-20T17:40:31.524Z] [INFO] User queued: tvm8qxh584e | mode=chat
+[2025-08-20T17:40:31.528Z] [INFO] Room created df82ab29-3b6b-4674-82fc-4dcf51a69a07 for 1ntdo3apkbr & tvm8qxh584e | mode=chat
+[2025-08-20T17:53:05.322Z] [INFO] Room df82ab29-3b6b-4674-82fc-4dcf51a69a07 closed. tvm8qxh584e left; 1ntdo3apkbr idle.
+[2025-08-20T17:53:05.325Z] [WARN] Socket disconnected: UBtz_tUm62seia-xAABO
+[2025-08-20T17:53:07.337Z] [INFO] Socket connected: Fn2DnfZsv6Z_RS4_AABQ
+[2025-08-20T17:53:07.350Z] [INFO] User registered: sessionId=tvm8qxh584e
+[2025-08-20T17:53:07.882Z] [WARN] Socket disconnected: Fn2DnfZsv6Z_RS4_AABQ
