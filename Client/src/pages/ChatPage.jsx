@@ -6,6 +6,7 @@ import MessageList from "../components/MessageList"; // You will need to style t
 import VideoBox from "../components/VideoBox";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
+import { Helmet } from "react-helmet";
 
 // Lightweight unique id
 const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
@@ -325,13 +326,13 @@ export default function ChatPage({ sessionId }) {
     });
     peerRef.current = pc;
     pc.ontrack = (e) => {
-        // Find the remote stream and update the state to trigger a re-render
-        const remote = e.streams?.[0] || null;
-        if (remote) {
-            remoteStreamRef.current = remote;
-            // Force a re-render to show the remote stream
-            setPartnerId(p => p); 
-        }
+      // Find the remote stream and update the state to trigger a re-render
+      const remote = e.streams?.[0] || null;
+      if (remote) {
+        remoteStreamRef.current = remote;
+        // Force a re-render to show the remote stream
+        setPartnerId((p) => p);
+      }
     };
     return pc;
   };
@@ -449,23 +450,30 @@ export default function ChatPage({ sessionId }) {
     return (
       <div className="container d-flex flex-column align-items-center justify-content-center vh-100">
         <div className="text-center">
-            <div className="spinner-border text-primary mb-3" role="status">
-                <span className="visually-hidden">Loading...</span>
-            </div>
-            <h3 className="mb-3">Waiting for a partner...</h3>
-            {mode === "video" && (
+          <div className="spinner-border text-primary mb-3" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+          <h3 className="mb-3">Waiting for a partner...</h3>
+          {mode === "video" && (
             <div className="mt-4 w-100" style={{ maxWidth: 640 }}>
-                <div className="ratio ratio-16x9 bg-dark rounded-3 shadow-sm overflow-hidden">
-                    <VideoBox localStream={localStreamRef.current} muted />
-                    <div className="position-absolute top-0 start-0 m-2 badge bg-secondary">You</div>
+              <div className="ratio ratio-16x9 bg-dark rounded-3 shadow-sm overflow-hidden">
+                <VideoBox localStream={localStreamRef.current} muted />
+                <div className="position-absolute top-0 start-0 m-2 badge bg-secondary">
+                  You
                 </div>
-                {videoError && <div className="alert alert-danger mt-2">{videoError}</div>}
+              </div>
+              {videoError && (
+                <div className="alert alert-danger mt-2 ">{videoError}</div>
+              )}
             </div>
-            )}
-            {banner && <div className="text-muted mt-3">{banner}</div>}
-            <button className="btn btn-outline-secondary mt-4" onClick={handleBackFromQueue}>
+          )}
+          {banner && <div className="text-muted mt-3">{banner}</div>}
+          <button
+            className="btn btn-outline-secondary mt-4"
+            onClick={handleBackFromQueue}
+          >
             Cancel
-            </button>
+          </button>
         </div>
       </div>
     );
@@ -474,164 +482,183 @@ export default function ChatPage({ sessionId }) {
   const canSend = mode === "chat" && partnerPresent && status === "connected";
 
   return (
-    <div className="container-fluid py-3 d-flex flex-column" style={{ height: "100vh" }}>
-      {/* Header */}
-      <header className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3 pb-3 border-bottom">
-        <h4 className="mb-2 mb-md-0">
-          Anonymous {mode === "video" ? "Video" : "Chat"} 
-        </h4>
-        <div className="btn-group" role="group">
-          <button
-            className="btn btn-outline-primary"
-            onClick={handleNext}
-            disabled={nextBusyRef.current}
-          >
-            {nextBusyRef.current ? "Finding..." : "Next"}
-          </button>
-          <button className="btn btn-outline-danger" onClick={handleEnd}>
-            End
-          </button>
-        </div>
-      </header>
+    <div
+      className="container-fluid py-3 d-flex flex-column"
+      style={{ height: "100vh" }}
+    >
+      <Helmet>
+        <title>Anonymous Chat with Strangers - Omegle Alternative</title>
+        <meta
+          name="description"
+          content="Start a free and anonymous video or text chat with random strangers instantly. A simple, fast, and fun alternative to Omegle."
+        />
+        <meta
+          name="keywords"
+          content="omegle, anonymous chat, video chat, random chat, chat with strangers, free chat"
+        />
+        {/* Sets the canonical URL to the current page */}
+        <link rel="canonical" href={window.location.href} />
+      </Helmet>
+      <div className="row">
+        <div className="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+          {/* Header */}
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3 pb-3 border-bottom">
+            <h4 className="mb-2 mb-md-0">
+              Anonymous {mode === "video" ? "Video" : "Chat"}
+            </h4>
+            <div className="btn-group" role="group">
+              <button
+                className="btn btn-success"
+                onClick={handleNext}
+                disabled={nextBusyRef.current}
+              >
+                {nextBusyRef.current ? "Finding..." : "Next"}
+              </button>
+              <button className="btn btn-danger" onClick={handleEnd}>
+                End
+              </button>
+            </div>
+          </div>
 
-      {banner && <div className="alert alert-info py-2 mb-3">{banner}</div>}
+          {banner && <div className="alert alert-info py-2 mb-3">{banner}</div>}
 
-      {/* Main Content Area */}
-      <main className="flex-grow-1" style={{ overflowY: 'auto' }}>
-        {mode === "video" ? (
-          // --- VIDEO CHAT UI ---
-          <div className="d-flex justify-content-center align-items-center h-100">
-            <div className="w-100 h-100" style={{ maxWidth: '1280px', maxHeight: '720px' }}>
-              <div className="ratio ratio-16x9 bg-dark rounded-3 position-relative shadow-lg overflow-hidden">
-                {/* Partner's Video */}
-                <VideoBox remoteStream={remoteStreamRef.current} />
-                {!remoteStreamRef.current && (
-                    <div className="d-flex align-items-center justify-content-center text-white">
-                        {partnerPresent ? "Connecting to partner..." : "Waiting for partner..."}
-                    </div>
-                )}
-                <span className="position-absolute top-0 start-0 m-2 badge bg-success fs-6">Partner</span>
+          {/* Main Content Area */}
+          <main className="flex-grow-1">
+            {mode === "video" ? (
+              // --- VIDEO CHAT UI ---
+              <div className="d-flex justify-content-center align-items-center h-100">
+                <div
+                  className="w-100 h-100"
+                  style={{ maxWidth: "1280px", maxHeight: "720px" }}
+                >
+                  <div className="ratio ratio-16x9 bg-dark rounded-3 position-relative shadow-lg overflow-hidden">
+                    {/* Partner's Video */}
+                    <VideoBox remoteStream={remoteStreamRef.current} />
+                    {!remoteStreamRef.current && (
+                      <div className="d-flex align-items-center justify-content-center text-white">
+                        {partnerPresent
+                          ? "Connecting to partner..."
+                          : "Waiting for partner..."}
+                      </div>
+                    )}
+                    <span className="position-absolute top-0 start-0 m-2 badge bg-success fs-6">
+                      Partner
+                    </span>
 
-                {/* Local Video (PiP) */}
-                {localStreamRef.current && (
-                    <div className="position-absolute end-0 bottom-0 m-3 border border-2 border-white shadow rounded-3 overflow-hidden bg-black"
-                         style={{ width: "25%", minWidth: "150px", maxWidth: "240px" }}>
+                    {/* Local Video (PiP) */}
+                    {localStreamRef.current && (
+                      <div
+                        className="position-absolute end-0 bottom-0 m-3 border border-2 border-white shadow rounded-3 overflow-hidden bg-black"
+                        style={{
+                          width: "25%",
+                          minWidth: "150px",
+                          maxWidth: "240px",
+                        }}
+                      >
                         <div className="ratio ratio-16x9">
-                            <VideoBox localStream={localStreamRef.current} muted />
+                          <VideoBox
+                            localStream={localStreamRef.current}
+                            muted
+                          />
                         </div>
-                        <span className="position-absolute top-0 start-0 m-1 badge bg-secondary">You</span>
+                        <span className="position-absolute top-0 start-0 m-1 badge bg-secondary">
+                          You
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  {videoError && (
+                    <div className="alert alert-danger mt-2">{videoError}</div>
+                  )}
+                  {!partnerPresent && (
+                    <div className="alert alert-warning small mt-2">
+                      Partner has left. You can click 'Next' to find someone
+                      else or 'End' the session.
                     </div>
-                )}
-              </div>
-              {videoError && <div className="alert alert-danger mt-2">{videoError}</div>}
-              {!partnerPresent && (
-                <div className="alert alert-warning small mt-2">
-                  Partner has left. You can click 'Next' to find someone else or 'End' the session.
+                  )}
                 </div>
-              )}
-            </div>
-          </div>
-        ) : (
-          // --- TEXT CHAT UI ---
-          <div className="row justify-content-center h-100">
-            <div className="col-12 col-md-10 col-lg-8 d-flex flex-column h-100">
-              <div className="card shadow-sm flex-grow-1">
-                <div className="card-body d-flex flex-column p-2 p-md-3">
-                    <div className="flex-grow-1 mb-3" style={{ overflowY: 'auto' }}>
-                        <MessageList messages={messages} partnerTyping={partnerTyping} />
-                    </div>
+              </div>
+            ) : (
+              // --- TEXT CHAT UI ---
+              <div className="row justify-content-center h-100">
+                <div className="col-12 col-md-10 col-lg-8 d-flex flex-column h-100">
+                  <div className="card shadow-sm flex-grow-1">
+                    <div className="card-body d-flex flex-column p-2 p-md-3">
+                      <div className="flex-grow-1 mb-3">
+                        <MessageList
+                          messages={messages}
+                          partnerTyping={partnerTyping}
+                        />
+                      </div>
 
-                    <div className="mt-auto">
+                      <div className="mt-auto">
                         <div className="position-relative">
-                            {showEmoji && (
-                                <div className="position-absolute bottom-100 mb-2">
-                                    <Picker
-                                        data={data}
-                                        onEmojiSelect={(emoji) => setInput((prev) => prev + (emoji?.native || ""))}
-                                        previewPosition="none"
-                                        theme="light"
-                                    />
-                                </div>
-                            )}
-                            <div className="d-flex align-items-center gap-2">
-                                <button className="btn btn-light rounded-circle flex-shrink-0" onClick={() => setShowEmoji((v) => !v)}>
-                                    😊
-                                </button>
-                                <input
-                                    className="form-control rounded-pill"
-                                    value={input}
-                                    onChange={(e) => handleTyping(e.target.value)}
-                                    onKeyDown={(e) => e.key === "Enter" && !sendBusyRef.current && canSend && sendMsg()}
-                                    placeholder={canSend ? "Type a message..." : "Partner has left."}
-                                    disabled={!canSend}
-                                />
-                                <button className="btn btn-primary rounded-circle flex-shrink-0" onClick={sendMsg} disabled={!canSend || !input.trim() || sendBusyRef.current}
-                                style={{ width: '40px', height: '40px', paddingTop: '0.1rem' }}>
-                                    ➤
-                                </button>
+                          {showEmoji && (
+                            <div className="position-absolute bottom-100 mb-2">
+                              <Picker
+                                data={data}
+                                onEmojiSelect={(emoji) =>
+                                  setInput(
+                                    (prev) => prev + (emoji?.native || "")
+                                  )
+                                }
+                                previewPosition="none"
+                                theme="light"
+                              />
                             </div>
+                          )}
+                          <div className="d-flex align-items-center gap-2">
+                            <button
+                              className="btn btn-light rounded-circle flex-shrink-0"
+                              onClick={() => setShowEmoji((v) => !v)}
+                            >
+                              😊
+                            </button>
+                            <input
+                              className="form-control rounded-pill"
+                              value={input}
+                              onChange={(e) => handleTyping(e.target.value)}
+                              onKeyDown={(e) =>
+                                e.key === "Enter" &&
+                                !sendBusyRef.current &&
+                                canSend &&
+                                sendMsg()
+                              }
+                              placeholder={
+                                canSend
+                                  ? "Type a message..."
+                                  : "Partner has left."
+                              }
+                              disabled={!canSend}
+                            />
+                            <button
+                              className="btn btn-primary rounded-circle flex-shrink-0"
+                              onClick={sendMsg}
+                              disabled={
+                                !canSend || !input.trim() || sendBusyRef.current
+                              }
+                              style={{
+                                width: "40px",
+                                height: "40px",
+                                paddingTop: "0.1rem",
+                              }}
+                            >
+                              ➤
+                            </button>
+                          </div>
                         </div>
+                      </div>
                     </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        )}
-      </main>
+            )}
+          </main>
+        </div>
+        <div className="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+          <img src={"../src/assest/add.svg"} alt="Chatting illustration" />
+        </div>
+      </div>
     </div>
   );
 }
-
-/**
- * NOTE FOR MessageList.jsx:
- * To achieve the chat bubble UI, your MessageList component should be styled
- * to render messages differently based on their origin.
- *
- * Example implementation for MessageList.jsx:
- *
- * export default function MessageList({ messages, partnerTyping }) {
- *   const scrollRef = useRef(null);
- *   useEffect(() => {
- *     scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
- *   }, [messages, partnerTyping]);
- *
- *   return (
- *     <div className="p-2">
- *       {messages.map((msg, idx) => (
- *         <div key={msg.messageId || idx} className={`d-flex my-2 ${msg.from === 'me' ? 'justify-content-end' : 'justify-content-start'}`}>
- *           <div
- *             className={`px-3 py-2 rounded-3 shadow-sm ${
- *               msg.sys ? 'bg-secondary bg-opacity-10 text-muted small mx-auto' :
- *               msg.from === 'me' ? 'bg-primary text-white' : 'bg-light border'
- *             }`}
- *             style={{ maxWidth: '75%' }}
- *           >
- *             {msg.text}
- *           </div>
- *         </div>
- *       ))}
- *       {partnerTyping && (
- *          <div className="d-flex my-2 justify-content-start">
- *              <div className="px-3 py-2 rounded-3 shadow-sm bg-light border">
- *                  <div className="typing-indicator">
- *                      <span></span><span></span><span></span>
- *                  </div>
- *              </div>
- *          </div>
- *       )}
- *       <div ref={scrollRef} />
- *     </div>
- *   );
- * }
- *
- * And add this CSS for the typing indicator:
- *
- * .typing-indicator span {
- *   height: 8px; width: 8px; background-color: #9E9EA1;
- *   border-radius: 50%; display: inline-block; margin: 0 1px;
- *   animation: typing-fade 1s infinite;
- * }
- * .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
- * .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
- * @keyframes typing-fade { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
- */
