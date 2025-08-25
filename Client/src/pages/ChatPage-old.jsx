@@ -6,15 +6,11 @@ import MessageList from "../components/MessageList";
 import VideoBox from "../components/VideoBox";
 import { Helmet } from "react-helmet";
 
-// --- LAZY LOADING FOR EMOJI PICKER ---
-// Picker component is loaded on demand.
 const Picker = React.lazy(() => import("@emoji-mart/react"));
 
-// Lightweight unique id (LOGIC UNCHANGED)
 const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 
 export default function ChatPage({ sessionId }) {
-  // --- CORE LOGIC AND STATE (UNCHANGED) ---
   const socketRef = useRef(null);
   const peerRef = useRef(null);
   const localStreamRef = useRef(null);
@@ -66,7 +62,6 @@ export default function ChatPage({ sessionId }) {
     return { flag: false, message: "" };
   };
 
-  // --- ALL EVENT HANDLERS AND CORE LOGIC (UNCHANGED) ---
   useEffect(() => {
     const socket = io(SOCKET_URL, { transports: ["websocket"] });
     socketRef.current = socket;

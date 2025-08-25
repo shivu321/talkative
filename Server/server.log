@@ -2088,3 +2088,182 @@
 [2025-08-25T09:39:15.993Z] [WARN] Socket disconnected: lNXMMu8dMSl1sHOLAAEt
 [2025-08-25T09:39:15.995Z] [INFO] Socket connected: vj2GXJ2d_ZOeRWogAAEv
 [2025-08-25T09:39:15.996Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:41:47.281Z] [WARN] Socket disconnected: vj2GXJ2d_ZOeRWogAAEv
+[2025-08-25T09:41:47.549Z] [INFO] Socket connected: dtSXvTFVkPan9TK2AAEx
+[2025-08-25T09:41:47.552Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:42:58.071Z] [WARN] Socket disconnected: dtSXvTFVkPan9TK2AAEx
+[2025-08-25T09:42:58.200Z] [INFO] Socket connected: 9HF1yHEy_p-zJs0MAAEz
+[2025-08-25T09:42:58.201Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:42:59.288Z] [WARN] Socket disconnected: 9HF1yHEy_p-zJs0MAAEz
+[2025-08-25T09:42:59.352Z] [INFO] Socket connected: SBEbQfMx8Qu-o8i1AAE1
+[2025-08-25T09:42:59.353Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:42:59.794Z] [WARN] Socket disconnected: SBEbQfMx8Qu-o8i1AAE1
+[2025-08-25T09:42:59.854Z] [INFO] Socket connected: Xh455CsuzzZOXQC4AAE3
+[2025-08-25T09:42:59.855Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:43:01.789Z] [WARN] Socket disconnected: S9czFztS8hifau6mAAEj
+[2025-08-25T09:43:02.029Z] [INFO] Socket connected: 1iMg9kkh2dhgudQUAAE5
+[2025-08-25T09:43:02.031Z] [INFO] User registered: sessionId=qsl1ku0ac6s
+[2025-08-25T09:43:07.905Z] [INFO] User queued: qsl1ku0ac6s | mode=chat
+[2025-08-25T09:44:09.826Z] [INFO] Socket connected: z_WG5hvFLDdl-_d-AAE7
+[2025-08-25T09:44:09.830Z] [WARN] Socket disconnected: Xh455CsuzzZOXQC4AAE3
+[2025-08-25T09:44:09.832Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:44:18.191Z] [INFO] User queued: i905zyipwaq | mode=chat
+[2025-08-25T09:44:18.192Z] [INFO] Room created e6c33f13-89c2-42f0-ba76-222585ec6fe2 for qsl1ku0ac6s & i905zyipwaq | mode=chat
+[2025-08-25T09:44:30.403Z] [INFO] Socket connected: F6sD6CAtO4su6lljAAE9
+[2025-08-25T09:44:30.406Z] [INFO] Room e6c33f13-89c2-42f0-ba76-222585ec6fe2 closed due to duplicate login for i905zyipwaq
+[2025-08-25T09:44:30.413Z] [WARN] Socket disconnected: z_WG5hvFLDdl-_d-AAE7
+[2025-08-25T09:44:30.417Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:44:33.679Z] [INFO] User queued: i905zyipwaq | mode=chat
+[2025-08-25T09:44:59.367Z] [INFO] User left queue: i905zyipwaq
+[2025-08-25T09:45:15.632Z] [INFO] User left queue: qsl1ku0ac6s
+[2025-08-25T09:45:17.851Z] [WARN] Socket disconnected: 1iMg9kkh2dhgudQUAAE5
+[2025-08-25T09:45:18.029Z] [INFO] Socket connected: n7Hf7j5cJW3EUUuOAAE_
+[2025-08-25T09:45:18.032Z] [INFO] User registered: sessionId=qsl1ku0ac6s
+[2025-08-25T09:45:51.278Z] [INFO] Socket connected: _NjRVJnWG5EOd9rjAAFB
+[2025-08-25T09:45:51.280Z] [WARN] Socket disconnected: F6sD6CAtO4su6lljAAE9
+[2025-08-25T09:45:51.281Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:45:53.590Z] [INFO] Socket connected: 9gFQ1FPUXGdLBML5AAFD
+[2025-08-25T09:45:53.591Z] [WARN] Socket disconnected: _NjRVJnWG5EOd9rjAAFB
+[2025-08-25T09:45:53.592Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:45:58.560Z] [INFO] User queued: i905zyipwaq | mode=chat
+[2025-08-25T09:46:06.169Z] [INFO] Socket connected: DwAekY7GYN8LQ6LdAAFF
+[2025-08-25T09:46:06.171Z] [WARN] Socket disconnected: 9gFQ1FPUXGdLBML5AAFD
+[2025-08-25T09:46:06.172Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:46:07.718Z] [INFO] Socket connected: KiJPCLX-ghkYWp1dAAFH
+[2025-08-25T09:46:07.721Z] [WARN] Socket disconnected: DwAekY7GYN8LQ6LdAAFF
+[2025-08-25T09:46:07.722Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:46:08.882Z] [WARN] Socket disconnected: n7Hf7j5cJW3EUUuOAAE_
+[2025-08-25T09:46:09.013Z] [INFO] Socket connected: CPc5ZtCWPx4_UV_oAAFJ
+[2025-08-25T09:46:09.014Z] [INFO] User registered: sessionId=qsl1ku0ac6s
+[2025-08-25T09:46:11.208Z] [INFO] User queued: i905zyipwaq | mode=chat
+[2025-08-25T09:46:13.175Z] [INFO] User queued: qsl1ku0ac6s | mode=chat
+[2025-08-25T09:46:13.176Z] [INFO] Room created a169aa54-5970-414b-afda-c11a9652e1f4 for qsl1ku0ac6s & i905zyipwaq | mode=chat
+[2025-08-25T09:46:19.130Z] [INFO] Socket connected: BV5J18S6B6y-lieYAAFL
+[2025-08-25T09:46:19.131Z] [INFO] Room a169aa54-5970-414b-afda-c11a9652e1f4 closed due to duplicate login for i905zyipwaq
+[2025-08-25T09:46:19.132Z] [WARN] Socket disconnected: KiJPCLX-ghkYWp1dAAFH
+[2025-08-25T09:46:19.132Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:46:21.130Z] [INFO] User queued: i905zyipwaq | mode=chat
+[2025-08-25T09:46:27.890Z] [INFO] Socket connected: ydqVyQqJkbjFgKoSAAFN
+[2025-08-25T09:46:27.891Z] [WARN] Socket disconnected: BV5J18S6B6y-lieYAAFL
+[2025-08-25T09:46:27.892Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:46:56.976Z] [INFO] User queued: i905zyipwaq | mode=chat
+[2025-08-25T09:46:56.977Z] [INFO] Room created da3318a3-8b3c-45d7-851a-a120ca1f54dd for i905zyipwaq & qsl1ku0ac6s | mode=chat
+[2025-08-25T09:47:11.456Z] [INFO] Socket connected: jpfLnysTKTlW3t-8AAFP
+[2025-08-25T09:47:11.457Z] [INFO] Room da3318a3-8b3c-45d7-851a-a120ca1f54dd closed due to duplicate login for i905zyipwaq
+[2025-08-25T09:47:11.458Z] [WARN] Socket disconnected: ydqVyQqJkbjFgKoSAAFN
+[2025-08-25T09:47:11.459Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:47:13.478Z] [INFO] Socket connected: HJviEHnR9XHhv_LFAAFR
+[2025-08-25T09:47:13.480Z] [WARN] Socket disconnected: jpfLnysTKTlW3t-8AAFP
+[2025-08-25T09:47:13.481Z] [INFO] User registered: sessionId=i905zyipwaq
+[2025-08-25T09:49:34.409Z] [WARN] Socket disconnected: CPc5ZtCWPx4_UV_oAAFJ
+[2025-08-25T09:49:38.224Z] [WARN] Socket disconnected: HJviEHnR9XHhv_LFAAFR
+[2025-08-25T09:49:55.560Z] [INFO] Received consent request
+[2025-08-25T09:49:55.566Z] [INFO] Consent saved for sessionId=ybrus6nak3b
+[2025-08-25T09:49:55.577Z] [INFO] Socket connected: fGhXzLCxzf0chS2hAAFT
+[2025-08-25T09:49:55.579Z] [INFO] User registered: sessionId=ybrus6nak3b
+[2025-08-25T09:49:57.989Z] [INFO] Received consent request
+[2025-08-25T09:49:57.991Z] [INFO] Consent saved for sessionId=aaal55p4bns
+[2025-08-25T09:49:58.005Z] [INFO] Socket connected: KyPfzCeVArmkqtQIAAFV
+[2025-08-25T09:49:58.007Z] [INFO] User registered: sessionId=aaal55p4bns
+[2025-08-25T09:49:59.451Z] [INFO] Received consent request
+[2025-08-25T09:49:59.457Z] [INFO] Consent already exists for sessionId=aaal55p4bns
+[2025-08-25T09:49:59.468Z] [INFO] Socket connected: 31xjuAYJ1w_v40WSAAFX
+[2025-08-25T09:49:59.470Z] [WARN] Socket disconnected: KyPfzCeVArmkqtQIAAFV
+[2025-08-25T09:49:59.471Z] [INFO] User registered: sessionId=aaal55p4bns
+[2025-08-25T09:50:00.851Z] [INFO] Received consent request
+[2025-08-25T09:50:00.854Z] [INFO] Consent already exists for sessionId=aaal55p4bns
+[2025-08-25T09:50:00.866Z] [INFO] Socket connected: ubuhCVUEwi643mUJAAFZ
+[2025-08-25T09:50:00.868Z] [WARN] Socket disconnected: 31xjuAYJ1w_v40WSAAFX
+[2025-08-25T09:50:00.869Z] [INFO] User registered: sessionId=aaal55p4bns
+[2025-08-25T09:51:12.356Z] [INFO] Socket connected: QvEnwSbTKI7q6njbAAFb
+[2025-08-25T09:51:12.359Z] [WARN] Socket disconnected: ubuhCVUEwi643mUJAAFZ
+[2025-08-25T09:51:12.361Z] [INFO] User registered: sessionId=aaal55p4bns
+[2025-08-25T09:51:13.378Z] [WARN] Socket disconnected: QvEnwSbTKI7q6njbAAFb
+[2025-08-25T09:51:13.525Z] [INFO] Socket connected: UFsMJye83g1LtyS5AAFd
+[2025-08-25T09:51:13.529Z] [INFO] User registered: sessionId=aaal55p4bns
+[2025-08-25T09:51:15.323Z] [WARN] Socket disconnected: UFsMJye83g1LtyS5AAFd
+[2025-08-25T09:51:15.487Z] [INFO] Socket connected: 1pEpPEpjqRRmnHC6AAFf
+[2025-08-25T09:51:15.490Z] [INFO] User registered: sessionId=aaal55p4bns
+[2025-08-25T09:53:14.158Z] [INFO] Received consent request
+[2025-08-25T09:53:14.163Z] [INFO] Consent saved for sessionId=i0si00m1odi
+[2025-08-25T09:53:14.206Z] [INFO] Socket connected: 5wvPm843B9u89OCcAAFh
+[2025-08-25T09:53:14.207Z] [INFO] User registered: sessionId=i0si00m1odi
+[2025-08-25T09:53:26.225Z] [WARN] Socket disconnected: 1pEpPEpjqRRmnHC6AAFf
+[2025-08-25T09:53:26.451Z] [INFO] Socket connected: 375008EibJgMCHSeAAFj
+[2025-08-25T09:53:26.454Z] [INFO] User registered: sessionId=aaal55p4bns
+[2025-08-25T09:53:28.492Z] [WARN] Socket disconnected: fGhXzLCxzf0chS2hAAFT
+[2025-08-25T09:53:28.879Z] [INFO] Socket connected: OHCfkyAjSEITXkW-AAFl
+[2025-08-25T09:53:28.884Z] [INFO] User registered: sessionId=ybrus6nak3b
+[2025-08-25T09:53:32.102Z] [WARN] Socket disconnected: 5wvPm843B9u89OCcAAFh
+[2025-08-25T09:53:32.451Z] [INFO] Socket connected: ZsbCOwxGi9c-3PqAAAFn
+[2025-08-25T09:53:32.453Z] [INFO] User registered: sessionId=i0si00m1odi
+[2025-08-25T09:53:52.634Z] [INFO] User queued: i0si00m1odi | mode=chat
+[2025-08-25T09:53:55.059Z] [INFO] User queued: aaal55p4bns | mode=chat
+[2025-08-25T09:53:55.060Z] [INFO] Room created b35b4722-f0ac-4158-8b52-6ed0dc021efe for i0si00m1odi & aaal55p4bns | mode=chat
+[2025-08-25T09:53:58.641Z] [INFO] User queued: ybrus6nak3b | mode=chat
+[2025-08-25T09:54:03.096Z] [INFO] Room b35b4722-f0ac-4158-8b52-6ed0dc021efe closed. aaal55p4bns left; i0si00m1odi idle.
+[2025-08-25T09:54:03.098Z] [INFO] Room created 0f8cb7c4-89a1-47d3-9ca3-e0ec4e94471f for aaal55p4bns & ybrus6nak3b | mode=chat
+[2025-08-25T09:54:18.016Z] [INFO] Room 0f8cb7c4-89a1-47d3-9ca3-e0ec4e94471f closed. ybrus6nak3b left; aaal55p4bns idle.
+[2025-08-25T09:54:18.017Z] [INFO] Room created b5fa1b35-f245-4b3d-a974-f623942a8a42 for ybrus6nak3b & i0si00m1odi | mode=chat
+[2025-08-25T09:54:33.920Z] [INFO] Room b5fa1b35-f245-4b3d-a974-f623942a8a42 closed. ybrus6nak3b left; i0si00m1odi idle.
+[2025-08-25T09:54:33.920Z] [WARN] Socket disconnected: OHCfkyAjSEITXkW-AAFl
+[2025-08-25T09:54:34.124Z] [INFO] Socket connected: p4_6pwxJcddXVYBDAAFp
+[2025-08-25T09:54:34.128Z] [INFO] User registered: sessionId=ybrus6nak3b
+[2025-08-25T09:54:35.155Z] [WARN] Socket disconnected: ZsbCOwxGi9c-3PqAAAFn
+[2025-08-25T09:54:35.255Z] [INFO] Socket connected: G-iI9sxR_NE3B6txAAFr
+[2025-08-25T09:54:35.257Z] [INFO] User registered: sessionId=i0si00m1odi
+[2025-08-25T09:54:36.666Z] [WARN] Socket disconnected: 375008EibJgMCHSeAAFj
+[2025-08-25T09:54:36.783Z] [INFO] Socket connected: aCxXMCUX2rJ_ord3AAFt
+[2025-08-25T09:54:36.784Z] [INFO] User registered: sessionId=aaal55p4bns
+[2025-08-25T09:57:07.922Z] [WARN] Socket disconnected: p4_6pwxJcddXVYBDAAFp
+[2025-08-25T09:57:33.865Z] [INFO] Socket connected: 5oHRgdbajzki6uO2AAFv
+[2025-08-25T09:57:33.867Z] [INFO] User registered: sessionId=ybrus6nak3b
+[2025-08-25T09:58:05.614Z] [INFO] Received consent request
+[2025-08-25T09:58:05.618Z] [INFO] Consent saved for sessionId=xwyl344zhd
+[2025-08-25T09:58:05.625Z] [INFO] Socket connected: AfsPjUKn_bmtDW9RAAFx
+[2025-08-25T09:58:05.629Z] [INFO] User registered: sessionId=xwyl344zhd
+[2025-08-25T09:58:44.005Z] [WARN] Socket disconnected: AfsPjUKn_bmtDW9RAAFx
+[2025-08-25T09:58:44.455Z] [INFO] Socket connected: Zn6ejv6a_wT3daPGAAFz
+[2025-08-25T09:58:44.466Z] [INFO] User registered: sessionId=xwyl344zhd
+[2025-08-25T10:06:47.216Z] [INFO] User queued: aaal55p4bns | mode=chat
+[2025-08-25T10:06:52.242Z] [INFO] User queued: i0si00m1odi | mode=chat
+[2025-08-25T10:06:52.243Z] [INFO] Room created 9006b229-19c1-47cb-bee0-7d32420fd28c for i0si00m1odi & aaal55p4bns | mode=chat
+[2025-08-25T10:06:57.687Z] [INFO] User queued: ybrus6nak3b | mode=chat
+[2025-08-25T10:07:00.586Z] [INFO] User queued: xwyl344zhd | mode=chat
+[2025-08-25T10:07:00.587Z] [INFO] Room created 3775e3d4-922f-4c68-91ff-7b36d7086c76 for xwyl344zhd & ybrus6nak3b | mode=chat
+[2025-08-25T10:07:08.648Z] [INFO] Room 9006b229-19c1-47cb-bee0-7d32420fd28c closed. aaal55p4bns left; i0si00m1odi idle.
+[2025-08-25T10:07:08.653Z] [WARN] Socket disconnected: aCxXMCUX2rJ_ord3AAFt
+[2025-08-25T10:07:08.845Z] [INFO] Socket connected: AJnj2HAwJC-hCp6lAAF1
+[2025-08-25T10:07:08.846Z] [INFO] User registered: sessionId=aaal55p4bns
+[2025-08-25T10:07:09.748Z] [INFO] Room 3775e3d4-922f-4c68-91ff-7b36d7086c76 closed. ybrus6nak3b left; xwyl344zhd idle.
+[2025-08-25T10:07:09.751Z] [WARN] Socket disconnected: 5oHRgdbajzki6uO2AAFv
+[2025-08-25T10:07:10.036Z] [INFO] Socket connected: 8hnjj2uPW_F3U6DEAAF3
+[2025-08-25T10:07:10.040Z] [INFO] User registered: sessionId=ybrus6nak3b
+[2025-08-25T10:07:11.139Z] [WARN] Socket disconnected: Zn6ejv6a_wT3daPGAAFz
+[2025-08-25T10:07:11.355Z] [INFO] Socket connected: rippwr3NfrNgaL1uAAF5
+[2025-08-25T10:07:11.356Z] [INFO] User registered: sessionId=xwyl344zhd
+[2025-08-25T10:07:12.533Z] [WARN] Socket disconnected: G-iI9sxR_NE3B6txAAFr
+[2025-08-25T10:07:12.629Z] [INFO] Socket connected: oFXXJIXNK7wHzIihAAF7
+[2025-08-25T10:07:12.631Z] [INFO] User registered: sessionId=i0si00m1odi
+[2025-08-25T10:13:33.577Z] [INFO] User queued: aaal55p4bns | mode=chat
+[2025-08-25T10:13:46.410Z] [INFO] User queued: xwyl344zhd | mode=chat
+[2025-08-25T10:13:46.411Z] [INFO] Room created 56014561-c9ea-4c25-a6d1-3e72942e7c16 for xwyl344zhd & aaal55p4bns | mode=chat
+[2025-08-25T10:13:50.657Z] [INFO] Room 56014561-c9ea-4c25-a6d1-3e72942e7c16 closed. aaal55p4bns left; xwyl344zhd idle.
+[2025-08-25T10:13:53.465Z] [INFO] User queued: ybrus6nak3b | mode=chat
+[2025-08-25T10:13:53.466Z] [INFO] Room created 3e24a3da-9920-4a47-8a34-14a77c581f2d for ybrus6nak3b & aaal55p4bns | mode=chat
+[2025-08-25T10:13:55.993Z] [INFO] Room 3e24a3da-9920-4a47-8a34-14a77c581f2d closed. ybrus6nak3b left; aaal55p4bns idle.
+[2025-08-25T10:13:58.586Z] [INFO] User queued: i0si00m1odi | mode=chat
+[2025-08-25T10:13:58.587Z] [INFO] Room created 93d3b202-a4e1-4499-b787-8ce92db29065 for i0si00m1odi & ybrus6nak3b | mode=chat
+[2025-08-25T10:14:04.024Z] [INFO] Room created 1a8a92d2-e742-4256-9074-93e024ba75b9 for xwyl344zhd & aaal55p4bns | mode=chat
+[2025-08-25T10:14:05.608Z] [INFO] Room 1a8a92d2-e742-4256-9074-93e024ba75b9 closed. aaal55p4bns left; xwyl344zhd idle.
+[2025-08-25T10:14:07.047Z] [INFO] Room 93d3b202-a4e1-4499-b787-8ce92db29065 closed. i0si00m1odi left; ybrus6nak3b idle.
+[2025-08-25T10:14:07.048Z] [INFO] Room created 454aaa14-014c-4d57-91c3-6af7d79f118a for i0si00m1odi & aaal55p4bns | mode=chat
+[2025-08-25T10:14:12.736Z] [INFO] Room 454aaa14-014c-4d57-91c3-6af7d79f118a closed. aaal55p4bns left; i0si00m1odi idle.
+[2025-08-25T10:14:12.738Z] [INFO] Room created d066fcac-96f5-4bd9-99e9-d918c2a76fe9 for aaal55p4bns & xwyl344zhd | mode=chat
+[2025-08-25T10:14:22.840Z] [INFO] Room created fd73da7d-a985-447f-b08f-17adaf000c8c for ybrus6nak3b & i0si00m1odi | mode=chat
+[2025-08-25T10:14:27.033Z] [INFO] Room fd73da7d-a985-447f-b08f-17adaf000c8c closed. i0si00m1odi left; ybrus6nak3b idle.
+[2025-08-25T10:14:27.034Z] [WARN] Socket disconnected: oFXXJIXNK7wHzIihAAF7
+[2025-08-25T10:14:28.385Z] [INFO] Room d066fcac-96f5-4bd9-99e9-d918c2a76fe9 closed. xwyl344zhd left; aaal55p4bns idle.
+[2025-08-25T10:14:28.387Z] [WARN] Socket disconnected: rippwr3NfrNgaL1uAAF5
+[2025-08-25T10:14:30.030Z] [WARN] Socket disconnected: 8hnjj2uPW_F3U6DEAAF3
+[2025-08-25T10:14:31.236Z] [WARN] Socket disconnected: AJnj2HAwJC-hCp6lAAF1
