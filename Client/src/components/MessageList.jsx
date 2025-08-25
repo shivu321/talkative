@@ -14,7 +14,7 @@ export default function MessageList({ messages = [], partnerTyping }) {
   }, [messages, partnerTyping]);
 
   return (
-    <div className="p-2" style={{ overflowY: 'auto',height:'300px' }}>
+    <div className="p-2 message-list-container" >
       {messages.map((msg, idx) => (
         <div
           key={msg.messageId || idx}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="100%" height="100%" viewBox="0 0 500 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Talkative chat interface">
+  <defs>
+    <linearGradient id="gradBubble" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5B8DEF"/>
+      <stop offset="100%" stop-color="#8C5BFF"/>
+    </linearGradient>
+    <linearGradient id="gradText" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#374151"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000000" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Centered Logo Bubble -->
+  <g transform="translate(170,40)" filter="url(#softShadow)">
+    <path d="M16 0h64a16 16 0 0 1 16 16v20a16 16 0 0 1-16 16H46l-12 9c-1.2 1-3 .1-3-1.4V52H16A16 16 0 0 1 0 36V16A16 16 0 0 1 16 0Z" fill="url(#gradBubble)">
+      <animateTransform attributeName="transform" type="translate" values="0 0; 0 2; 0 0" dur="3s" repeatCount="indefinite"/>
+    </path>
+    <g transform="translate(24,22)">
+      <circle cx="14" cy="16" r="3" fill="#ffffff">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="26" cy="16" r="3" fill="#ffffff">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" begin="0.2s" repeatCount="indefinite"/>
+      </circle>
+      <circle cx="38" cy="16" r="3" fill="#ffffff">
+        <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" begin="0.4s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+
+  <!-- Brand Text Below Logo -->
+  <g transform="translate(130,130)">
+    <text font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif"
+          font-size="38" font-weight="800" fill="url(#gradText)" letter-spacing="0.5">
+      Talkative
+    </text>
+    <rect x="0" y="12" width="0" height="4" rx="2" fill="url(#gradBubble)">
+      <animate attributeName="width" from="0" to="240" dur="1s" fill="freeze" begin="0.3s"/>
+    </rect>
+    <rect x="245" y="-26" width="3" height="40" rx="1.5" fill="#8C5BFF" opacity="1">
+      <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+
+  <!-- Chat Messages -->
+  <g transform="translate(40,250)" filter="url(#softShadow)">
+    <rect width="120" height="36" rx="10" fill="#f0f4ff"/>
+    <text x="15" y="24" font-family="Arial, sans-serif" font-size="16" fill="#374151">Hi 👋</text>
+  </g>
+
+  <g transform="translate(320,280)" filter="url(#softShadow)">
+    <rect width="140" height="36" rx="10" fill="#e6ecff"/>
+    <text x="15" y="24" font-family="Arial, sans-serif" font-size="16" fill="#374151">Hello 😊</text>
+  </g>
+
+  <!-- Light Theme Moving Chat Bubbles in Background -->
+  <g opacity="0.6">
+    <circle cx="60" cy="220" r="12" fill="#f0f4ff">
+      <animateTransform attributeName="transform" type="translate" values="0 0; 0 -12; 0 0" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="420" cy="200" r="15" fill="#e6ecff">
+      <animateTransform attributeName="transform" type="translate" values="0 0; 0 15; 0 0" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="100" cy="70" r="10" fill="#dfe6ff">
+      <animateTransform attributeName="transform" type="translate" values="0 0; 0 -10; 0 0" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="40" r="8" fill="#f5f7ff">
+      <animateTransform attributeName="transform" type="translate" values="0 0; 0 12; 0 0" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+</svg>
