@@ -5,9 +5,9 @@ import { io } from "socket.io-client";
 import { SOCKET_URL } from "../api";
 
 // Import the new child components
-import ModeSelectionView from "../components/chat/ModeSelectionView";
-import QueueView from "../components/chat/QueueView";
-import ChatView from "../components/chat/ChatView";
+import ModeSelectionView from "../components/Chat/ModeSelectionView";
+import QueueView from "../components/Chat/QueueView";
+import ChatView from "../components/Chat/ChatView";
 
 // Lightweight unique id
 const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
