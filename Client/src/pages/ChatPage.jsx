@@ -36,6 +36,8 @@ export default function ChatPage({ sessionId }) {
   const [messageFlag, SetMessageFlag] = useState(false);
   const [validationMessage, SetValidationMessage] = useState("");
 
+  
+
   // All logic (functions) also remains in the parent
   const validateChatMessage = (input) => {
     const text = input.trim();
