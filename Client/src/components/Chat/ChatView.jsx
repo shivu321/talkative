@@ -6,13 +6,13 @@ import TextChatUI from "./TextChatUI";
 
 export default function ChatView(props) {
   const { mode, banner, handleNext, handleEnd, nextBusyRef } = props;
-  useEffect(() => {
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch (err) {
-      console.error("AdSense error", err);
-    }
-  }, []);
+  // useEffect(() => {
+  //   try {
+  //     (window.adsbygoogle = window.adsbygoogle || []).push({});
+  //   } catch (err) {
+  //     console.error("AdSense error", err);
+  //   }
+  // }, []);
 
   return (
     <div className="d-flex flex-column flex-grow-1 py-3">
@@ -56,14 +56,14 @@ export default function ChatView(props) {
         </div>
         <div className="col-lg-5 d-none d-lg-flex align-items-center justify-content-center bg-light rounded-3">
           <p className="text-muted">
-            <ins
+            {/* <ins
               className="adsbygoogle"
               style={{ display: "block" }}
               data-ad-client="ca-pub-6307530857595070"
               data-ad-slot="1234567890" // <-- replace with your ad slot id
               data-ad-format="auto"
               data-full-width-responsive="true"
-            ></ins>
+            ></ins> */}
           </p>
         </div>
       </div>
