@@ -13,9 +13,9 @@ import ChatView from "../components/Chat/ChatView";
 const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 
 export default function ChatPage({ sessionId }) {
-  useEffect(() => {
-    localStorage.clear();
-  }, []);
+  // useEffect(() => {
+  //   localStorage.clear();
+  // }, []);
   // All state and refs remain here in the parent component
   const socketRef = useRef(null);
   const peerRef = useRef(null);
@@ -39,22 +39,33 @@ export default function ChatPage({ sessionId }) {
   const [messageFlag, SetMessageFlag] = useState(false);
   const [validationMessage, SetValidationMessage] = useState("");
 
-  
-
   // All logic (functions) also remains in the parent
   const validateChatMessage = (input) => {
     const text = input.trim();
     const digitRegex = /\d/;
-    const numberWords = /\b(one|two|three|four|five|six|seven|eight|nine|ten)\b/i;
-    const linkRegex = /(https?:\/\/[^\s]+|www\.[^\s]+|facebook\.com|instagram\.com|twitter\.com|x\.com|linkedin\.com|snapchat\.com|t\.co|bit\.ly|youtu\.be|youtube\.com|telegram\.me|wa\.me|whatsapp\.com|discord\.gg)/i;
+    const numberWords =
+      /\b(one|two|three|four|five|six|seven|eight|nine|ten)\b/i;
+    const linkRegex =
+      /(https?:\/\/[^\s]+|www\.[^\s]+|facebook\.com|instagram\.com|twitter\.com|x\.com|linkedin\.com|snapchat\.com|t\.co|bit\.ly|youtu\.be|youtube\.com|telegram\.me|wa\.me|whatsapp\.com|discord\.gg)/i;
     const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\b/i;
     const phoneRegex = /\b(?:\+?\d{1,3}[-.\s]?)?(?:\d[-.\s]?){8,}\d\b/;
 
-    if (digitRegex.test(text)) return { flag: true, message: "❌ Numbers are not allowed." };
-    if (numberWords.test(text)) return { flag: true, message: "❌ Numbers in words (One–Ten) are not allowed." };
-    if (linkRegex.test(text)) return { flag: true, message: "❌ Links and social media are not allowed." };
-    if (emailRegex.test(text)) return { flag: true, message: "❌ Email addresses are not allowed." };
-    if (phoneRegex.test(text)) return { flag: true, message: "❌ Phone numbers are not allowed." };
+    if (digitRegex.test(text))
+      return { flag: true, message: "❌ Numbers are not allowed." };
+    if (numberWords.test(text))
+      return {
+        flag: true,
+        message: "❌ Numbers in words (One–Ten) are not allowed.",
+      };
+    if (linkRegex.test(text))
+      return {
+        flag: true,
+        message: "❌ Links and social media are not allowed.",
+      };
+    if (emailRegex.test(text))
+      return { flag: true, message: "❌ Email addresses are not allowed." };
+    if (phoneRegex.test(text))
+      return { flag: true, message: "❌ Phone numbers are not allowed." };
     return { flag: false, message: "" };
   };
 
@@ -65,9 +76,12 @@ export default function ChatPage({ sessionId }) {
       socket.emit("register", { sessionId });
       setBanner(null);
     });
-    socket.on("registered", () => setBanner("Registered. Select a mode to start."));
+    socket.on("registered", () =>
+      setBanner("Registered. Select a mode to start.")
+    );
     socket.on("error", (err) => {
-      const msg = typeof err === "string" ? err : err?.message || "Unknown error";
+      const msg =
+        typeof err === "string" ? err : err?.message || "Unknown error";
       setBanner(`Error: ${msg}`);
     });
     socket.on("queued", () => {
@@ -104,7 +118,9 @@ export default function ChatPage({ sessionId }) {
     });
     socket.on("message", (m) => {
       if (m?.from && m.from === sessionId) return;
-      const id = m?.messageId || `${m?.from || ""}-${m?.text || ""}-${m?.createdAt || ""}`;
+      const id =
+        m?.messageId ||
+        `${m?.from || ""}-${m?.text || ""}-${m?.createdAt || ""}`;
       if (displayedIdsRef.current.has(id)) return;
       displayedIdsRef.current.add(id);
       setMessages((prev) => [...prev, m]);
@@ -115,7 +131,10 @@ export default function ChatPage({ sessionId }) {
       setPartnerTyping(false);
       const sysId = uid();
       displayedIdsRef.current.add(sysId);
-      setMessages((prev) => [...prev, { sys: true, text: "Partner left.", messageId: sysId }]);
+      setMessages((prev) => [
+        ...prev,
+        { sys: true, text: "Partner left.", messageId: sysId },
+      ]);
       setBanner("Partner left. You can End or Next to continue.");
       cleanupPeer();
     });
@@ -153,8 +172,16 @@ export default function ChatPage({ sessionId }) {
     if (localStreamRef.current) return localStreamRef.current;
     try {
       const st = await navigator.mediaDevices.getUserMedia({
-        audio: { echoCancellation: true, noiseSuppression: true, autoGainControl: true },
-        video: { width: { ideal: 1280, min: 640 }, height: { ideal: 720, min: 360 }, frameRate: { ideal: 30, min: 24 } },
+        audio: {
+          echoCancellation: true,
+          noiseSuppression: true,
+          autoGainControl: true,
+        },
+        video: {
+          width: { ideal: 1280, min: 640 },
+          height: { ideal: 720, min: 360 },
+          frameRate: { ideal: 30, min: 24 },
+        },
       });
       localStreamRef.current = st;
       setVideoError(null);
@@ -250,7 +277,10 @@ export default function ChatPage({ sessionId }) {
     const socket = socketRef.current;
     const messageId = uid();
     displayedIdsRef.current.add(messageId);
-    setMessages((prev) => [...prev, { from: "me", text, messageId, createdAt: new Date().toISOString() }]);
+    setMessages((prev) => [
+      ...prev,
+      { from: "me", text, messageId, createdAt: new Date().toISOString() },
+    ]);
     setInput("");
     setShowEmoji(false);
     socket.emit("typing", { roomId, typing: false });
@@ -277,7 +307,13 @@ export default function ChatPage({ sessionId }) {
       iceServers: [
         { urls: "stun:stun.l.google.com:19302" },
         ...(import.meta.env.VITE_TURN_URL
-          ? [{ urls: import.meta.env.VITE_TURN_URL, username: import.meta.env.VITE_TURN_USER, credential: import.meta.env.VITE_TURN_PASS }]
+          ? [
+              {
+                urls: import.meta.env.VITE_TURN_URL,
+                username: import.meta.env.VITE_TURN_USER,
+                credential: import.meta.env.VITE_TURN_PASS,
+              },
+            ]
           : []),
       ],
     });
@@ -298,11 +334,21 @@ export default function ChatPage({ sessionId }) {
       const localStream = localStreamRef.current || (await ensureLocalStream());
       localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
       pc.onicecandidate = (e) => {
-        if (e.candidate) socketRef.current.emit("webrtc-ice", { to: toPartnerId, candidate: e.candidate });
+        if (e.candidate)
+          socketRef.current.emit("webrtc-ice", {
+            to: toPartnerId,
+            candidate: e.candidate,
+          });
       };
-      const offer = await pc.createOffer({ offerToReceiveAudio: true, offerToReceiveVideo: true });
+      const offer = await pc.createOffer({
+        offerToReceiveAudio: true,
+        offerToReceiveVideo: true,
+      });
       await pc.setLocalDescription(offer);
-      socketRef.current.emit("webrtc-offer", { to: toPartnerId, sdp: pc.localDescription });
+      socketRef.current.emit("webrtc-offer", {
+        to: toPartnerId,
+        sdp: pc.localDescription,
+      });
     } catch (e) {
       console.error("webrtc caller err", e);
       setVideoError("Failed to start call.");
@@ -315,12 +361,19 @@ export default function ChatPage({ sessionId }) {
       const localStream = localStreamRef.current || (await ensureLocalStream());
       localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
       pc.onicecandidate = (e) => {
-        if (e.candidate) socketRef.current.emit("webrtc-ice", { to: from, candidate: e.candidate });
+        if (e.candidate)
+          socketRef.current.emit("webrtc-ice", {
+            to: from,
+            candidate: e.candidate,
+          });
       };
       await pc.setRemoteDescription(remoteSdp);
       const answer = await pc.createAnswer();
       await pc.setLocalDescription(answer);
-      socketRef.current.emit("webrtc-answer", { to: from, sdp: pc.localDescription });
+      socketRef.current.emit("webrtc-answer", {
+        to: from,
+        sdp: pc.localDescription,
+      });
     } catch (e) {
       console.error("webrtc receiver err", e);
       setVideoError("Failed to answer call.");
@@ -370,21 +423,44 @@ export default function ChatPage({ sessionId }) {
     }
     if (status === "connected") {
       const chatViewProps = {
-        mode, banner, handleNext, handleEnd, nextBusyRef: nextBusyRef.current,
-        localStream: localStreamRef.current, remoteStream: remoteStreamRef.current,
-        videoError, partnerPresent, messages, partnerTyping, input, showEmoji,
+        mode,
+        banner,
+        handleNext,
+        handleEnd,
+        nextBusyRef: nextBusyRef.current,
+        localStream: localStreamRef.current,
+        remoteStream: remoteStreamRef.current,
+        videoError,
+        partnerPresent,
+        messages,
+        partnerTyping,
+        input,
+        showEmoji,
         canSend: mode === "chat" && partnerPresent && status === "connected",
-        handleTyping, sendMsg, setShowEmoji, sendBusyRef: sendBusyRef.current,
-        validateChatMessage, setInput, messageFlag, SetMessageFlag, validationMessage, SetValidationMessage,
+        handleTyping,
+        sendMsg,
+        setShowEmoji,
+        sendBusyRef: sendBusyRef.current,
+        validateChatMessage,
+        setInput,
+        messageFlag,
+        SetMessageFlag,
+        validationMessage,
+        SetValidationMessage,
       };
       return <ChatView {...chatViewProps} />;
     }
     // Default: status === 'idle'
-    return <ModeSelectionView banner={banner} onModeSelect={handleModeSelect} />;
+    return (
+      <ModeSelectionView banner={banner} onModeSelect={handleModeSelect} />
+    );
   };
 
   return (
-    <div className="container-fluid d-flex flex-column" style={{ minHeight: "100vh", backgroundColor: "#f8f9fa" }}>
+    <div
+      className="container-fluid d-flex flex-column"
+      style={{ minHeight: "100vh", backgroundColor: "#f8f9fa" }}
+    >
       {renderContent()}
     </div>
   );
