@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API } from "../api";
 import PrivacyModal from "../components/PrivacyModal";
@@ -13,17 +13,16 @@ export default function ConsentPage({ onConsent }) {
   const [showTerms, setShowTerms] = useState(false);
   // const navigate = useNavigate();
 
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
+
   const submit = async () => {
     if (!age || !privacy || !terms) {
       return alert("Please accept all the conditions to continue.");
     }
-    let sessionId = localStorage.getItem("sessionId");
-    if (!sessionId) {
-      sessionId = Math.random().toString(36).substring(2, 15);
-      localStorage.setItem("sessionId", sessionId);
-    }
-    setLoading(true);
 
+    setLoading(true);
     try {
       const res = await axios.post(`${API}/consent`, {
         is18Plus: age,
@@ -32,6 +31,11 @@ export default function ConsentPage({ onConsent }) {
         sessionId: sessionId,
       });
       const id = res.data?.sessionId;
+      let sessionId = localStorage.getItem("sessionId");
+      if (!sessionId) {
+        sessionId = Math.random().toString(36).substring(2, 15);
+        localStorage.setItem("sessionId", sessionId);
+      }
       onConsent(id);
       // navigate("/chat");
     } catch (e) {
