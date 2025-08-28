@@ -13,6 +13,9 @@ import ChatView from "../components/Chat/ChatView";
 const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 
 export default function ChatPage({ sessionId }) {
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
   // All state and refs remain here in the parent component
   const socketRef = useRef(null);
   const peerRef = useRef(null);
