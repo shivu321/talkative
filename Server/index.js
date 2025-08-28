@@ -25,12 +25,11 @@ const io = new Server(httpServer, {
 
 // Middleware
 app.use(express.json());
-app.use(
-    cors({
-        origin: "*",
-        credentials: true,
-    })
-);
+app.use(cors({
+    origin: "https://talkative.co.in",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 // Routes
 app.use("/consent", consentRoutes);
