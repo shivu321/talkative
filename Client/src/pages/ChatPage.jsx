@@ -70,7 +70,10 @@ export default function ChatPage({ sessionId }) {
   };
 
   useEffect(() => {
-    const socket = io(SOCKET_URL, { transports: ["websocket"] });
+    const socket = io(SOCKET_URL, {
+      transports: ["websocket"], // optional, forces ws
+      path: "/socket.io", // default path
+    });
     socketRef.current = socket;
     socket.on("connect", () => {
       socket.emit("register", { sessionId });
