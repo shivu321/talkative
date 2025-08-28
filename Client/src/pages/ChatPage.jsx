@@ -70,7 +70,7 @@ export default function ChatPage({ sessionId }) {
   };
 
   useEffect(() => {
-    const socket = io(SOCKET_URL, {
+    const socket = io("https://api.talkative.co.in/", {
       transports: ["websocket"], // optional, forces ws
       path: "/socket.io", // default path
     });
