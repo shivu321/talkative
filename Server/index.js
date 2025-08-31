@@ -26,7 +26,7 @@ const io = new Server(httpServer, {
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: "https://talkative.co.in",
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
