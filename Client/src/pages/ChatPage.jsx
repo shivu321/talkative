@@ -70,10 +70,7 @@ export default function ChatPage({ sessionId }) {
   };
 
   useEffect(() => {
-    const socket = io("https://api.talkative.co.in", {
-      path: "/socket.io", // default path
-      transports: ["websocket"], // forces WebSocket (skips polling)
-    });
+    const socket = io("https://api.talkative.co.in", { transports: ["websocket", "polling"] });
     socketRef.current = socket;
     socket.on("connect", () => {
       socket.emit("register", { sessionId });
