@@ -19,7 +19,8 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
             cors: {
-        origin: "*"
+        origin: "https://talkative.co.in",
+            methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         },
 });
 
