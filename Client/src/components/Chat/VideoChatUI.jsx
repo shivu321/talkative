@@ -18,34 +18,20 @@ export default function VideoChatUI({
     [localMainRef.current, localPreviewRef.current].forEach((el) => {
       if (!el) return;
       el.srcObject = localStream || null;
-      el.muted = true;
+      el.muted = true; // ✅ always mute local video
       el.play?.().catch(() => {});
     });
   }, [localStream]);
 
   // Attach REMOTE stream
   useEffect(() => {
-    [remoteMainRef.current, remotePreviewRef.current].forEach((el, index) => {
+    [remoteMainRef.current, remotePreviewRef.current].forEach((el) => {
       if (!el) return;
       el.srcObject = remoteStream || null;
-      // Mute preview only initially
-      el.muted = index === 1;
+      el.muted = false; // ✅ remote should always have audio
       el.play?.().catch(() => {});
     });
   }, [remoteStream]);
-
-  // Handle audio when swapping main/preview
-  useEffect(() => {
-    if (!remoteMainRef.current || !remotePreviewRef.current) return;
-
-    remoteMainRef.current.muted = isLocalMain; // mute main if local main
-    remotePreviewRef.current.muted = !isLocalMain; // mute preview if remote not main
-
-    const activeRemote = isLocalMain
-      ? remotePreviewRef.current
-      : remoteMainRef.current;
-    activeRemote?.play?.().catch(() => {});
-  }, [isLocalMain, remoteStream]);
 
   return (
     <div className="w-100 h-100 d-flex flex-column align-items-center">
@@ -83,7 +69,12 @@ export default function VideoChatUI({
             right: "1rem",
             cursor: "pointer",
           }}
-          onClick={() => setIsLocalMain((prev) => !prev)}
+          onClick={() => {
+            // ✅ user interaction ensures remote audio can play
+            setIsLocalMain((prev) => !prev);
+            remoteMainRef.current?.play?.().catch(() => {});
+            remotePreviewRef.current?.play?.().catch(() => {});
+          }}
         >
           <video
             ref={remotePreviewRef}

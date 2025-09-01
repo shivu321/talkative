@@ -23,6 +23,9 @@ export default function QueueView({
         <div className="mt-4 w-100" style={{ maxWidth: 640 }}>
           <div className="ratio ratio-16x9 bg-dark rounded-3 shadow-sm overflow-hidden">
             <VideoBox localStream={localStream} muted />
+            <div className="position-absolute top-0 start-0 m-2 badge bg-secondary">
+              You
+            </div>
           </div>
           {videoError && (
             <div className="alert alert-danger mt-2">{videoError}</div>
