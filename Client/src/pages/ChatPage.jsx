@@ -252,12 +252,13 @@ export default function ChatPage({ sessionId }) {
       ],
     });
 
-    pc.ontrack = (e) => {
-      const remote = e.streams?.[0] || new MediaStream([e.track]);
-      remoteStreamRef.current = remote;
-      setRemoteStreamState(remote); // update state for video element
-      setPartnerPresent(true);
-    };
+  pc.ontrack = (e) => {
+    console.log("ontrack received", e.streams, e.track);
+    const remote = e.streams?.[0] || new MediaStream([e.track]);
+    remoteStreamRef.current = remote;
+    setRemoteStreamState(remote);
+    setPartnerPresent(true);
+  };
 
     pc.onicecandidate = (ev) => {
       if (ev.candidate && socketRef.current && partnerId) {

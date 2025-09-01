@@ -16,36 +16,31 @@ export default function VideoChatUI({
   // Attach LOCAL stream
   useEffect(() => {
     [localMainRef.current, localPreviewRef.current].forEach((el) => {
-      if (el) {
-        el.srcObject = localStream || null;
-        el.muted = true;
-        el.play?.().catch(() => {});
-      }
+      if (!el) return;
+      el.srcObject = localStream || null;
+      el.muted = true;
+      el.play?.().catch(() => {});
     });
   }, [localStream]);
 
   // Attach REMOTE stream
   useEffect(() => {
-    if (!remoteStream) return;
-
-    [remoteMainRef.current, remotePreviewRef.current].forEach((el) => {
-      if (el) {
-        // Important: reset srcObject first
-        el.srcObject = null;
-        el.srcObject = remoteStream;
-        el.play?.().catch(() => {});
-      }
+    [remoteMainRef.current, remotePreviewRef.current].forEach((el, index) => {
+      if (!el) return;
+      el.srcObject = remoteStream || null;
+      // Mute preview only initially
+      el.muted = index === 1;
+      el.play?.().catch(() => {});
     });
   }, [remoteStream]);
 
-  // Control which remote video outputs audio
+  // Handle audio when swapping main/preview
   useEffect(() => {
     if (!remoteMainRef.current || !remotePreviewRef.current) return;
 
-    remoteMainRef.current.muted = isLocalMain;
-    remotePreviewRef.current.muted = !isLocalMain;
+    remoteMainRef.current.muted = isLocalMain; // mute main if local main
+    remotePreviewRef.current.muted = !isLocalMain; // mute preview if remote not main
 
-    // Ensure the visible remote video plays
     const activeRemote = isLocalMain
       ? remotePreviewRef.current
       : remoteMainRef.current;
@@ -55,7 +50,7 @@ export default function VideoChatUI({
   return (
     <div className="w-100 h-100 d-flex flex-column align-items-center">
       <div className="w-100 h-100 bg-dark rounded-3 position-relative shadow-lg overflow-hidden">
-        {/* Main videos */}
+        {/* Main Videos */}
         <video
           ref={remoteMainRef}
           autoPlay
@@ -76,7 +71,7 @@ export default function VideoChatUI({
           style={{ objectFit: "cover" }}
         />
 
-        {/* Small floating preview */}
+        {/* Floating Preview */}
         <div
           className="position-absolute border border-2 border-white shadow rounded-3 overflow-hidden bg-black"
           style={{
