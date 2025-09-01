@@ -1,18 +1,10 @@
-// src/components/chat/ChatView.jsx
 import React from "react";
 import { Helmet } from "react-helmet";
 import VideoChatUI from "./VideoChatUI";
 import TextChatUI from "./TextChatUI";
 
 export default function ChatView(props) {
-  const { mode, banner, handleNext, handleEnd, nextBusyRef } = props;
-  // useEffect(() => {
-  //   try {
-  //     (window.adsbygoogle = window.adsbygoogle || []).push({});
-  //   } catch (err) {
-  //     console.error("AdSense error", err);
-  //   }
-  // }, []);
+  const { mode, banner, handleNext, nextBusyRef } = props;
 
   return (
     <div className="d-flex flex-column flex-grow-1 py-3">
@@ -48,23 +40,19 @@ export default function ChatView(props) {
           {banner && <div className="alert alert-info py-2 mb-3">{banner}</div>}
           <main className="flex-grow-1" style={{ position: "relative" }}>
             {mode === "video" ? (
-              <VideoChatUI {...props} />
+              <VideoChatUI
+                localStream={props.localStream}
+                remoteStream={props.remoteStream}
+                videoError={props.videoError}
+                partnerPresent={props.partnerPresent}
+              />
             ) : (
               <TextChatUI {...props} />
             )}
           </main>
         </div>
         <div className="col-lg-5 d-none d-lg-flex align-items-center justify-content-center bg-light rounded-3">
-          <p className="text-muted">
-            {/* <ins
-              className="adsbygoogle"
-              style={{ display: "block" }}
-              data-ad-client="ca-pub-6307530857595070"
-              data-ad-slot="1234567890" // <-- replace with your ad slot id
-              data-ad-format="auto"
-              data-full-width-responsive="true"
-            ></ins> */}
-          </p>
+          <p className="text-muted"></p>
         </div>
       </div>
     </div>

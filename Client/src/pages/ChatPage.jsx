@@ -1,30 +1,29 @@
 // src/pages/ChatPage.jsx
-
-import React, { useEffect, useRef, useState, Suspense } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { SOCKET_URL } from "../api";
 
-// Import the new child components
 import ModeSelectionView from "../components/Chat/ModeSelectionView";
 import QueueView from "../components/Chat/QueueView";
 import ChatView from "../components/Chat/ChatView";
 
-// Lightweight unique id
 const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 
 export default function ChatPage({ sessionId }) {
-  // useEffect(() => {
-  //   localStorage.clear();
-  // }, []);
-  // All state and refs remain here in the parent component
   const socketRef = useRef(null);
   const peerRef = useRef(null);
+
   const localStreamRef = useRef(null);
+  const [localStreamState, setLocalStreamState] = useState(null);
+
   const remoteStreamRef = useRef(null);
+  const [remoteStreamState, setRemoteStreamState] = useState(null);
+
   const typingTimeoutRef = useRef(null);
   const displayedIdsRef = useRef(new Set());
   const sendBusyRef = useRef(false);
   const nextBusyRef = useRef(false);
+
   const [mode, setMode] = useState(null);
   const [status, setStatus] = useState("idle");
   const [roomId, setRoomId] = useState(null);
@@ -39,9 +38,11 @@ export default function ChatPage({ sessionId }) {
   const [messageFlag, SetMessageFlag] = useState(false);
   const [validationMessage, SetValidationMessage] = useState("");
 
-  // All logic (functions) also remains in the parent
-  const validateChatMessage = (input) => {
-    const text = input.trim();
+  // -----------------------------------------
+  // Message validation
+  // -----------------------------------------
+  const validateChatMessage = (inputVal) => {
+    const text = inputVal.trim();
     const digitRegex = /\d/;
     const numberWords =
       /\b(one|two|three|four|five|six|seven|eight|nine|ten)\b/i;
@@ -69,58 +70,69 @@ export default function ChatPage({ sessionId }) {
     return { flag: false, message: "" };
   };
 
+  // -----------------------------------------
+  // Socket + signaling
+  // -----------------------------------------
   useEffect(() => {
-    // const socket = io("http://localhost:5000", {
-    //   transports: ["websocket", "polling"],
-    // });
+    // const socket = io(SOCKET_URL, { transports: ["websocket", "polling"] });
     const socket = io("https://api.talkative.co.in", {
       transports: ["websocket", "polling"],
-    });
+     });
     socketRef.current = socket;
+
     socket.on("connect", () => {
       socket.emit("register", { sessionId });
       setBanner(null);
     });
+
     socket.on("registered", () =>
       setBanner("Registered. Select a mode to start.")
     );
+
     socket.on("error", (err) => {
       const msg =
         typeof err === "string" ? err : err?.message || "Unknown error";
       setBanner(`Error: ${msg}`);
     });
+
     socket.on("queued", () => {
       setStatus("queued");
       setBanner("Searching for a partner...");
     });
-    socket.on("matched", ({ roomId, partnerId, mode: matchedMode }) => {
-      displayedIdsRef.current.clear();
-      setShowEmoji(false);
-      setPartnerPresent(true);
-      setPartnerTyping(false);
-      setMessages([]);
-      setBanner(null);
-      sendBusyRef.current = false;
-      setStatus("connected");
-      setRoomId(roomId);
-      setPartnerId(partnerId);
-      const finalMode = matchedMode || mode;
-      if (finalMode === "video") {
-        const meIsCaller = sessionId < partnerId;
-        if (meIsCaller) {
+
+    socket.on(
+      "matched",
+      ({ roomId: rid, partnerId: pid, mode: matchedMode }) => {
+        displayedIdsRef.current.clear();
+        setShowEmoji(false);
+        setPartnerPresent(true);
+        setPartnerTyping(false);
+        setMessages([]);
+        setBanner(null);
+        sendBusyRef.current = false;
+        setStatus("connected");
+        setRoomId(rid);
+        setPartnerId(pid);
+
+        const finalMode = matchedMode || mode;
+
+        if (finalMode === "video") {
+          const meIsCaller = sessionId < pid;
           ensureLocalStream()
             .then(() => {
-              cleanupPeer();
-              createPeerAsCaller(partnerId);
+              cleanupPeer(); // close previous peer
+              if (meIsCaller) createPeerAsCaller(pid);
             })
             .catch((e) => {
               setVideoError("Camera/mic permission error.");
               console.error(e);
             });
         }
+
+        nextBusyRef.current = false;
       }
-      nextBusyRef.current = false;
-    });
+    );
+
     socket.on("message", (m) => {
       if (m?.from && m.from === sessionId) return;
       const id =
@@ -130,7 +142,9 @@ export default function ChatPage({ sessionId }) {
       displayedIdsRef.current.add(id);
       setMessages((prev) => [...prev, m]);
     });
+
     socket.on("typing", ({ typing }) => setPartnerTyping(!!typing));
+
     socket.on("partner-left", () => {
       setPartnerPresent(false);
       setPartnerTyping(false);
@@ -143,6 +157,7 @@ export default function ChatPage({ sessionId }) {
       setBanner("Partner left. You can End or Next to continue.");
       cleanupPeer();
     });
+
     socket.on("webrtc-offer", async ({ from, sdp }) => {
       try {
         await ensureLocalStream();
@@ -152,16 +167,17 @@ export default function ChatPage({ sessionId }) {
         setVideoError("Failed to handle incoming offer.");
       }
     });
+
     socket.on("webrtc-answer", async ({ sdp }) => {
-      if (peerRef.current && sdp) {
-        await peerRef.current.setRemoteDescription(sdp).catch(console.error);
-      }
+      if (peerRef.current && sdp)
+        await peerRef.current.setRemoteDescription(sdp);
     });
+
     socket.on("webrtc-ice", ({ candidate }) => {
-      if (peerRef.current && candidate) {
+      if (peerRef.current && candidate)
         peerRef.current.addIceCandidate(candidate).catch(console.error);
-      }
     });
+
     return () => {
       if (typingTimeoutRef.current) {
         clearTimeout(typingTimeoutRef.current);
@@ -173,6 +189,9 @@ export default function ChatPage({ sessionId }) {
     };
   }, [sessionId]);
 
+  // -----------------------------------------
+  // Local stream
+  // -----------------------------------------
   const ensureLocalStream = async () => {
     if (localStreamRef.current) return localStreamRef.current;
     try {
@@ -189,6 +208,7 @@ export default function ChatPage({ sessionId }) {
         },
       });
       localStreamRef.current = st;
+      setLocalStreamState(st);
       setVideoError(null);
       return st;
     } catch (e) {
@@ -201,9 +221,121 @@ export default function ChatPage({ sessionId }) {
     if (localStreamRef.current) {
       localStreamRef.current.getTracks()?.forEach((t) => t.stop?.());
       localStreamRef.current = null;
+      setLocalStreamState(null);
     }
   };
 
+  // -----------------------------------------
+  // Peer creation
+  // -----------------------------------------
+  const createPeerBase = () => {
+    if (peerRef.current) {
+      try {
+        peerRef.current.getReceivers()?.forEach((r) => r.track?.stop?.());
+        peerRef.current.close();
+      } catch {}
+      peerRef.current = null;
+    }
+
+    const pc = new RTCPeerConnection({
+      iceServers: [
+        { urls: "stun:stun.l.google.com:19302" },
+        ...(import.meta.env.VITE_TURN_URL
+          ? [
+              {
+                urls: import.meta.env.VITE_TURN_URL,
+                username: import.meta.env.VITE_TURN_USER,
+                credential: import.meta.env.VITE_TURN_PASS,
+              },
+            ]
+          : []),
+      ],
+    });
+
+    pc.ontrack = (e) => {
+      const remote = e.streams?.[0] || new MediaStream([e.track]);
+      remoteStreamRef.current = remote;
+      setRemoteStreamState(remote); // update state for video element
+      setPartnerPresent(true);
+    };
+
+    pc.onicecandidate = (ev) => {
+      if (ev.candidate && socketRef.current && partnerId) {
+        socketRef.current.emit("webrtc-ice", {
+          to: partnerId,
+          candidate: ev.candidate,
+        });
+      }
+    };
+
+    pc.onconnectionstatechange = () => {
+      const state = pc.connectionState;
+      if (
+        state === "disconnected" ||
+        state === "failed" ||
+        state === "closed"
+      ) {
+        setPartnerPresent(false);
+        remoteStreamRef.current = null;
+        setRemoteStreamState(null);
+      } else if (state === "connected") setPartnerPresent(true);
+    };
+
+    peerRef.current = pc;
+    return pc;
+  };
+
+  const createPeerAsCaller = async (toPartnerId) => {
+    try {
+      const pc = createPeerBase();
+      const localStream = localStreamRef.current || (await ensureLocalStream());
+      localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
+      const offer = await pc.createOffer();
+      await pc.setLocalDescription(offer);
+      socketRef.current?.emit("webrtc-offer", {
+        to: toPartnerId,
+        sdp: pc.localDescription,
+      });
+    } catch (e) {
+      console.error("webrtc caller err", e);
+      setVideoError("Failed to start call.");
+    }
+  };
+
+  const createPeerAsReceiver = async (from, remoteSdp) => {
+    try {
+      const pc = createPeerBase();
+      const localStream = localStreamRef.current || (await ensureLocalStream());
+      localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
+      await pc.setRemoteDescription(remoteSdp);
+      const answer = await pc.createAnswer();
+      await pc.setLocalDescription(answer);
+      socketRef.current?.emit("webrtc-answer", {
+        to: from,
+        sdp: pc.localDescription,
+      });
+    } catch (e) {
+      console.error("webrtc receiver err", e);
+      setVideoError("Failed to answer call.");
+    }
+  };
+
+  const cleanupPeer = () => {
+    if (peerRef.current) {
+      try {
+        peerRef.current.getReceivers()?.forEach((r) => r.track?.stop?.());
+        peerRef.current.close();
+      } catch {}
+      peerRef.current = null;
+    }
+    remoteStreamRef.current = null;
+    setRemoteStreamState(null);
+    setPartnerPresent(false);
+  };
+
+  // -----------------------------------------
+  // Chat handlers
+  // -----------------------------------------
   const handleModeSelect = async (m) => {
     setMode(m);
     setBanner(null);
@@ -212,33 +344,19 @@ export default function ChatPage({ sessionId }) {
     setPartnerPresent(false);
     setPartnerTyping(false);
     displayedIdsRef.current.clear();
-    if (m === "video") {
-      try {
-        await ensureLocalStream();
-      } catch {
-        return;
-      }
-    }
+    if (m === "video") await ensureLocalStream();
     joinQueue(m);
   };
 
   const joinQueue = (m) => {
-    const socket = socketRef.current;
-    if (!socket || socket.disconnected) return;
-    socket.emit("joinQueue", { sessionId, mode: m });
+    socketRef.current?.emit("joinQueue", { sessionId, mode: m });
   };
 
   const handleEnd = () => {
-    const socket = socketRef.current;
-    if (socket) {
-      socket.emit("endChat");
-      socket.emit("next");
-      socket.emit("leaveQueue");
-    }
-    if (typingTimeoutRef.current) {
-      clearTimeout(typingTimeoutRef.current);
-      typingTimeoutRef.current = null;
-    }
+    socketRef.current?.emit("endChat");
+    socketRef.current?.emit("next");
+    socketRef.current?.emit("leaveQueue");
+    if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
     cleanupPeer();
     stopLocalStream();
     setStatus("idle");
@@ -256,12 +374,8 @@ export default function ChatPage({ sessionId }) {
   const handleNext = () => {
     if (nextBusyRef.current) return;
     nextBusyRef.current = true;
-    const socket = socketRef.current;
-    if (!socket || socket.disconnected) {
-      nextBusyRef.current = false;
-      return;
-    }
     cleanupPeer();
+    stopLocalStream();
     setMessages([]);
     setInput("");
     setStatus("idle");
@@ -271,15 +385,13 @@ export default function ChatPage({ sessionId }) {
     setPartnerTyping(false);
     setBanner("Searching for a new partner...");
     displayedIdsRef.current.clear();
-    socket.emit("next");
+    socketRef.current?.emit("next");
   };
 
   const sendMsg = () => {
     const text = input.trim();
-    if (!text || !roomId || !partnerPresent) return;
-    if (sendBusyRef.current) return;
+    if (!text || !roomId || !partnerPresent || sendBusyRef.current) return;
     sendBusyRef.current = true;
-    const socket = socketRef.current;
     const messageId = uid();
     displayedIdsRef.current.add(messageId);
     setMessages((prev) => [
@@ -288,115 +400,20 @@ export default function ChatPage({ sessionId }) {
     ]);
     setInput("");
     setShowEmoji(false);
-    socket.emit("typing", { roomId, typing: false });
-    socket.emit("message", { roomId, text, messageId });
-    setTimeout(() => {
-      sendBusyRef.current = false;
-    }, 120);
+    socketRef.current?.emit("typing", { roomId, typing: false });
+    socketRef.current?.emit("message", { roomId, text, messageId });
+    setTimeout(() => (sendBusyRef.current = false), 120);
   };
 
   const handleTyping = (v) => {
     setInput(v);
     if (!roomId || !partnerPresent) return;
-    const socket = socketRef.current;
-    socket.emit("typing", { roomId, typing: true });
+    socketRef.current?.emit("typing", { roomId, typing: true });
     if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
     typingTimeoutRef.current = setTimeout(() => {
-      socket.emit("typing", { roomId, typing: false });
+      socketRef.current?.emit("typing", { roomId, typing: false });
       typingTimeoutRef.current = null;
     }, 800);
-  };
-
-  const createPeerBase = () => {
-    const pc = new RTCPeerConnection({
-      iceServers: [
-        { urls: "stun:stun.l.google.com:19302" },
-        ...(import.meta.env.VITE_TURN_URL
-          ? [
-              {
-                urls: import.meta.env.VITE_TURN_URL,
-                username: import.meta.env.VITE_TURN_USER,
-                credential: import.meta.env.VITE_TURN_PASS,
-              },
-            ]
-          : []),
-      ],
-    });
-    peerRef.current = pc;
-    pc.ontrack = (e) => {
-      const remote = e.streams?.[0] || null;
-      if (remote) {
-        remoteStreamRef.current = remote;
-        setPartnerId((p) => p);
-      }
-    };
-    return pc;
-  };
-
-  const createPeerAsCaller = async (toPartnerId) => {
-    try {
-      const pc = createPeerBase();
-      const localStream = localStreamRef.current || (await ensureLocalStream());
-      localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
-      pc.onicecandidate = (e) => {
-        if (e.candidate)
-          socketRef.current.emit("webrtc-ice", {
-            to: toPartnerId,
-            candidate: e.candidate,
-          });
-      };
-      const offer = await pc.createOffer({
-        offerToReceiveAudio: true,
-        offerToReceiveVideo: true,
-      });
-      await pc.setLocalDescription(offer);
-      socketRef.current.emit("webrtc-offer", {
-        to: toPartnerId,
-        sdp: pc.localDescription,
-      });
-    } catch (e) {
-      console.error("webrtc caller err", e);
-      setVideoError("Failed to start call.");
-    }
-  };
-
-  const createPeerAsReceiver = async (from, remoteSdp) => {
-    try {
-      const pc = createPeerBase();
-      const localStream = localStreamRef.current || (await ensureLocalStream());
-      localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
-      pc.onicecandidate = (e) => {
-        if (e.candidate)
-          socketRef.current.emit("webrtc-ice", {
-            to: from,
-            candidate: e.candidate,
-          });
-      };
-      await pc.setRemoteDescription(remoteSdp);
-      const answer = await pc.createAnswer();
-      await pc.setLocalDescription(answer);
-      socketRef.current.emit("webrtc-answer", {
-        to: from,
-        sdp: pc.localDescription,
-      });
-    } catch (e) {
-      console.error("webrtc receiver err", e);
-      setVideoError("Failed to answer call.");
-    }
-  };
-
-  const cleanupPeer = () => {
-    if (peerRef.current) {
-      try {
-        peerRef.current.getSenders?.().forEach((s) => s.track?.stop?.());
-        peerRef.current.getReceivers?.().forEach((r) => r.track?.stop?.());
-      } catch {}
-      try {
-        peerRef.current.close();
-      } catch {}
-      peerRef.current = null;
-    }
-    remoteStreamRef.current = null;
   };
 
   const handleBackFromQueue = () => {
@@ -414,13 +431,16 @@ export default function ChatPage({ sessionId }) {
     nextBusyRef.current = false;
   };
 
+  // -----------------------------------------
+  // Render
+  // -----------------------------------------
   const renderContent = () => {
     if (status === "queued") {
       return (
         <QueueView
           banner={banner}
           mode={mode}
-          localStream={localStreamRef.current}
+          localStream={localStreamState}
           videoError={videoError}
           onBack={handleBackFromQueue}
         />
@@ -433,8 +453,8 @@ export default function ChatPage({ sessionId }) {
         handleNext,
         handleEnd,
         nextBusyRef: nextBusyRef.current,
-        localStream: localStreamRef.current,
-        remoteStream: remoteStreamRef.current,
+        localStream: localStreamState,
+        remoteStream: remoteStreamState,
         videoError,
         partnerPresent,
         messages,
@@ -455,7 +475,6 @@ export default function ChatPage({ sessionId }) {
       };
       return <ChatView {...chatViewProps} />;
     }
-    // Default: status === 'idle'
     return (
       <ModeSelectionView banner={banner} onModeSelect={handleModeSelect} />
     );

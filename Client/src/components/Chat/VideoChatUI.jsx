@@ -6,52 +6,77 @@ export default function VideoChatUI({
   videoError,
   partnerPresent,
 }) {
-  const localRef = useRef();
-  const remoteRef = useRef();
+  const localMainRef = useRef(null);
+  const localPreviewRef = useRef(null);
+  const remoteMainRef = useRef(null);
+  const remotePreviewRef = useRef(null);
 
   const [isLocalMain, setIsLocalMain] = useState(false);
 
+  // Attach LOCAL stream
   useEffect(() => {
-    if (localRef.current && localStream) {
-      localRef.current.srcObject = localStream;
-    }
+    [localMainRef.current, localPreviewRef.current].forEach((el) => {
+      if (el) {
+        el.srcObject = localStream || null;
+        el.muted = true;
+        el.play?.().catch(() => {});
+      }
+    });
   }, [localStream]);
 
+  // Attach REMOTE stream
   useEffect(() => {
-    if (remoteRef.current && remoteStream) {
-      remoteRef.current.srcObject = remoteStream;
-    }
+    if (!remoteStream) return;
+
+    [remoteMainRef.current, remotePreviewRef.current].forEach((el) => {
+      if (el) {
+        // Important: reset srcObject first
+        el.srcObject = null;
+        el.srcObject = remoteStream;
+        el.play?.().catch(() => {});
+      }
+    });
   }, [remoteStream]);
+
+  // Control which remote video outputs audio
+  useEffect(() => {
+    if (!remoteMainRef.current || !remotePreviewRef.current) return;
+
+    remoteMainRef.current.muted = isLocalMain;
+    remotePreviewRef.current.muted = !isLocalMain;
+
+    // Ensure the visible remote video plays
+    const activeRemote = isLocalMain
+      ? remotePreviewRef.current
+      : remoteMainRef.current;
+    activeRemote?.play?.().catch(() => {});
+  }, [isLocalMain, remoteStream]);
 
   return (
     <div className="w-100 h-100 d-flex flex-column align-items-center">
       <div className="w-100 h-100 bg-dark rounded-3 position-relative shadow-lg overflow-hidden">
-        {/* Partner video (always mounted) */}
+        {/* Main videos */}
         <video
-          ref={remoteRef}
+          ref={remoteMainRef}
           autoPlay
           playsInline
-          className={`position-absolute top-0 start-0 w-100 h-100 transition-all ${
+          className={`position-absolute top-0 start-0 w-100 h-100 ${
             isLocalMain ? "d-none" : ""
           }`}
-          style={{ objectFit: "cover", cursor: "pointer" }}
-          onClick={() => setIsLocalMain(true)}
+          style={{ objectFit: "cover" }}
         />
-
-        {/* Local video (always mounted) */}
         <video
-          ref={localRef}
+          ref={localMainRef}
           autoPlay
-          muted
           playsInline
-          className={`position-absolute top-0 start-0 w-100 h-100 transition-all ${
+          muted
+          className={`position-absolute top-0 start-0 w-100 h-100 ${
             isLocalMain ? "" : "d-none"
           }`}
-          style={{ objectFit: "cover", cursor: "pointer" }}
-          onClick={() => setIsLocalMain(false)}
+          style={{ objectFit: "cover" }}
         />
 
-        {/* Floating small preview */}
+        {/* Small floating preview */}
         <div
           className="position-absolute border border-2 border-white shadow rounded-3 overflow-hidden bg-black"
           style={{
@@ -65,31 +90,26 @@ export default function VideoChatUI({
           }}
           onClick={() => setIsLocalMain((prev) => !prev)}
         >
-          {!isLocalMain && localStream && (
-            <video
-              ref={localRef}
-              autoPlay
-              muted
-              playsInline
-              className="w-100 h-100"
-              style={{ objectFit: "cover" }}
-            />
-          )}
-
-          {isLocalMain && remoteStream && (
-            <video
-              ref={remoteRef}
-              autoPlay
-              playsInline
-              className="w-100 h-100"
-              style={{ objectFit: "cover" }}
-            />
-          )}
+          <video
+            ref={remotePreviewRef}
+            autoPlay
+            playsInline
+            className={`w-100 h-100 ${isLocalMain ? "" : "d-none"}`}
+            style={{ objectFit: "cover" }}
+          />
+          <video
+            ref={localPreviewRef}
+            autoPlay
+            playsInline
+            muted
+            className={`w-100 h-100 ${isLocalMain ? "d-none" : ""}`}
+            style={{ objectFit: "cover" }}
+          />
         </div>
 
-        {/* Overlay only when partner is absent */}
+        {/* Waiting overlay */}
         {!remoteStream && !partnerPresent && (
-          <div className="d-flex h-100 align-items-center justify-content-center text-white fs-5 text-center">
+          <div className="d-flex h-100 align-items-center justify-content-center text-white fs-5">
             Waiting for partner...
           </div>
         )}
