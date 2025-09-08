@@ -74,21 +74,7 @@ export default function ChatPage({ sessionId }) {
   // Socket + signaling
   // -----------------------------------------
   const [typedText, setTypedText] = useState("");
-  
 
-  // useEffect(() => {
-  //   setTypedText(""); // reset when totalOnline changes
-  //   let i = 0;
-  //   const interval = setInterval(() => {
-  //     setTypedText((prev) => prev + fullText[i]);
-  //     i++;
-  //     if (i >= fullText.length) {
-  //       clearInterval(interval);
-  //     }
-  //   }, 50); // typing speed (ms per letter)
-
-  //   return () => clearInterval(interval);
-  // }, [totalOnline]);
   useEffect(() => {
     // const socket = io(SOCKET_URL, { transports: ["websocket", "polling"] });
     const socket = io("https://api.talkative.co.in", {
@@ -97,10 +83,11 @@ export default function ChatPage({ sessionId }) {
     socketRef.current = socket;
     socket.on("onlineCount", ({ total }) => {
       console.log("Total online users:", total);
-      // You can update your UI here
       SetTotalOnline(total);
-      setTypedText(""); // reset when totalOnline changes
-      const fullText = `Hey! Total strangers available for chat: ${total}`;
+
+      // reset typing
+      setTypedText("");
+      const fullText = `Total strangers available for chat: ${total}`;
       let i = 0;
       const interval = setInterval(() => {
         setTypedText((prev) => prev + fullText[i]);
