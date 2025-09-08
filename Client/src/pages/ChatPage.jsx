@@ -23,7 +23,7 @@ export default function ChatPage({ sessionId }) {
   const displayedIdsRef = useRef(new Set());
   const sendBusyRef = useRef(false);
   const nextBusyRef = useRef(false);
-
+  const [totalOnline,SetTotalOnline] = useState(0);
   const [mode, setMode] = useState(null);
   const [status, setStatus] = useState("idle");
   const [roomId, setRoomId] = useState(null);
@@ -77,9 +77,13 @@ export default function ChatPage({ sessionId }) {
     // const socket = io(SOCKET_URL, { transports: ["websocket", "polling"] });
     const socket = io("https://api.talkative.co.in", {
       transports: ["websocket", "polling"],
-     });
+    });
     socketRef.current = socket;
-
+    socket.on("onlineCount", ({ total }) => {
+      console.log("Total online users:", total);
+      // You can update your UI here
+      SetTotalOnline(total)
+    });
     socket.on("connect", () => {
       socket.emit("register", { sessionId });
       setBanner(null);
@@ -252,13 +256,13 @@ export default function ChatPage({ sessionId }) {
       ],
     });
 
-  pc.ontrack = (e) => {
-    console.log("ontrack received", e.streams, e.track);
-    const remote = e.streams?.[0] || new MediaStream([e.track]);
-    remoteStreamRef.current = remote;
-    setRemoteStreamState(remote);
-    setPartnerPresent(true);
-  };
+    pc.ontrack = (e) => {
+      console.log("ontrack received", e.streams, e.track);
+      const remote = e.streams?.[0] || new MediaStream([e.track]);
+      remoteStreamRef.current = remote;
+      setRemoteStreamState(remote);
+      setPartnerPresent(true);
+    };
 
     pc.onicecandidate = (ev) => {
       if (ev.candidate && socketRef.current && partnerId) {
@@ -477,7 +481,7 @@ export default function ChatPage({ sessionId }) {
       return <ChatView {...chatViewProps} />;
     }
     return (
-      <ModeSelectionView banner={banner} onModeSelect={handleModeSelect} />
+      <ModeSelectionView banner={banner} onModeSelect={handleModeSelect} totalOnline={totalOnline}/>
     );
   };
 
