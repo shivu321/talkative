@@ -28,13 +28,12 @@ export default function ModeSelectionView({
             Video Chat
           </button>
         </div>
-        <div
-          class="alert alert-warning alert-dismissible fade show pt-5"
-          role="alert"
-        >
-          <strong>Hey Total Stranger Available</strong> For Chat :-{" "}
-          {totalOnline}
-        </div>
+      </div>
+      <div
+        class="alert alert-warning alert-dismissible fade show "
+        role="alert"
+      >
+        <strong>Hey Total Stranger Available</strong> For Chat :- {totalOnline}
       </div>
     </div>
   );
