@@ -29,7 +29,7 @@ export default function ModeSelectionView({
           </button>
         </div>
         <div
-          class="alert alert-warning alert-dismissible fade show"
+          class="alert alert-warning alert-dismissible fade show pt-5"
           role="alert"
         >
           <strong>Hey Total Stranger Available</strong> For Chat :-{" "}
