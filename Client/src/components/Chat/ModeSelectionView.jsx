@@ -38,8 +38,7 @@ export default function ModeSelectionView({
             className="alert alert-warning alert-dismissible fade show mt-3 text-center w-100"
             role="alert"
           >
-            <strong>Hey!</strong> Total strangers available for chat:{" "}
-            {totalOnline}
+            <strong>{totalOnline}</strong>
             <button
               type="button"
               className="btn-close"

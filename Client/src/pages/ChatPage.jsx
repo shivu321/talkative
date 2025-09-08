@@ -73,6 +73,22 @@ export default function ChatPage({ sessionId }) {
   // -----------------------------------------
   // Socket + signaling
   // -----------------------------------------
+  const [typedText, setTypedText] = useState("");
+  const fullText = `Hey! Total strangers available for chat: ${totalOnline}`;
+
+  useEffect(() => {
+    setTypedText(""); // reset when totalOnline changes
+    let i = 0;
+    const interval = setInterval(() => {
+      setTypedText((prev) => prev + fullText[i]);
+      i++;
+      if (i >= fullText.length) {
+        clearInterval(interval);
+      }
+    }, 50); // typing speed (ms per letter)
+
+    return () => clearInterval(interval);
+  }, [totalOnline]);
   useEffect(() => {
     // const socket = io(SOCKET_URL, { transports: ["websocket", "polling"] });
     const socket = io("https://api.talkative.co.in", {
@@ -481,7 +497,7 @@ export default function ChatPage({ sessionId }) {
       return <ChatView {...chatViewProps} />;
     }
     return (
-      <ModeSelectionView banner={banner} onModeSelect={handleModeSelect} totalOnline={totalOnline}/>
+      <ModeSelectionView banner={banner} onModeSelect={handleModeSelect} totalOnline={typedText}/>
     );
   };
 
