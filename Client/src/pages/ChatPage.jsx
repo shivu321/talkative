@@ -89,13 +89,8 @@ export default function ChatPage({ sessionId }) {
       setTypedText("");
       const fullText = `Total strangers available for chat: ${total}`;
       let i = 0;
-      const interval = setInterval(() => {
-        setTypedText((prev) => prev + fullText[i]);
-        i++;
-        if (i >= fullText.length) {
-          clearInterval(interval);
-        }
-      }, 50);
+      setTypedText(fullText);
+      
     });
     socket.on("connect", () => {
       socket.emit("register", { sessionId });
