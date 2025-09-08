@@ -7,7 +7,7 @@ export default function ModeSelectionView({
   totalOnline,
 }) {
   return (
-    <div className="d-flex align-items-center justify-content-center flex-grow-1">
+    <div className="d-flex align-items-center justify-content-center flex-column">
       <div
         className="text-center p-4 p-md-5 rounded-3 shadow-sm bg-white"
         style={{ maxWidth: "500px" }}
