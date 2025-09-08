@@ -43,9 +43,16 @@ export default function TextChatUI(props) {
   };
 
   return (
-    <div className="d-flex flex-column h-100 p-2 bg-light">
+    <div
+      className="d-flex flex-column h-100"
+      style={{
+        background: "linear-gradient(270deg, #f5f7fa, #e2ebf0, #f5f7fa)",
+        backgroundSize: "600% 600%",
+        animation: "gradientBG 12s ease infinite",
+      }}
+    >
       {/* Chat Messages */}
-      <div className="message-list-container flex-grow-1 mb-2 p-2 rounded bg-white shadow-sm overflow-auto">
+      <div className="message-list-container flex-grow-1 mb-2 p-3 overflow-auto">
         <MessageList messages={messages} partnerTyping={partnerTyping} />
       </div>
 
@@ -58,7 +65,7 @@ export default function TextChatUI(props) {
 
       {/* Input Box */}
       <div
-        className="mt-auto bg-white shadow-sm p-2 rounded-pill"
+        className="mt-auto bg-white shadow-sm p-2 rounded-pill mx-2 mb-3"
         style={{
           border: "1px solid rgb(109, 117, 242)",
           position: "relative",
@@ -151,6 +158,15 @@ export default function TextChatUI(props) {
           </button>
         </div>
       </div>
+
+      {/* 🔥 Animated Background CSS */}
+      <style>{`
+        @keyframes gradientBG {
+          0% {background-position: 0% 50%;}
+          50% {background-position: 100% 50%;}
+          100% {background-position: 0% 50%;}
+        }
+      `}</style>
     </div>
   );
 }
