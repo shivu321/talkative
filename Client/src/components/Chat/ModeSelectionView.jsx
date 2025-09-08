@@ -33,7 +33,7 @@ export default function ModeSelectionView({
         </div>
 
         {/* 🔥 Closable Bootstrap Alert */}
-        {totalOnline > 0 && (
+        {totalOnline && (
           <div
             className="alert alert-warning alert-dismissible fade show mt-3 text-center w-100"
             role="alert"

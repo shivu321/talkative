@@ -23,7 +23,7 @@ export default function ChatPage({ sessionId }) {
   const displayedIdsRef = useRef(new Set());
   const sendBusyRef = useRef(false);
   const nextBusyRef = useRef(false);
-  const [totalOnline,SetTotalOnline] = useState(0);
+  const [totalOnline, SetTotalOnline] = useState(0);
   const [mode, setMode] = useState(null);
   const [status, setStatus] = useState("idle");
   const [roomId, setRoomId] = useState(null);
@@ -74,21 +74,21 @@ export default function ChatPage({ sessionId }) {
   // Socket + signaling
   // -----------------------------------------
   const [typedText, setTypedText] = useState("");
-  const fullText = `Hey! Total strangers available for chat: ${totalOnline}`;
+  
 
-  useEffect(() => {
-    setTypedText(""); // reset when totalOnline changes
-    let i = 0;
-    const interval = setInterval(() => {
-      setTypedText((prev) => prev + fullText[i]);
-      i++;
-      if (i >= fullText.length) {
-        clearInterval(interval);
-      }
-    }, 50); // typing speed (ms per letter)
+  // useEffect(() => {
+  //   setTypedText(""); // reset when totalOnline changes
+  //   let i = 0;
+  //   const interval = setInterval(() => {
+  //     setTypedText((prev) => prev + fullText[i]);
+  //     i++;
+  //     if (i >= fullText.length) {
+  //       clearInterval(interval);
+  //     }
+  //   }, 50); // typing speed (ms per letter)
 
-    return () => clearInterval(interval);
-  }, [totalOnline]);
+  //   return () => clearInterval(interval);
+  // }, [totalOnline]);
   useEffect(() => {
     // const socket = io(SOCKET_URL, { transports: ["websocket", "polling"] });
     const socket = io("https://api.talkative.co.in", {
@@ -98,7 +98,17 @@ export default function ChatPage({ sessionId }) {
     socket.on("onlineCount", ({ total }) => {
       console.log("Total online users:", total);
       // You can update your UI here
-      SetTotalOnline(total)
+      SetTotalOnline(total);
+      setTypedText(""); // reset when totalOnline changes
+      const fullText = `Hey! Total strangers available for chat: ${total}`;
+      let i = 0;
+      const interval = setInterval(() => {
+        setTypedText((prev) => prev + fullText[i]);
+        i++;
+        if (i >= fullText.length) {
+          clearInterval(interval);
+        }
+      }, 50);
     });
     socket.on("connect", () => {
       socket.emit("register", { sessionId });
@@ -497,7 +507,11 @@ export default function ChatPage({ sessionId }) {
       return <ChatView {...chatViewProps} />;
     }
     return (
-      <ModeSelectionView banner={banner} onModeSelect={handleModeSelect} totalOnline={typedText}/>
+      <ModeSelectionView
+        banner={banner}
+        onModeSelect={handleModeSelect}
+        totalOnline={typedText}
+      />
     );
   };
 
