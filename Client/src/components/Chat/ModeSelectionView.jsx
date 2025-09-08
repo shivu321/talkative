@@ -29,12 +29,24 @@ export default function ModeSelectionView({
           </button>
         </div>
       </div>
-      <div
-        class="alert alert-warning alert-dismissible fade show "
-        role="alert"
-      >
-        <strong>Hey Total Stranger Available</strong> For Chat :- {totalOnline}
-      </div>
+
+      {/* 🔥 Closable Bootstrap Alert */}
+      {totalOnline > 0 && (
+        <div
+          className="alert alert-warning alert-dismissible fade show mt-3"
+          role="alert"
+          style={{ maxWidth: "500px" }}
+        >
+          <strong>Hey!</strong> Total strangers available for chat:{" "}
+          {totalOnline}
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+      )}
     </div>
   );
 }
