@@ -75,7 +75,7 @@ export default function TermsModal({ show, handleClose }) {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="outline-light" className="px-4 rounded-pill" onClick={handleClose}>
           Close
         </Button>
       </Modal.Footer>

@@ -17,20 +17,41 @@ dotenv.config();
 
 const app = express();
 const httpServer = createServer(app);
+const allowedOrigins = [
+    process.env.CLIENT_ORIGIN,
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://talkative.co.in"
+].filter(Boolean);
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin) || origin.startsWith("http://localhost:")) {
+            return callback(null, true);
+        }
+        return callback(new Error("Not allowed by CORS"));
+    },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+};
+
 const io = new Server(httpServer, {
-            cors: {
-        origin: "https://talkative.co.in",
-            methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    cors: {
+        origin: (origin, callback) => {
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.includes(origin) || origin.startsWith("http://localhost:")) {
+                return callback(null, true);
+            }
+            return callback(new Error("Not allowed by CORS"));
         },
+        methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    },
 });
 
 // Middleware
 app.use(express.json());
-app.use(cors({
-                origin: "https://talkative.co.in",
-                methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"]
-    }));
+app.use(cors(corsOptions));
 
 // Routes
 app.use("/consent", consentRoutes);

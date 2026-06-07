@@ -100,7 +100,7 @@ export default function PrivacyPolicyModal({ show, handleClose }) {
           correct it, and withdraw consent. For any grievances, please contact
           our Grievance Officer.
         </p>
-        <div className="border p-3 rounded bg-light">
+        <div className="border border-secondary border-opacity-20 p-3 rounded bg-white bg-opacity-5">
           <p className="mb-1">
             <strong>Grievance Officer for Talkative</strong>
           </p>
@@ -128,7 +128,7 @@ export default function PrivacyPolicyModal({ show, handleClose }) {
 
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleClose}>
+        <Button variant="outline-light" className="px-4 rounded-pill" onClick={handleClose}>
           Close
         </Button>
       </Modal.Footer>

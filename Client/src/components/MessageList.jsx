@@ -1,8 +1,6 @@
 // MessageList.jsx
 import React, { useEffect, useRef } from 'react';
-import "./messages.css"
-
-
+import "./messages.css";
 
 export default function MessageList({ messages = [], partnerTyping }) {
   const scrollRef = useRef(null);
@@ -14,36 +12,42 @@ export default function MessageList({ messages = [], partnerTyping }) {
   }, [messages, partnerTyping]);
 
   return (
-    <div className="p-2 message-list-container" >
+    <div className="p-1 d-flex flex-column gap-2" style={{ background: "transparent" }}>
       {messages.map((msg, idx) => (
         <div
           key={msg.messageId || idx}
-          className={`d-flex my-2 ${
+          className={`d-flex ${
             msg.sys
-              ? 'justify-content-center' // Center system messages
+              ? 'justify-content-center'
               : msg.from === 'me'
-              ? 'justify-content-end'   // Align user's messages to the right
-              : 'justify-content-start' // Align partner's messages to the left
+              ? 'justify-content-end'
+              : 'justify-content-start'
           }`}
         >
           <div
-            className={`px-3 py-2 rounded-3 shadow-sm ${
+            className={`px-3 py-2 shadow-sm ${
               msg.sys
-                ? 'bg-secondary bg-opacity-10 text-muted small fst-italic' // Style for system messages
+                ? 'bg-secondary bg-opacity-10 text-muted small fst-italic rounded-pill px-4'
                 : msg.from === 'me'
-                ? 'bg-primary text-white' // Style for user's messages
-                : 'bg-light border'       // Style for partner's messages
+                ? 'chat-bubble-me rounded-4 rounded-end-0 text-white'
+                : 'chat-bubble-partner rounded-4 rounded-start-0 text-white'
             }`}
-            style={{ maxWidth: '75%', wordWrap: 'break-word' }}
+            style={{ 
+              maxWidth: '82%', 
+              wordWrap: 'break-word', 
+              fontSize: msg.sys ? '0.85rem' : '0.95rem',
+              lineHeight: '1.4'
+            }}
           >
             {msg.text}
           </div>
         </div>
       ))}
+
       {partnerTyping && (
-        <div className="d-flex my-2 justify-content-start">
-          <div className="px-3 py-2 rounded-3 shadow-sm bg-light border">
-            <div className="typing-indicator">
+        <div className="d-flex justify-content-start">
+          <div className="px-3 py-2 rounded-4 rounded-start-0 shadow-sm chat-bubble-partner">
+            <div className="typing-indicator d-flex align-items-center gap-1 py-1">
               <span></span>
               <span></span>
               <span></span>
@@ -52,7 +56,7 @@ export default function MessageList({ messages = [], partnerTyping }) {
         </div>
       )}
 
-      {/* This empty div acts as an anchor to scroll to */}
+      {/* Anchor to scroll to */}
       <div ref={scrollRef} />
     </div>
   );

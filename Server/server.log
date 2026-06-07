@@ -2267,3 +2267,77 @@
 [2025-08-25T10:14:28.387Z] [WARN] Socket disconnected: rippwr3NfrNgaL1uAAF5
 [2025-08-25T10:14:30.030Z] [WARN] Socket disconnected: 8hnjj2uPW_F3U6DEAAF3
 [2025-08-25T10:14:31.236Z] [WARN] Socket disconnected: AJnj2HAwJC-hCp6lAAF1
+[2026-06-07T03:59:45.095Z] [INFO] MongoDB connected successfully
+[2026-06-07T03:59:45.106Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:11:14.905Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:15:38.996Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:15:39.028Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:15:39.971Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:15:55.653Z] [INFO] Socket connected: RsQecVUh1DgiaOURAAAB
+[2026-06-07T04:15:55.664Z] [INFO] User registered: sessionId=u6f557j7i9o
+[2026-06-07T04:17:17.973Z] [INFO] Received consent request
+[2026-06-07T04:17:18.753Z] [INFO] Consent saved for sessionId=xo85e84cmdb
+[2026-06-07T04:17:19.060Z] [INFO] Socket connected: OpbQTav_2PwOpk9aAAAD
+[2026-06-07T04:17:19.068Z] [INFO] User registered: sessionId=xo85e84cmdb
+[2026-06-07T04:18:18.857Z] [INFO] Received consent request
+[2026-06-07T04:18:18.875Z] [INFO] Consent saved for sessionId=6tenpjhni1y
+[2026-06-07T04:18:18.904Z] [INFO] Socket connected: 1CDCeTNCkqyhv1_MAAAF
+[2026-06-07T04:18:18.908Z] [INFO] User registered: sessionId=6tenpjhni1y
+[2026-06-07T04:18:28.382Z] [INFO] Received consent request
+[2026-06-07T04:18:28.394Z] [INFO] Consent saved for sessionId=i6g4u0u6shm
+[2026-06-07T04:18:28.418Z] [INFO] Socket connected: a3j8jX5bNYlstYFIAAAH
+[2026-06-07T04:18:28.422Z] [INFO] User registered: sessionId=i6g4u0u6shm
+[2026-06-07T04:18:33.256Z] [INFO] User queued: i6g4u0u6shm | mode=chat
+[2026-06-07T04:18:36.809Z] [INFO] User queued: 6tenpjhni1y | mode=chat
+[2026-06-07T04:18:36.816Z] [INFO] Room created 9f13436f-985d-470b-8e17-85b2d4506790 for 6tenpjhni1y & i6g4u0u6shm | mode=chat
+[2026-06-07T04:18:50.819Z] [INFO] Room 9f13436f-985d-470b-8e17-85b2d4506790 closed. 6tenpjhni1y left; i6g4u0u6shm idle.
+[2026-06-07T04:18:57.528Z] [INFO] Room created 2773962b-94bb-4fe2-85af-248a6fdfc301 for 6tenpjhni1y & i6g4u0u6shm | mode=chat
+[2026-06-07T04:19:06.740Z] [INFO] Room 2773962b-94bb-4fe2-85af-248a6fdfc301 closed. 6tenpjhni1y left; i6g4u0u6shm idle.
+[2026-06-07T04:19:08.620Z] [INFO] User left queue: 6tenpjhni1y
+[2026-06-07T04:19:16.276Z] [INFO] User left queue: i6g4u0u6shm
+[2026-06-07T04:19:23.550Z] [INFO] User queued: i6g4u0u6shm | mode=video
+[2026-06-07T04:19:29.963Z] [INFO] User queued: 6tenpjhni1y | mode=video
+[2026-06-07T04:19:29.965Z] [INFO] Room created 3e077488-53e3-4bfc-9691-634bbe8bda09 for 6tenpjhni1y & i6g4u0u6shm | mode=video
+[2026-06-07T04:19:52.617Z] [INFO] Room 3e077488-53e3-4bfc-9691-634bbe8bda09 closed. i6g4u0u6shm left; 6tenpjhni1y idle.
+[2026-06-07T04:20:01.280Z] [INFO] Room created 15e27d0f-58d2-409d-8885-0b809bca5464 for i6g4u0u6shm & 6tenpjhni1y | mode=video
+[2026-06-07T04:20:06.717Z] [INFO] Room 15e27d0f-58d2-409d-8885-0b809bca5464 closed. 6tenpjhni1y left; i6g4u0u6shm idle.
+[2026-06-07T04:20:08.647Z] [INFO] User left queue: 6tenpjhni1y
+[2026-06-07T04:20:12.728Z] [INFO] User left queue: i6g4u0u6shm
+[2026-06-07T04:23:41.558Z] [WARN] Socket disconnected: RsQecVUh1DgiaOURAAAB
+[2026-06-07T04:23:41.561Z] [WARN] Socket disconnected: 1CDCeTNCkqyhv1_MAAAF
+[2026-06-07T04:23:41.686Z] [WARN] Socket disconnected: OpbQTav_2PwOpk9aAAAD
+[2026-06-07T04:23:42.099Z] [WARN] Socket disconnected: a3j8jX5bNYlstYFIAAAH
+[2026-06-07T04:23:42.508Z] [INFO] Socket connected: JhaU3i3yKEJEWZ_QAAAJ
+[2026-06-07T04:23:42.511Z] [INFO] User registered: sessionId=u6f557j7i9o
+[2026-06-07T04:23:42.997Z] [INFO] Socket connected: ElwKiXSCdwVsW4uSAAAL
+[2026-06-07T04:23:43.003Z] [INFO] User registered: sessionId=6tenpjhni1y
+[2026-06-07T04:23:43.485Z] [INFO] Socket connected: YXflheaCFB07CuX0AAAO
+[2026-06-07T04:23:43.517Z] [INFO] User registered: sessionId=i6g4u0u6shm
+[2026-06-07T04:23:43.570Z] [INFO] Socket connected: -xMnol8XorF4w5WxAAAP
+[2026-06-07T04:23:43.595Z] [INFO] User registered: sessionId=xo85e84cmdb
+[2026-06-07T04:23:46.091Z] [INFO] Socket connected: pt3KT6PB2o3V9c0WAAAR
+[2026-06-07T04:23:46.099Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:25:25.786Z] [WARN] Socket disconnected: -xMnol8XorF4w5WxAAAP
+[2026-06-07T04:25:26.073Z] [INFO] Socket connected: yH6ysrrIIh_75q9PAAAT
+[2026-06-07T04:25:26.074Z] [INFO] User registered: sessionId=xo85e84cmdb
+[2026-06-07T04:25:56.831Z] [WARN] Socket disconnected: yH6ysrrIIh_75q9PAAAT
+[2026-06-07T04:26:04.134Z] [INFO] Socket connected: YYKC-FQWoyu0XQ6pAAAV
+[2026-06-07T04:26:04.161Z] [INFO] User registered: sessionId=xo85e84cmdb
+[2026-06-07T04:26:23.939Z] [WARN] Socket disconnected: YYKC-FQWoyu0XQ6pAAAV
+[2026-06-07T04:26:54.678Z] [INFO] Received consent request
+[2026-06-07T04:26:54.699Z] [INFO] Consent saved for sessionId=s6kwc4gd0ta
+[2026-06-07T04:26:55.170Z] [INFO] Socket connected: j7p9KhoyUOFGcFvcAAAX
+[2026-06-07T04:26:55.231Z] [INFO] User registered: sessionId=s6kwc4gd0ta
+[2026-06-07T04:27:12.134Z] [INFO] User queued: vm0804k37c | mode=chat
+[2026-06-07T04:27:12.567Z] [INFO] User queued: s6kwc4gd0ta | mode=chat
+[2026-06-07T04:27:12.575Z] [INFO] Room created f505c500-52f9-44a2-92bd-110caa061574 for s6kwc4gd0ta & vm0804k37c | mode=chat
+[2026-06-07T04:27:26.936Z] [INFO] Room f505c500-52f9-44a2-92bd-110caa061574 closed. s6kwc4gd0ta left; vm0804k37c idle.
+[2026-06-07T04:27:29.793Z] [INFO] Room created 5764a400-c31c-4d5c-a142-b82248df23ff for vm0804k37c & s6kwc4gd0ta | mode=chat
+[2026-06-07T04:27:36.557Z] [INFO] Room 5764a400-c31c-4d5c-a142-b82248df23ff closed. s6kwc4gd0ta left; vm0804k37c idle.
+[2026-06-07T04:27:36.565Z] [WARN] Socket disconnected: j7p9KhoyUOFGcFvcAAAX
+[2026-06-07T04:27:37.202Z] [INFO] Socket connected: gOyw4-6crEyQquC6AAAZ
+[2026-06-07T04:27:37.218Z] [INFO] User registered: sessionId=s6kwc4gd0ta
+[2026-06-07T04:27:45.430Z] [INFO] User queued: s6kwc4gd0ta | mode=chat
+[2026-06-07T04:29:57.675Z] [WARN] Socket disconnected: ElwKiXSCdwVsW4uSAAAL
+[2026-06-07T04:29:57.882Z] [INFO] Socket connected: 3mdBoqZxT142VEMIAAAb
+[2026-06-07T04:29:57.885Z] [INFO] User registered: sessionId=6tenpjhni1y

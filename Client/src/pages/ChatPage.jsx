@@ -76,8 +76,7 @@ export default function ChatPage({ sessionId }) {
   const [typedText, setTypedText] = useState("");
 
   useEffect(() => {
-    // const socket = io(SOCKET_URL, { transports: ["websocket", "polling"] });
-    const socket = io("https://api.talkative.co.in", {
+    const socket = io(SOCKET_URL, {
       transports: ["websocket", "polling"],
     });
     socketRef.current = socket;

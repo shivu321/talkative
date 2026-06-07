@@ -43,42 +43,39 @@ export default function TextChatUI(props) {
   };
 
   return (
-    <div
-      className="d-flex flex-column h-100"
-      style={{
-        background: "linear-gradient(270deg, #f5f7fa, #e2ebf0, #f5f7fa)",
-        backgroundSize: "600% 600%",
-        animation: "gradientBG 12s ease infinite",
-      }}
-    >
+    <div className="d-flex flex-column h-100 bg-transparent">
       {/* Chat Messages */}
-      <div className="message-list-container flex-grow-1 mb-2 p-3 overflow-auto">
+      <div className="message-list-container flex-grow-1 mb-3 p-3 overflow-auto">
         <MessageList messages={messages} partnerTyping={partnerTyping} />
       </div>
 
-      {/* Validation Message */}
+      {/* Validation Warning Alert */}
       {validationMessage && (
-        <small className="text-danger mb-2 d-block text-center fw-semibold">
+        <div className="alert alert-danger border-0 py-2 px-3 mx-2 mb-2 rounded-3 text-center small fw-semibold animate-pulse shadow-sm">
+          <i className="bi bi-shield-fill-exclamation me-2"></i>
           {validationMessage}
-        </small>
+        </div>
       )}
 
-      {/* Input Box */}
+      {/* Input Box Wrapper */}
       <div
-        className="mt-auto bg-white shadow-sm p-2 rounded-pill mx-2 mb-3"
+        className="mt-auto p-2 rounded-pill mx-2 mb-2"
         style={{
-          border: "1px solid rgb(109, 117, 242)",
+          background: "rgba(255, 255, 255, 0.04)",
+          border: "1px solid var(--glass-border)",
           position: "relative",
+          boxShadow: "0 4px 24px rgba(0, 0, 0, 0.25)"
         }}
       >
         <div className="d-flex align-items-center gap-2">
           {/* Emoji Picker Button */}
           <button
-            className="btn btn-light rounded-circle flex-shrink-0 shadow-sm"
+            className="btn btn-dark rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center border-0"
             onClick={toggleEmojiPicker}
-            style={{ width: "42px", height: "42px" }}
+            style={{ width: "42px", height: "42px", background: "rgba(255, 255, 255, 0.08)", transition: "background 0.2s" }}
+            type="button"
           >
-            😊
+            <span style={{ fontSize: "1.2rem" }}>😊</span>
           </button>
 
           {/* Emoji Picker Dropdown */}
@@ -89,11 +86,13 @@ export default function TextChatUI(props) {
             >
               <Suspense
                 fallback={
-                  <div className="p-2 bg-light rounded shadow">Loading...</div>
+                  <div className="p-3 bg-dark border border-secondary border-opacity-30 rounded shadow text-white small">
+                    Loading Emojis...
+                  </div>
                 }
               >
                 {isEmojiLoading ? (
-                  <div className="p-2 bg-light rounded shadow">
+                  <div className="p-3 bg-dark border border-secondary border-opacity-30 rounded shadow text-white small">
                     Loading Emojis...
                   </div>
                 ) : (
@@ -104,7 +103,7 @@ export default function TextChatUI(props) {
                         setInput((prev) => prev + (emoji?.native || ""))
                       }
                       previewPosition="none"
-                      theme="light"
+                      theme="dark"
                     />
                   )
                 )}
@@ -114,9 +113,8 @@ export default function TextChatUI(props) {
 
           {/* Message Input */}
           <input
-            className="form-control border-0 flex-grow-1 px-3 py-2 rounded-pill shadow-none"
+            className="form-control border-0 flex-grow-1 px-3 py-2 rounded-pill shadow-none text-white bg-transparent"
             style={{
-              backgroundColor: "#f8f9fa",
               fontSize: "15px",
             }}
             value={input}
@@ -128,27 +126,24 @@ export default function TextChatUI(props) {
               !messageFlag &&
               sendMsg()
             }
-            placeholder={canSend ? "Type a message..." : "Partner has left."}
+            placeholder={canSend ? "Type a message..." : "Partner has left the conversation."}
             disabled={!canSend}
           />
 
           {/* Send Button */}
           <button
-            className="btn btn-primary rounded-circle flex-shrink-0 shadow-sm"
+            className="btn btn-glowing-primary rounded-circle flex-shrink-0 d-flex align-items-center justify-content-center"
             onClick={sendMsg}
             disabled={messageFlag || !canSend || !input.trim() || sendBusyRef}
             style={{
               width: "44px",
               height: "44px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
             }}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              width="18"
-              height="18"
+              width="16"
+              height="16"
               fill="currentColor"
               className="bi bi-send-fill"
               viewBox="0 0 16 16"
@@ -159,12 +154,13 @@ export default function TextChatUI(props) {
         </div>
       </div>
 
-      {/* 🔥 Animated Background CSS */}
       <style>{`
-        @keyframes gradientBG {
-          0% {background-position: 0% 50%;}
-          50% {background-position: 100% 50%;}
-          100% {background-position: 0% 50%;}
+        @keyframes pulse {
+          0%, 100% { opacity: 0.9; }
+          50% { opacity: 0.7; }
+        }
+        .animate-pulse {
+          animation: pulse 2s infinite ease-in-out;
         }
       `}</style>
     </div>
