@@ -76,13 +76,23 @@ export function attachChatHandlers(io, socket, ensureRegistered) {
     }
     if (!text?.trim()) return;
 
+    let senderHandle, receiverHandle;
     const room = getRoom(roomId);
-    if (!room) return;
-
-    const participants = resolveParticipants(room, socket.id, socket.sessionId);
-    if (!participants) return;
-
-    const { senderHandle, receiverHandle } = participants;
+    if (!room) {
+      // Resolve participants from offline friend chat roomId format
+      if (/^[a-f0-9]{12}_[a-f0-9]{12}$/.test(roomId)) {
+        senderHandle = getHandle(socket.sessionId);
+        const handles = roomId.split("_");
+        receiverHandle = handles[0] === senderHandle ? handles[1] : handles[0];
+      } else {
+        return;
+      }
+    } else {
+      const participants = resolveParticipants(room, socket.id, socket.sessionId);
+      if (!participants) return;
+      senderHandle = participants.senderHandle;
+      receiverHandle = participants.receiverHandle;
+    }
 
     try {
       await persistAndBroadcastMessage(io, roomId, senderHandle, receiverHandle, text.trim(), messageId);

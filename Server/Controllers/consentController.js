@@ -84,3 +84,45 @@ export const saveConsent = async (req, res) => {
         });
     }
 }; // End of saveConsent controller
+
+export const restoreSession = async (req, res) => {
+    try {
+        let { handle } = req.body;
+        if (!handle || typeof handle !== "string") {
+            return res.status(400).json({ message: "Handle is required" });
+        }
+        
+        // Remove prefix if present
+        let cleanHandle = handle.trim();
+        if (cleanHandle.startsWith("talkative_")) {
+            cleanHandle = cleanHandle.substring("talkative_".length);
+        }
+        cleanHandle = cleanHandle.toLowerCase();
+
+        if (!/^[a-z0-9]{12}$/.test(cleanHandle)) {
+            return res.status(400).json({
+                message: "Invalid handle format. Must be talkative_ followed by 12 characters."
+            });
+        }
+
+        const consent = await Consent.findOne({ handle: cleanHandle });
+        if (!consent) {
+            return res.status(404).json({
+                message: "Handle not found in system"
+            });
+        }
+
+        logger.info(`Session restored for handle=${cleanHandle}`);
+        return res.status(200).json({
+            success: true,
+            sessionId: consent.sessionId,
+            message: "Session restored successfully"
+        });
+    } catch (e) {
+        logger.error("Session restore failed: " + e.message);
+        res.status(500).json({
+            error: e.message
+        });
+    }
+};
+

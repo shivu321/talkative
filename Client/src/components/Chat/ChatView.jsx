@@ -1,10 +1,11 @@
 // src/components/chat/ChatView.jsx
-import React from "react";
+import React, { useState } from "react";
 import { Helmet } from "react-helmet";
 import VideoChatUI from "./VideoChatUI";
 import TextChatUI from "./TextChatUI";
 
 export default function ChatView(props) {
+  const [copied, setCopied] = useState(false);
   const {
     mode,
     banner,
@@ -100,18 +101,25 @@ export default function ChatView(props) {
                 </h4>
                 
                 {partnerId && (
-                  <button
-                    className="btn btn-sm btn-link p-1 hover-scale"
-                    onClick={() => {
-                      navigator.clipboard.writeText(partnerHandle);
-                      alert(`Copied ${partnerHandle} to clipboard!`);
-                    }}
-                    type="button"
-                    title="Copy Handle"
-                    style={{ border: "none", background: "none" }}
-                  >
-                    <i className="bi bi-copy text-primary" style={{ fontSize: "0.85rem" }}></i>
-                  </button>
+                  copied ? (
+                    <span className="text-success small fw-semibold d-flex align-items-center gap-1 ms-1" style={{ fontSize: "0.8rem" }}>
+                      <i className="bi bi-check-lg"></i> Copied
+                    </span>
+                  ) : (
+                    <button
+                      className="btn btn-sm btn-link p-1 hover-scale"
+                      onClick={() => {
+                        navigator.clipboard.writeText(partnerHandle);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      }}
+                      type="button"
+                      title="Copy Handle"
+                      style={{ border: "none", background: "none" }}
+                    >
+                      <i className="bi bi-copy text-primary" style={{ fontSize: "0.85rem" }}></i>
+                    </button>
+                  )
                 )}
 
                 {!isFriendChat && partnerId && friendRequests?.friends?.some(f => (typeof f === 'string' ? f === partnerId : f.handle === partnerId)) && (

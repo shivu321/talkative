@@ -22,6 +22,7 @@ export default function ModeSelectionView({
   const [activeTab, setActiveTab] = useState("received"); // "received" or "sent"
   const [addFriendInput, setAddFriendInput] = useState("");
   const [addFriendError, setAddFriendError] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const handleConnect = (e) => {
     e.preventDefault();
@@ -210,6 +211,35 @@ export default function ModeSelectionView({
             >
               <i className="bi bi-x-lg fs-5"></i>
             </button>
+          </div>
+
+          {/* User's Own ID Section */}
+          <div className="p-3 border-bottom border-secondary border-opacity-10 bg-white bg-opacity-5 d-flex justify-content-between align-items-center">
+            <span className="small text-muted fw-semibold">My ID:</span>
+            <div className="d-flex align-items-center gap-2">
+              <code className="text-primary fw-bold font-monospace" style={{ fontSize: "0.85rem" }}>
+                talkative_{mySessionId}
+              </code>
+              {copied ? (
+                <span className="text-success small fw-semibold d-flex align-items-center gap-1" style={{ fontSize: "0.8rem" }}>
+                  <i className="bi bi-check-lg"></i> Copied
+                </span>
+              ) : (
+                <button
+                  className="btn btn-sm btn-link p-0 hover-scale text-decoration-none"
+                  onClick={() => {
+                    navigator.clipboard.writeText(`talkative_${mySessionId}`);
+                    setCopied(true);
+                    setTimeout(() => setCopied(false), 2000);
+                  }}
+                  type="button"
+                  title="Copy my ID"
+                  style={{ border: "none", background: "none" }}
+                >
+                  <i className="bi bi-copy text-primary" style={{ fontSize: "0.85rem" }}></i>
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Quick Add Friend Input */}

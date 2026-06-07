@@ -172,6 +172,31 @@ function getOnlineFriendEntry(targetHandle) {
  * @param {string} myHandle
  * @param {string} friendId  Raw value from client (may have talkative_ prefix)
  */
+async function buildFriendRequestsPayload(myHandle) {
+  const records = await Friendship.find({
+    $or: [{ requester: myHandle }, { receiver: myHandle }],
+  });
+
+  const sent = records
+    .filter((r) => r.requester === myHandle && r.status === "pending")
+    .map((r) => r.receiver);
+
+  const received = records
+    .filter((r) => r.receiver === myHandle && r.status === "pending")
+    .map((r) => r.requester);
+
+  const friends = records
+    .filter((r) => r.status === "accepted")
+    .map((r) => {
+      const friendHandle = r.requester === myHandle ? r.receiver : r.requester;
+      const friendAlias =
+        r.requester === myHandle ? r.requesterAlias : r.receiverAlias;
+      return { handle: friendHandle, alias: friendAlias || "" };
+    });
+
+  return { sent, received, friends };
+}
+
 async function sendChatRequest(socket, myHandle, friendId) {
   const targetHandle = stripPrefix(friendId);
   const key = pairKey(myHandle, targetHandle);
@@ -186,19 +211,103 @@ async function sendChatRequest(socket, myHandle, friendId) {
     return;
   }
 
-  const friendship = await findAcceptedFriendship(myHandle, targetHandle);
+  let friendship = await findAcceptedFriendship(myHandle, targetHandle);
   if (!friendship) {
-    socket.emit("error", { code: "NOT_FRIENDS", message: "Not friends with this user" });
-    return;
+    // If target handle is not friends yet, let's verify if they exist on platform
+    const targetUser = await Consent.findOne({ handle: targetHandle });
+    if (!targetUser) {
+      socket.emit("error", { code: "USER_NOT_FOUND", message: "User handle not found on this platform." });
+      return;
+    }
+
+    // Check if any existing friendship record is in database
+    const existingFriendship = await Friendship.findOne({
+      $or: [
+        { requester: myHandle, receiver: targetHandle },
+        { requester: targetHandle, receiver: myHandle }
+      ]
+    });
+
+    if (existingFriendship) {
+      if (existingFriendship.status === "pending") {
+        if (existingFriendship.requester === myHandle) {
+          socket.emit("error", { code: "REQ_PENDING", message: "Friend request already sent. Waiting for them to accept." });
+          return;
+        } else {
+          // Incoming request from target -> auto-accept since A is initiating connection
+          existingFriendship.status = "accepted";
+          await existingFriendship.save();
+          friendship = existingFriendship;
+
+          // Broadcast updated friend requests lists to both so the UI dynamically updates
+          const myPayload = await buildFriendRequestsPayload(myHandle);
+          socket.emit("friend-requests-list", myPayload);
+
+          const targetSid = handleToSessionId.get(targetHandle);
+          if (targetSid) {
+            const targetState = activeUsers.get(targetSid);
+            if (targetState?.socket?.connected) {
+              const targetPayload = await buildFriendRequestsPayload(targetHandle);
+              targetState.socket.emit("friend-requests-list", targetPayload);
+              targetState.socket.emit("friend-request-accepted", { friendId: myHandle });
+            }
+          }
+        }
+      } else {
+        // Status is declined, reset to pending
+        existingFriendship.status = "pending";
+        existingFriendship.requester = myHandle;
+        existingFriendship.receiver = targetHandle;
+        await existingFriendship.save();
+
+        const myPayload = await buildFriendRequestsPayload(myHandle);
+        socket.emit("friend-requests-list", myPayload);
+
+        const targetSid = handleToSessionId.get(targetHandle);
+        if (targetSid) {
+          const targetState = activeUsers.get(targetSid);
+          if (targetState?.socket?.connected) {
+            const targetPayload = await buildFriendRequestsPayload(targetHandle);
+            targetState.socket.emit("friend-requests-list", targetPayload);
+            targetState.socket.emit("friend-request-received", { fromUserId: myHandle });
+          }
+        }
+
+        socket.emit("error", { code: "NOT_FRIENDS", message: "Friend request sent! You can chat once they accept it." });
+        return;
+      }
+    } else {
+      // Create new pending friendship
+      const newFriendship = new Friendship({
+        requester: myHandle,
+        receiver: targetHandle,
+        status: "pending"
+      });
+      await newFriendship.save();
+
+      // Broadcast updated friend requests lists to both so the UI dynamically updates
+      const myPayload = await buildFriendRequestsPayload(myHandle);
+      socket.emit("friend-requests-list", myPayload);
+
+      const targetSid = handleToSessionId.get(targetHandle);
+      if (targetSid) {
+        const targetState = activeUsers.get(targetSid);
+        if (targetState?.socket?.connected) {
+          const targetPayload = await buildFriendRequestsPayload(targetHandle);
+          targetState.socket.emit("friend-requests-list", targetPayload);
+          targetState.socket.emit("friend-request-received", { fromUserId: myHandle });
+        }
+      }
+
+      socket.emit("error", { code: "NOT_FRIENDS", message: "Friend request sent! You can chat once they accept it." });
+      return;
+    }
   }
 
   const friendEntry = getOnlineFriendEntry(targetHandle);
   if (!friendEntry) {
-    socket.emit("friend-chat-request-declined", {
-      friendId: targetHandle,
-      reason: "offline",
-      message: "Your friend is currently offline.",
-    });
+    // If offline, directly initialize offline chat view so they can message them
+    await initFriendChat(socket, socket.sessionId, myHandle, targetHandle);
     return;
   }
 
@@ -318,11 +427,14 @@ async function initFriendChat(socket, sid, myHandle, friendId) {
       partnerGender: myCurrentState.gender || "other",
     });
   } else {
+    const roomId = [myHandle, targetHandle].sort().join("_");
+    socket.join(roomId);
     socket.emit("friend-chat-init-response", {
       isFriend: true,
       friendId: targetHandle,
       messages: formattedLogs,
       isOnline: false,
+      roomId,
       partnerGender: targetGender,
     });
   }
