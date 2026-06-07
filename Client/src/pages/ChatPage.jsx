@@ -1,138 +1,119 @@
-// src/pages/ChatPage.jsx
+/**
+ * pages/ChatPage.jsx  — Compositor
+ *
+ * This component owns application-level state and wires together all
+ * hooks and sub-components. It contains NO business logic of its own.
+ *
+ * State ownership:
+ *   useMyHandle      → myHandle, myHandleRef
+ *   useWebRTC        → streams, peer, videoError
+ *   useChatRequest   → incoming/outgoing chat-request state
+ *   local state      → everything else (status, messages, friends, etc.)
+ */
+
 import React, { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
 import { SOCKET_URL } from "../api";
 
+// Hooks
+import { useMyHandle } from "../hooks/useMyHandle";
+import { useWebRTC } from "../hooks/useWebRTC";
+import { useChatRequest } from "../hooks/useChatRequest";
+
+// Utils
+import { validateChatMessage } from "../utils/messageValidation";
+
+// Components
 import ModeSelectionView from "../components/Chat/ModeSelectionView";
 import QueueView from "../components/Chat/QueueView";
 import ChatView from "../components/Chat/ChatView";
+import ChatRequestPopups from "../components/Chat/ChatRequestPopups";
 import PrivacyModal from "../components/PrivacyModal";
 import TermsModal from "../components/TermsModal";
 
+// ─── Utilities ────────────────────────────────────────────────────────────────
+
+/** Generate a locally unique ID for optimistic message dedup. */
 const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 
+// ─── Component ────────────────────────────────────────────────────────────────
+
 export default function ChatPage({ sessionId, theme, toggleTheme }) {
+  // ── Refs ────────────────────────────────────────────────────────────────────
   const socketRef = useRef(null);
-  const peerRef = useRef(null);
-
-  const localStreamRef = useRef(null);
-  const [localStreamState, setLocalStreamState] = useState(null);
-
-  const remoteStreamRef = useRef(null);
-  const [remoteStreamState, setRemoteStreamState] = useState(null);
-
+  const partnerIdRef = useRef(null);        // kept in sync with partnerId state
   const typingTimeoutRef = useRef(null);
   const displayedIdsRef = useRef(new Set());
   const sendBusyRef = useRef(false);
   const nextBusyRef = useRef(false);
-  const [totalOnline, SetTotalOnline] = useState(0);
-  const [mode, setMode] = useState(null);
+
+  // ── Session handle (SHA-256) ────────────────────────────────────────────────
+  const { myHandle, myHandleRef } = useMyHandle(sessionId);
+
+  // ── Chat state ──────────────────────────────────────────────────────────────
   const [status, setStatus] = useState("idle");
+  const [mode, setMode] = useState(null);
   const [roomId, setRoomId] = useState(null);
   const [partnerId, setPartnerId] = useState(null);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [partnerTyping, setPartnerTyping] = useState(false);
   const [partnerPresent, setPartnerPresent] = useState(false);
+  const [partnerGender, setPartnerGender] = useState(null);
   const [showEmoji, setShowEmoji] = useState(false);
   const [banner, setBanner] = useState(null);
-  const [videoError, setVideoError] = useState(null);
-  const [messageFlag, SetMessageFlag] = useState(false);
-  const [validationMessage, SetValidationMessage] = useState("");
+  const [typedText, setTypedText] = useState("");
 
+  // ── Friend state ────────────────────────────────────────────────────────────
   const [friendRequests, setFriendRequests] = useState({ sent: [], received: [], friends: [] });
-  const [myHandle, setMyHandle] = useState("");
-  const myHandleRef = useRef("");
-
-  useEffect(() => {
-    if (!sessionId) return;
-    const msgBuffer = new TextEncoder().encode(sessionId);
-    crypto.subtle.digest("SHA-256", msgBuffer).then((hashBuffer) => {
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
-      const h = hashHex.slice(0, 12);
-      setMyHandle(h);
-      myHandleRef.current = h;
-    });
-  }, [sessionId]);
-
   const [isFriendChat, setIsFriendChat] = useState(false);
   const [isFriendOnline, setIsFriendOnline] = useState(false);
   const [isFriendshipAccepted, setIsFriendshipAccepted] = useState(false);
-  const [partnerGender, setPartnerGender] = useState(null);
 
+  // ── Policy / legal state ────────────────────────────────────────────────────
   const [showPrivacy, setShowPrivacy] = useState(false);
   const [showTerms, setShowTerms] = useState(false);
   const [showPolicyNotification, setShowPolicyNotification] = useState(false);
   const [policyNotificationMessage, setPolicyNotificationMessage] = useState("");
 
-  // Chat request confirmation state
-  const [incomingChatRequest, setIncomingChatRequest] = useState(null); // { fromHandle }
-  const [outgoingChatRequest, setOutgoingChatRequest] = useState(null); // { toHandle, status: "pending"|"declined"|"cooldown", message?, remaining? }
-  const cooldownIntervalRef = useRef(null);
+  // ── Message validation flags ────────────────────────────────────────────────
+  const [messageFlag, SetMessageFlag] = useState(false);
+  const [validationMessage, SetValidationMessage] = useState("");
 
-  // -----------------------------------------
-  // Message validation
-  // -----------------------------------------
-  const validateChatMessage = (inputVal) => {
-    const isNowFriend = isFriendChat || friendRequests.friends?.some(f => (typeof f === "string" ? f === partnerId : f.handle === partnerId));
-    if (isNowFriend) {
-      return { flag: false, message: "" };
-    }
-    const text = inputVal.trim();
-    const digitRegex = /\d/;
-    const numberWords =
-      /\b(one|two|three|four|five|six|seven|eight|nine|ten)\b/i;
-    const linkRegex =
-      /(https?:\/\/[^\s]+|www\.[^\s]+|facebook\.com|instagram\.com|twitter\.com|x\.com|linkedin\.com|snapchat\.com|t\.co|bit\.ly|youtu\.be|youtube\.com|telegram\.me|wa\.me|whatsapp\.com|discord\.gg)/i;
-    const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\b/i;
-    const phoneRegex = /\b(?:\+?\d{1,3}[-.\s]?)?(?:\d[-.\s]?){8,}\d\b/;
+  // ── Custom hooks ────────────────────────────────────────────────────────────
+  const {
+    localStream,
+    remoteStream,
+    videoError,
+    peerRef,
+    ensureLocalStream,
+    stopLocalStream,
+    cleanupPeer,
+    createPeerAsCaller,
+    createPeerAsReceiver,
+  } = useWebRTC(socketRef, partnerIdRef, setPartnerPresent);
 
-    if (text.includes("@") || text.includes("_"))
-      return {
-        flag: true,
-        message: "❌ Usernames or handles containing '@' or '_' are not allowed.",
-      };
-    if (digitRegex.test(text))
-      return { flag: true, message: "❌ Numbers are not allowed." };
-    if (numberWords.test(text))
-      return {
-        flag: true,
-        message: "❌ Numbers in words (One–Ten) are not allowed.",
-      };
-    if (linkRegex.test(text))
-      return {
-        flag: true,
-        message: "❌ Links and social media are not allowed.",
-      };
-    if (emailRegex.test(text))
-      return { flag: true, message: "❌ Email addresses are not allowed." };
-    if (phoneRegex.test(text))
-      return { flag: true, message: "❌ Phone numbers are not allowed." };
-    return { flag: false, message: "" };
-  };
+  const {
+    incomingChatRequest,
+    outgoingChatRequest,
+    handleConnectWithFriend,
+    handleRespondChatRequest,
+    handleDismissOutgoingRequest,
+    registerChatRequestListeners,
+  } = useChatRequest(socketRef, showPolicyNotification);
 
-  // -----------------------------------------
-  // Socket + signaling
-  // -----------------------------------------
-  const [typedText, setTypedText] = useState("");
-
+  // Keep partnerIdRef in sync with partnerId state (for closure-safe WebRTC use)
   useEffect(() => {
-    const socket = io(SOCKET_URL, {
-      transports: ["websocket", "polling"],
-    });
-    socketRef.current = socket;
-    socket.on("onlineCount", ({ total }) => {
-      console.log("Total online users:", total);
-      SetTotalOnline(total);
+    partnerIdRef.current = partnerId;
+  }, [partnerId]);
 
-      // reset typing
-      setTypedText("");
-      const fullText = `Total strangers available for chat: ${total}`;
-      let i = 0;
-      setTypedText(fullText);
-      
-    });
+  // ── Socket setup ────────────────────────────────────────────────────────────
+  useEffect(() => {
+    const socket = io(SOCKET_URL, { transports: ["websocket", "polling"] });
+    socketRef.current = socket;
+
+    // ── Core events ──────────────────────────────────────────────────────────
+
     socket.on("connect", () => {
       socket.emit("register", { sessionId });
       setBanner(null);
@@ -143,120 +124,61 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
       socket.emit("friend-requests-get");
     });
 
+    socket.on("onlineCount", ({ total }) => {
+      setTypedText(`Total strangers available for chat: ${total}`);
+    });
+
     socket.on("queued", () => {
       setStatus("queued");
       setBanner("Searching for a partner...");
     });
 
     socket.on("error", (err) => {
-      const msg =
-        typeof err === "string" ? err : err?.message || "Unknown error";
+      const msg = typeof err === "string" ? err : err?.message || "Unknown error";
       setBanner(`Error: ${msg}`);
       alert(`Error: ${msg}`);
     });
 
-    socket.on("friend-requests-list", ({ sent, received, friends }) => {
-      setFriendRequests({ sent, received, friends });
-    });
+    // ── Matched ───────────────────────────────────────────────────────────────
 
-    socket.on("friend-request-received", ({ fromUserId }) => {
-      alert(`New friend request received from talkative_${fromUserId}!`);
-      socketRef.current?.emit("friend-requests-get");
-    });
-
-    socket.on("friend-request-accepted", ({ friendId }) => {
-      alert(`You are now friends with talkative_${friendId}!`);
-      socketRef.current?.emit("friend-requests-get");
-    });
-
-    socket.on("friend-request-declined", () => {
-      socketRef.current?.emit("friend-requests-get");
-    });
-
-    socket.on("friend-request-sent-success", ({ toUserId }) => {
-      alert(`Friend request sent successfully to talkative_${toUserId}!`);
-      socketRef.current?.emit("friend-requests-get");
-    });
-
-    socket.on("policy-updated-notification", ({ message }) => {
-      setShowPolicyNotification(true);
-      setPolicyNotificationMessage(message);
-    });
-
-    // Chat request events
-    socket.on("friend-chat-incoming-request", ({ fromHandle }) => {
-      setIncomingChatRequest({ fromHandle });
-    });
-
-    socket.on("friend-chat-request-sent", ({ toHandle }) => {
-      setOutgoingChatRequest({ toHandle, status: "pending" });
-    });
-
-    socket.on("friend-chat-request-declined", ({ friendId, reason, message: msg }) => {
-      setOutgoingChatRequest({ toHandle: friendId, status: "declined", message: msg || "Request was declined." });
-    });
-
-    socket.on("friend-chat-request-cooldown", ({ remaining, message: msg }) => {
-      setOutgoingChatRequest(prev => ({ ...prev, status: "cooldown", message: msg, remaining }));
-    });
-
-    socket.on("friend-chat-init-response", ({ isFriend, friendId, messages: historicalMessages, isOnline, roomId: rid, partnerGender: pGender }) => {
-      setIsFriendChat(true);
-      setIsFriendshipAccepted(isFriend);
-      setIsFriendOnline(isOnline);
-      setPartnerId(friendId);
-      setPartnerGender(pGender || "other");
-      setMessages(historicalMessages || []);
+    socket.on("matched", ({ roomId: rid, partnerId: pid, mode: matchedMode, messages: history, isFriendChat: friendChat, partnerGender: pGender }) => {
+      displayedIdsRef.current.clear();
+      setShowEmoji(false);
+      setPartnerPresent(true);
+      setPartnerTyping(false);
+      setMessages(history || []);
+      setBanner(null);
+      sendBusyRef.current = false;
       setStatus("connected");
-      setRoomId(rid || "offline_room");
-      setPartnerPresent(isOnline);
-      setMode("chat");
+      setRoomId(rid);
+      setPartnerId(pid);
+      setPartnerGender(pGender || "other");
+      setIsFriendChat(!!friendChat);
+      setIsFriendshipAccepted(!!friendChat);
+      setIsFriendOnline(!!friendChat);
+      nextBusyRef.current = false;
+
+      // Clear any pending chat-request toast — the friend accepted
+      handleDismissOutgoingRequest();
+
+      const finalMode = matchedMode || mode;
+      if (finalMode === "video") {
+        const meIsCaller = myHandleRef.current < pid;
+        ensureLocalStream()
+          .then(() => {
+            cleanupPeer();
+            if (meIsCaller) createPeerAsCaller(pid);
+          })
+          .catch((e) => console.error(e));
+      }
     });
 
-    socket.on(
-      "matched",
-      ({ roomId: rid, partnerId: pid, mode: matchedMode, messages: historicalMessages, isFriendChat: matchedIsFriendChat, partnerGender: pGender }) => {
-        displayedIdsRef.current.clear();
-        setShowEmoji(false);
-        setPartnerPresent(true);
-        setPartnerTyping(false);
-        setMessages(historicalMessages || []);
-        setBanner(null);
-        sendBusyRef.current = false;
-        setStatus("connected");
-        setRoomId(rid);
-        setPartnerId(pid);
-        setPartnerGender(pGender || "other");
 
-        setIsFriendChat(!!matchedIsFriendChat);
-        setIsFriendshipAccepted(!!matchedIsFriendChat);
-        setIsFriendOnline(!!matchedIsFriendChat);
-
-        const finalMode = matchedMode || mode;
-
-        if (finalMode === "video") {
-          const meIsCaller = myHandleRef.current < pid;
-          ensureLocalStream()
-            .then(() => {
-              cleanupPeer(); // close previous peer
-              if (meIsCaller) createPeerAsCaller(pid);
-            })
-            .catch((e) => {
-              setVideoError("Camera/mic permission error.");
-              console.error(e);
-            });
-        }
-
-        nextBusyRef.current = false;
-      }
-    );
+    // ── Messaging ─────────────────────────────────────────────────────────────
 
     socket.on("message", (m) => {
-      console.log("socket message received on client:", m, "myHandleRef.current:", myHandleRef.current);
       if (m?.from && m.from === myHandleRef.current) return;
-      const id =
-        m?.messageId ||
-        `${m?.from || ""}-${m?.text || ""}-${m?.createdAt || ""}`;
+      const id = m?.messageId || `${m?.from || ""}-${m?.text || ""}-${m?.createdAt || ""}`;
       if (displayedIdsRef.current.has(id)) return;
       displayedIdsRef.current.add(id);
       setMessages((prev) => [...prev, m]);
@@ -270,13 +192,57 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
       setIsFriendOnline(false);
       const sysId = uid();
       displayedIdsRef.current.add(sysId);
-      setMessages((prev) => [
-        ...prev,
-        { sys: true, text: "Partner left.", messageId: sysId },
-      ]);
+      setMessages((prev) => [...prev, { sys: true, text: "Partner left.", messageId: sysId }]);
       setBanner("Partner left. You can End or Next to continue.");
       cleanupPeer();
     });
+
+    // ── Friendship events ─────────────────────────────────────────────────────
+
+    socket.on("friend-requests-list", ({ sent, received, friends }) => {
+      setFriendRequests({ sent, received, friends });
+    });
+
+    socket.on("friend-request-received", ({ fromUserId }) => {
+      alert(`New friend request received from talkative_${fromUserId}!`);
+      socket.emit("friend-requests-get");
+    });
+
+    socket.on("friend-request-accepted", ({ friendId }) => {
+      alert(`You are now friends with talkative_${friendId}!`);
+      socket.emit("friend-requests-get");
+    });
+
+    socket.on("friend-request-declined", () => {
+      socket.emit("friend-requests-get");
+    });
+
+    socket.on("friend-request-sent-success", ({ toUserId }) => {
+      alert(`Friend request sent successfully to talkative_${toUserId}!`);
+      socket.emit("friend-requests-get");
+    });
+
+    socket.on("friend-chat-init-response", ({ isFriend, friendId, messages: history, isOnline, roomId: rid, partnerGender: pGender }) => {
+      setIsFriendChat(true);
+      setIsFriendshipAccepted(isFriend);
+      setIsFriendOnline(isOnline);
+      setPartnerId(friendId);
+      setPartnerGender(pGender || "other");
+      setMessages(history || []);
+      setStatus("connected");
+      setRoomId(rid || "offline_room");
+      setPartnerPresent(isOnline);
+      setMode("chat");
+    });
+
+    // ── Policy ────────────────────────────────────────────────────────────────
+
+    socket.on("policy-updated-notification", ({ message }) => {
+      setShowPolicyNotification(true);
+      setPolicyNotificationMessage(message);
+    });
+
+    // ── WebRTC signaling ──────────────────────────────────────────────────────
 
     socket.on("webrtc-offer", async ({ from, sdp }) => {
       try {
@@ -284,13 +250,11 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
         await createPeerAsReceiver(from, sdp);
       } catch (e) {
         console.error("Error handling offer:", e);
-        setVideoError("Failed to handle incoming offer.");
       }
     });
 
     socket.on("webrtc-answer", async ({ sdp }) => {
-      if (peerRef.current && sdp)
-        await peerRef.current.setRemoteDescription(sdp);
+      if (peerRef.current && sdp) await peerRef.current.setRemoteDescription(sdp);
     });
 
     socket.on("webrtc-ice", ({ candidate }) => {
@@ -298,170 +262,34 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
         peerRef.current.addIceCandidate(candidate).catch(console.error);
     });
 
+    // ── Chat-request listeners (from hook) ────────────────────────────────────
+    registerChatRequestListeners(socket);
+
+    // ── Cleanup ───────────────────────────────────────────────────────────────
     return () => {
-      if (typingTimeoutRef.current) {
-        clearTimeout(typingTimeoutRef.current);
-        typingTimeoutRef.current = null;
-      }
+      if (typingTimeoutRef.current) clearTimeout(typingTimeoutRef.current);
       cleanupPeer();
       stopLocalStream();
       socket.disconnect();
     };
-  }, [sessionId]);
+  }, [sessionId]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // -----------------------------------------
-  // Local stream
-  // -----------------------------------------
-  const ensureLocalStream = async () => {
-    if (localStreamRef.current) return localStreamRef.current;
-    try {
-      const st = await navigator.mediaDevices.getUserMedia({
-        audio: {
-          echoCancellation: true,
-          noiseSuppression: true,
-          autoGainControl: true,
-        },
-        video: {
-          width: { ideal: 1280, min: 640 },
-          height: { ideal: 720, min: 360 },
-          frameRate: { ideal: 30, min: 24 },
-        },
-      });
-      localStreamRef.current = st;
-      setLocalStreamState(st);
-      setVideoError(null);
-      return st;
-    } catch (e) {
-      setVideoError("Unable to access camera/microphone.");
-      throw e;
-    }
-  };
+  // ── Chat action handlers ────────────────────────────────────────────────────
 
-  const stopLocalStream = () => {
-    if (localStreamRef.current) {
-      localStreamRef.current.getTracks()?.forEach((t) => t.stop?.());
-      localStreamRef.current = null;
-      setLocalStreamState(null);
-    }
-  };
-
-  // -----------------------------------------
-  // Peer creation
-  // -----------------------------------------
-  const createPeerBase = () => {
-    if (peerRef.current) {
-      try {
-        peerRef.current.getReceivers()?.forEach((r) => r.track?.stop?.());
-        peerRef.current.close();
-      } catch {}
-      peerRef.current = null;
-    }
-
-    const pc = new RTCPeerConnection({
-      iceServers: [
-        { urls: "stun:stun.l.google.com:19302" },
-        ...(import.meta.env.VITE_TURN_URL
-          ? [
-              {
-                urls: import.meta.env.VITE_TURN_URL,
-                username: import.meta.env.VITE_TURN_USER,
-                credential: import.meta.env.VITE_TURN_PASS,
-              },
-            ]
-          : []),
-      ],
-    });
-
-    pc.ontrack = (e) => {
-      console.log("ontrack received", e.streams, e.track);
-      const remote = e.streams?.[0] || new MediaStream([e.track]);
-      remoteStreamRef.current = remote;
-      setRemoteStreamState(remote);
-      setPartnerPresent(true);
-    };
-
-    pc.onicecandidate = (ev) => {
-      if (ev.candidate && socketRef.current && partnerId) {
-        socketRef.current.emit("webrtc-ice", {
-          to: partnerId,
-          candidate: ev.candidate,
-        });
-      }
-    };
-
-    pc.onconnectionstatechange = () => {
-      const state = pc.connectionState;
-      if (
-        state === "disconnected" ||
-        state === "failed" ||
-        state === "closed"
-      ) {
-        setPartnerPresent(false);
-        remoteStreamRef.current = null;
-        setRemoteStreamState(null);
-      } else if (state === "connected") setPartnerPresent(true);
-    };
-
-    peerRef.current = pc;
-    return pc;
-  };
-
-  const createPeerAsCaller = async (toPartnerId) => {
-    try {
-      const pc = createPeerBase();
-      const localStream = localStreamRef.current || (await ensureLocalStream());
-      localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
-      const offer = await pc.createOffer();
-      await pc.setLocalDescription(offer);
-      socketRef.current?.emit("webrtc-offer", {
-        to: toPartnerId,
-        sdp: pc.localDescription,
-      });
-    } catch (e) {
-      console.error("webrtc caller err", e);
-      setVideoError("Failed to start call.");
-    }
-  };
-
-  const createPeerAsReceiver = async (from, remoteSdp) => {
-    try {
-      const pc = createPeerBase();
-      const localStream = localStreamRef.current || (await ensureLocalStream());
-      localStream.getTracks().forEach((t) => pc.addTrack(t, localStream));
-      await pc.setRemoteDescription(remoteSdp);
-      const answer = await pc.createAnswer();
-      await pc.setLocalDescription(answer);
-      socketRef.current?.emit("webrtc-answer", {
-        to: from,
-        sdp: pc.localDescription,
-      });
-    } catch (e) {
-      console.error("webrtc receiver err", e);
-      setVideoError("Failed to answer call.");
-    }
-  };
-
-  const cleanupPeer = () => {
-    if (peerRef.current) {
-      try {
-        peerRef.current.getReceivers()?.forEach((r) => r.track?.stop?.());
-        peerRef.current.close();
-      } catch {}
-      peerRef.current = null;
-    }
-    remoteStreamRef.current = null;
-    setRemoteStreamState(null);
-    setPartnerPresent(false);
-  };
-
-  // -----------------------------------------
-  // Chat handlers
-  // -----------------------------------------
-  const handleModeSelect = async (m) => {
+  function guardPolicy(action) {
     if (showPolicyNotification) {
       alert("Please accept the updated Privacy Policy and Terms & Conditions at the top of the page first.");
-      return;
+      return false;
     }
+    return true;
+  }
+
+  function joinQueue(m) {
+    socketRef.current?.emit("joinQueue", { sessionId, mode: m });
+  }
+
+  async function handleModeSelect(m) {
+    if (!guardPolicy()) return;
     setMode(m);
     setBanner(null);
     setMessages([]);
@@ -471,13 +299,9 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
     displayedIdsRef.current.clear();
     if (m === "video") await ensureLocalStream();
     joinQueue(m);
-  };
+  }
 
-  const joinQueue = (m) => {
-    socketRef.current?.emit("joinQueue", { sessionId, mode: m });
-  };
-
-  const handleEnd = () => {
+  function handleEnd() {
     socketRef.current?.emit("endChat");
     socketRef.current?.emit("next");
     socketRef.current?.emit("leaveQueue");
@@ -494,9 +318,9 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
     displayedIdsRef.current.clear();
     sendBusyRef.current = false;
     nextBusyRef.current = false;
-  };
+  }
 
-  const handleNext = () => {
+  function handleNext() {
     if (nextBusyRef.current) return;
     nextBusyRef.current = true;
     cleanupPeer();
@@ -511,9 +335,9 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
     setBanner("Searching for a new partner...");
     displayedIdsRef.current.clear();
     socketRef.current?.emit("next");
-  };
+  }
 
-  const sendMsg = () => {
+  function sendMsg() {
     const text = input.trim();
     if (!text || !roomId || !partnerPresent || sendBusyRef.current) return;
     sendBusyRef.current = true;
@@ -528,9 +352,9 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
     socketRef.current?.emit("typing", { roomId, typing: false });
     socketRef.current?.emit("message", { roomId, text, messageId });
     setTimeout(() => (sendBusyRef.current = false), 120);
-  };
+  }
 
-  const handleTyping = (v) => {
+  function handleTyping(v) {
     setInput(v);
     if (!roomId || !partnerPresent) return;
     socketRef.current?.emit("typing", { roomId, typing: true });
@@ -539,9 +363,9 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
       socketRef.current?.emit("typing", { roomId, typing: false });
       typingTimeoutRef.current = null;
     }, 800);
-  };
+  }
 
-  const handleBackFromQueue = () => {
+  function handleBackFromQueue() {
     socketRef.current?.emit("leaveQueue");
     if (mode === "video") stopLocalStream();
     setMode(null);
@@ -553,117 +377,114 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
     setPartnerTyping(false);
     displayedIdsRef.current.clear();
     nextBusyRef.current = false;
-  };
+  }
 
-  const handleConnectWithFriend = (friendId) => {
-    if (showPolicyNotification) {
-      alert("Please accept the updated Privacy Policy and Terms & Conditions at the top of the page first.");
-      return;
-    }
-    if (!socketRef.current) return;
-    // Send a confirmation request to the friend first
-    setOutgoingChatRequest(null);
-    socketRef.current.emit("friend-chat-request", { friendId });
-  };
+  function handleAcceptRequest(fromUserId) {
+    if (!guardPolicy()) return;
+    socketRef.current?.emit("friend-request-accept", { fromUserId });
+  }
 
-  const handleRespondChatRequest = (fromHandle, accepted) => {
-    if (!socketRef.current) return;
-    setIncomingChatRequest(null);
-    socketRef.current.emit("friend-chat-request-response", { fromHandle, accepted });
-  };
+  function handleDeclineRequest(fromUserId) {
+    socketRef.current?.emit("friend-request-decline", { fromUserId });
+  }
 
-  const handleDismissOutgoingRequest = () => {
-    setOutgoingChatRequest(null);
-  };
+  function handleSendRequestDirectly(toUserId) {
+    if (!guardPolicy()) return;
+    socketRef.current?.emit("friend-request-send", { toUserId });
+  }
 
-  const handleAcceptRequest = (fromUserId) => {
-    if (showPolicyNotification) {
-      alert("Please accept the updated Privacy Policy and Terms & Conditions at the top of the page first.");
-      return;
-    }
-    if (!socketRef.current) return;
-    socketRef.current.emit("friend-request-accept", { fromUserId });
-  };
+  function handleSetFriendAlias(friendId, alias) {
+    socketRef.current?.emit("friend-alias-set", { friendId, alias });
+  }
 
-  const handleDeclineRequest = (fromUserId) => {
-    if (!socketRef.current) return;
-    socketRef.current.emit("friend-request-decline", { fromUserId });
-  };
+  /**
+   * Look up the alias a user has set for a given handle.
+   * Falls back to "talkative_{handle}" if no alias exists.
+   * @param {string|undefined} handle
+   * @returns {string}
+   */
+  function resolveDisplayName(handle) {
+    if (!handle) return "";
+    const entry = friendRequests.friends?.find(
+      (f) => (typeof f === "string" ? f : f.handle) === handle
+    );
+    const alias = typeof entry === "object" ? entry?.alias : "";
+    return alias || `talkative_${handle}`;
+  }
 
-  const handleSendRequestDirectly = (toUserId) => {
-    if (showPolicyNotification) {
-      alert("Please accept the updated Privacy Policy and Terms & Conditions at the top of the page first.");
-      return;
-    }
-    if (!socketRef.current) return;
-    socketRef.current.emit("friend-request-send", { toUserId });
-  };
+  // ── Inline validation wrapper (passed to ChatView) ─────────────────────────
 
-  const handleSetFriendAlias = (friendId, alias) => {
-    if (!socketRef.current) return;
-    socketRef.current.emit("friend-alias-set", { friendId, alias });
-  };
+  function validateMessage(inputVal) {
+    const isFriend =
+      isFriendChat ||
+      friendRequests.friends?.some((f) =>
+        typeof f === "string" ? f === partnerId : f.handle === partnerId
+      );
+    return validateChatMessage(inputVal, isFriend);
+  }
 
-  // -----------------------------------------
-  // Render
-  // -----------------------------------------
-  const renderContent = () => {
+  // ── Content renderer ────────────────────────────────────────────────────────
+
+  function renderContent() {
     if (status === "queued") {
       return (
         <QueueView
           banner={banner}
           mode={mode}
-          localStream={localStreamState}
+          localStream={localStream}
           videoError={videoError}
           onBack={handleBackFromQueue}
         />
       );
     }
+
     if (status === "connected") {
-      const chatViewProps = {
-        mode,
-        banner,
-        handleNext,
-        handleEnd,
-        nextBusyRef: nextBusyRef.current,
-        localStream: localStreamState,
-        remoteStream: remoteStreamState,
-        videoError,
-        partnerPresent,
-        messages,
-        partnerTyping,
-        input,
-        showEmoji,
-        canSend:
-          status === "connected" &&
-          (isFriendChat
-            ? isFriendshipAccepted && isFriendOnline
-            : partnerPresent),
-        handleTyping,
-        sendMsg,
-        setShowEmoji,
-        sendBusyRef: sendBusyRef.current,
-        validateChatMessage,
-        setInput,
-        messageFlag,
-        SetMessageFlag,
-        validationMessage,
-        SetValidationMessage,
-        theme,
-        toggleTheme,
-        isFriendChat,
-        isFriendOnline,
-        isFriendshipAccepted,
-        friendRequests,
-        onSendRequestDirectly: handleSendRequestDirectly,
-        onAcceptRequest: handleAcceptRequest,
-        onDeclineRequest: handleDeclineRequest,
-        mySessionId: myHandle || sessionId,
-        partnerId,
-        partnerGender,
-      };
-      return <ChatView {...chatViewProps} />;
+      const canSend =
+        status === "connected" &&
+        (isFriendChat ? isFriendshipAccepted && isFriendOnline : partnerPresent);
+
+      return (
+        <ChatView
+          mode={mode}
+          banner={banner}
+          handleNext={handleNext}
+          handleEnd={handleEnd}
+          nextBusyRef={nextBusyRef.current}
+          localStream={localStream}
+          remoteStream={remoteStream}
+          videoError={videoError}
+          partnerPresent={partnerPresent}
+          messages={messages}
+          partnerTyping={partnerTyping}
+          input={input}
+          showEmoji={showEmoji}
+          canSend={canSend}
+          handleTyping={handleTyping}
+          sendMsg={sendMsg}
+          setShowEmoji={setShowEmoji}
+          sendBusyRef={sendBusyRef.current}
+          validateChatMessage={validateMessage}
+          setInput={setInput}
+          messageFlag={messageFlag}
+          SetMessageFlag={SetMessageFlag}
+          validationMessage={validationMessage}
+          SetValidationMessage={SetValidationMessage}
+          theme={theme}
+          toggleTheme={toggleTheme}
+          isFriendChat={isFriendChat}
+          isFriendOnline={isFriendOnline}
+          isFriendshipAccepted={isFriendshipAccepted}
+          friendRequests={friendRequests}
+          onSendRequestDirectly={handleSendRequestDirectly}
+          onAcceptRequest={handleAcceptRequest}
+          onDeclineRequest={handleDeclineRequest}
+          mySessionId={myHandle || sessionId}
+          partnerId={partnerId}
+          partnerGender={partnerGender}
+        />
+      );
     }
+
     return (
       <ModeSelectionView
         banner={banner}
@@ -680,60 +501,68 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
         onDismissOutgoingRequest={handleDismissOutgoingRequest}
       />
     );
-  };
+  }
+
+  // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
     <div
       className="container-fluid d-flex flex-column bg-transparent position-relative"
       style={{ minHeight: "100vh" }}
     >
-      {/* Theme Toggle Button for Selection Screen */}
+      {/* Theme toggle (idle screen only) */}
       {status === "idle" && (
         <div className="position-absolute top-0 end-0 m-3" style={{ zIndex: 100 }}>
           <button
             className="btn btn-outline-light rounded-circle border-0 d-flex align-items-center justify-content-center shadow-sm"
             onClick={toggleTheme}
-            style={{ width: "42px", height: "42px", color: "var(--text-main)", background: "var(--glass-bg)", border: "1px solid var(--glass-border)" }}
+            style={{
+              width: "42px",
+              height: "42px",
+              color: "var(--text-main)",
+              background: "var(--glass-bg)",
+              border: "1px solid var(--glass-border)",
+            }}
             type="button"
             title="Toggle Theme"
           >
-            <i className={theme === "light" ? "bi bi-moon-stars-fill" : "bi bi-sun-fill"}></i>
+            <i className={theme === "light" ? "bi bi-moon-stars-fill" : "bi bi-sun-fill"} />
           </button>
         </div>
       )}
 
-      {/* Policy Update Notification Banner */}
+      {/* Policy update banner */}
       {showPolicyNotification && status === "idle" && (
-        <div 
+        <div
           className="alert alert-info border-0 rounded-4 p-3 m-3 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 glass-panel"
-          style={{ 
-            color: 'var(--text-main)', 
-            border: '1px solid rgba(109, 117, 242, 0.3)',
-            boxShadow: '0 0 15px rgba(109, 117, 242, 0.15)',
-            marginTop: '70px',
-            zIndex: 10
+          style={{
+            color: "var(--text-main)",
+            border: "1px solid rgba(109, 117, 242, 0.3)",
+            boxShadow: "0 0 15px rgba(109, 117, 242, 0.15)",
+            marginTop: "70px",
+            zIndex: 10,
           }}
         >
           <div className="d-flex align-items-center gap-2">
-            <i className="bi bi-shield-fill-info text-primary fs-5 animate-pulse"></i>
+            <i className="bi bi-shield-fill-info text-primary fs-5 animate-pulse" />
             <span className="small fw-semibold text-start">{policyNotificationMessage}</span>
           </div>
           <div className="d-flex gap-2 flex-shrink-0">
-            <button 
+            <button
               className="btn btn-sm btn-outline-secondary rounded-pill py-1 px-3"
               style={{ color: "var(--text-main)", borderColor: "var(--glass-border)", fontSize: "0.8rem" }}
               onClick={() => setShowPrivacy(true)}
             >
               Privacy Policy
             </button>
-            <button 
+            <button
               className="btn btn-sm btn-outline-secondary rounded-pill py-1 px-3"
               style={{ color: "var(--text-main)", borderColor: "var(--glass-border)", fontSize: "0.8rem" }}
               onClick={() => setShowTerms(true)}
             >
-              Terms & Conditions
+              Terms &amp; Conditions
             </button>
-            <button 
+            <button
               className="btn btn-sm btn-glowing-primary rounded-pill py-1.5 px-4"
               style={{ fontSize: "0.8rem" }}
               onClick={() => {
@@ -741,119 +570,27 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
                 socketRef.current?.emit("policy-accepted");
               }}
             >
-              Accept & Dismiss
+              Accept &amp; Dismiss
             </button>
           </div>
         </div>
       )}
 
+      {/* Main content */}
       {renderContent()}
 
-      <PrivacyModal
-        show={showPrivacy}
-        handleClose={() => setShowPrivacy(false)}
-      />
+      {/* Legal modals */}
+      <PrivacyModal show={showPrivacy} handleClose={() => setShowPrivacy(false)} />
       <TermsModal show={showTerms} handleClose={() => setShowTerms(false)} />
 
-      {/* ===== INCOMING CHAT REQUEST POPUP ===== */}
-      {incomingChatRequest && (
-        <div
-          className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
-          style={{ zIndex: 2000, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)" }}
-        >
-          <div
-            className="glass-panel p-4 rounded-4 shadow-lg text-center"
-            style={{ maxWidth: "380px", width: "90%", border: "1px solid rgba(255,255,255,0.12)", animation: "slideUpFade 0.3s ease-out" }}
-          >
-            <div
-              className="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle"
-              style={{ width: "72px", height: "72px", background: "rgba(109, 117, 242, 0.12)", border: "1.5px solid rgba(109,117,242,0.3)" }}
-            >
-              <i className="bi bi-chat-dots-fill" style={{ fontSize: "2rem", color: "var(--primary-color)" }}></i>
-            </div>
-            <h5 className="fw-bold mb-1" style={{ color: "var(--text-main)" }}>Chat Request</h5>
-            <p className="text-muted small mb-1">
-              <strong style={{ color: "var(--primary-color)" }}>talkative_{incomingChatRequest.fromHandle}</strong>
-            </p>
-            <p className="text-muted small mb-4">wants to start a chat with you.</p>
-            <div className="d-flex gap-3 justify-content-center">
-              <button
-                className="btn btn-glowing-primary px-4 py-2 rounded-pill fw-semibold"
-                onClick={() => handleRespondChatRequest(incomingChatRequest.fromHandle, true)}
-                type="button"
-              >
-                <i className="bi bi-check-lg me-1"></i> Allow
-              </button>
-              <button
-                className="btn btn-outline-danger px-4 py-2 rounded-pill fw-semibold"
-                style={{ borderColor: "rgba(220,53,69,0.4)", color: "var(--text-main)" }}
-                onClick={() => handleRespondChatRequest(incomingChatRequest.fromHandle, false)}
-                type="button"
-              >
-                <i className="bi bi-x-lg me-1"></i> Decline
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ===== OUTGOING CHAT REQUEST STATUS TOAST ===== */}
-      {outgoingChatRequest && (
-        <div
-          className="position-fixed bottom-0 end-0 m-4"
-          style={{ zIndex: 1900, maxWidth: "320px", width: "90%" }}
-        >
-          <div
-            className="glass-panel p-3 rounded-4 shadow-lg d-flex align-items-start gap-3"
-            style={{
-              border: outgoingChatRequest.status === "declined" || outgoingChatRequest.status === "cooldown"
-                ? "1px solid rgba(220,53,69,0.3)"
-                : "1px solid rgba(109,117,242,0.3)",
-              animation: "slideUpFade 0.3s ease-out"
-            }}
-          >
-            <div className="flex-shrink-0 mt-1">
-              {outgoingChatRequest.status === "pending" && (
-                <div className="spinner-border spinner-border-sm text-primary" role="status"></div>
-              )}
-              {outgoingChatRequest.status === "declined" && (
-                <i className="bi bi-x-circle-fill text-danger fs-5"></i>
-              )}
-              {outgoingChatRequest.status === "cooldown" && (
-                <i className="bi bi-clock-fill text-warning fs-5"></i>
-              )}
-            </div>
-            <div className="flex-grow-1">
-              <div className="fw-semibold small mb-1" style={{ color: "var(--text-main)" }}>
-                {outgoingChatRequest.status === "pending" && "Waiting for response…"}
-                {outgoingChatRequest.status === "declined" && "Request Declined"}
-                {outgoingChatRequest.status === "cooldown" && "Cooldown Active"}
-              </div>
-              <div className="text-muted" style={{ fontSize: "0.8rem" }}>
-                {outgoingChatRequest.status === "pending"
-                  ? `Sent to talkative_${outgoingChatRequest.toHandle}`
-                  : outgoingChatRequest.message}
-              </div>
-            </div>
-            <button
-              className="btn btn-link p-0 ms-1 flex-shrink-0"
-              style={{ color: "var(--text-muted)", border: "none", background: "none" }}
-              onClick={handleDismissOutgoingRequest}
-              type="button"
-              title="Dismiss"
-            >
-              <i className="bi bi-x-lg" style={{ fontSize: "0.85rem" }}></i>
-            </button>
-          </div>
-        </div>
-      )}
-
-      <style>{`
-        @keyframes slideUpFade {
-          from { opacity: 0; transform: translateY(20px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
+      {/* Chat-request overlays */}
+      <ChatRequestPopups
+        incomingChatRequest={incomingChatRequest}
+        incomingDisplayName={resolveDisplayName(incomingChatRequest?.fromHandle)}
+        outgoingChatRequest={outgoingChatRequest}
+        onRespond={handleRespondChatRequest}
+        onDismissOutgoing={handleDismissOutgoingRequest}
+      />
     </div>
   );
 }
