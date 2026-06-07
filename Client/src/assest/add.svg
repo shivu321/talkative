@@ -1,0 +1,42 @@
+<svg width="150" height="150" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .runner {
+      stroke: #333;
+      stroke-width: 4;
+      stroke-linecap: round;
+      fill: none;
+    }
+    .head { fill: #333; }
+    #leg1, #leg2, #arm1, #arm2 {
+      animation: run 0.6s infinite ease-in-out;
+      transform-origin: 50px 40px;
+    }
+    #leg2, #arm1 { animation-delay: -0.3s; }
+
+    @keyframes run {
+      0%, 100% { transform: rotate(45deg); }
+      50% { transform: rotate(-45deg); }
+    }
+    #body {
+      animation: bounce 0.6s infinite ease-in-out;
+    }
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(3px); }
+    }
+  </style>
+
+  <g class="runner" id="body">
+    <!-- Head -->
+    <circle class="head" cx="50" cy="25" r="8"/>
+    <!-- Body -->
+    <line x1="50" y1="33" x2="50" y2="60"/>
+    <!-- Limbs -->
+    <g id="limbs">
+      <line id="arm1" x1="50" y1="40" x2="70" y2="30"/>
+      <line id="arm2" x1="50" y1="40" x2="30" y2="30"/>
+      <line id="leg1" x1="50" y1="60" x2="70" y2="80"/>
+      <line id="leg2" x1="50" y1="60" x2="30" y2="80"/>
+    </g>
+  </g>
+</svg>

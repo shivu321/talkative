@@ -1,0 +1,44 @@
+[33m67cc4aa[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mbackup-before-reset[m[33m)[m HEAD@{0}: reset: moving to HEAD~
+[33m377bfd1[m HEAD@{1}: reset: moving to HEAD~1
+[33mba5a0ad[m HEAD@{2}: reset: moving to HEAD
+[33mba5a0ad[m HEAD@{3}: reset: moving to HEAD
+[33mba5a0ad[m HEAD@{4}: reset: moving to HEAD~
+[33m9b6ee45[m HEAD@{5}: reset: moving to HEAD~7
+[33maf8a3dd[m HEAD@{6}: reset: moving to HEAD~6
+[33me9d9951[m HEAD@{7}: reset: moving to HEAD~5
+[33m979dce8[m HEAD@{8}: reset: moving to HEAD~4
+[33m677f055[m HEAD@{9}: reset: moving to HEAD~3
+[33mc139366[m HEAD@{10}: reset: moving to HEAD~2
+[33mdeab776[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{11}: commit: comite
+[33m9eac721[m HEAD@{12}: pull: Merge made by the 'ort' strategy.
+[33mc139366[m HEAD@{13}: reset: moving to HEAD
+[33mc139366[m HEAD@{14}: reset: moving to HEAD~2
+[33mdaf302c[m HEAD@{15}: commit: update changes
+[33m8e4effa[m HEAD@{16}: commit: fixed changs
+[33mc139366[m HEAD@{17}: commit: fixed chanegs
+[33m0c82650[m HEAD@{18}: commit: fixed
+[33m0df0a87[m HEAD@{19}: commit: fixed chanegs
+[33m677f055[m HEAD@{20}: commit: fixed changes on the
+[33m5b928cf[m HEAD@{21}: commit: fixed changes
+[33m54d84e1[m HEAD@{22}: commit: fixed chnages
+[33mdbf7317[m HEAD@{23}: commit: fixed chnages
+[33m979dce8[m HEAD@{24}: commit: fixd
+[33meefaf7e[m HEAD@{25}: commit: fixed chanegs
+[33mee0a3cb[m HEAD@{26}: commit: fixed chnages
+[33m83848ec[m HEAD@{27}: commit (merge): Merge branch 'master' of github.com:shivu321/talkative
+[33m16b9dc8[m HEAD@{28}: commit: fixed chnags on cros issue
+[33me9d9951[m HEAD@{29}: commit: fixed
+[33me575d25[m HEAD@{30}: commit: fixed chage
+[33m6eb31ac[m HEAD@{31}: commit: fixed changes
+[33mf955e27[m HEAD@{32}: commit: fixe
+[33m8d4d931[m HEAD@{33}: commit: fixed chanegs
+[33mdfd4b3c[m HEAD@{34}: commit: fixed changes
+[33maf8a3dd[m HEAD@{35}: commit: fixed
+[33m3e11714[m HEAD@{36}: commit: fixed chanegs
+[33mc408d78[m HEAD@{37}: commit (merge): Merge branch 'master' of github.com:shivu321/talkative
+[33m040146b[m HEAD@{38}: commit: backend fixed also
+[33m38f3d10[m HEAD@{39}: commit: fixed changes
+[33m174eda0[m HEAD@{40}: commit: fixed changes with error resolve
+[33mefb3537[m HEAD@{41}: pull --tags origin master: Fast-forward
+[33mba5a0ad[m HEAD@{42}: pull --tags origin master: Fast-forward
+[33m67cc4aa[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;32mbackup-before-reset[m[33m)[m HEAD@{43}: commit (initial): initial Changes
