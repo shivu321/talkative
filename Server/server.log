@@ -1,249 +1,437 @@
-[2026-06-07T05:50:54.818Z] [INFO] MongoDB connected successfully
-[2026-06-07T05:50:54.853Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T05:50:54.997Z] [INFO] MongoDB connected successfully
-[2026-06-07T05:50:55.781Z] [INFO] Socket connected: yGtH93JIqex38k-xAAAC
-[2026-06-07T05:50:55.784Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T05:50:55.792Z] [INFO] Socket connected: jpSAeFZv2ZACT8anAAAD
-[2026-06-07T05:50:55.799Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:51:00.772Z] [WARN] Socket disconnected: jpSAeFZv2ZACT8anAAAD
-[2026-06-07T05:51:00.773Z] [WARN] Socket disconnected: yGtH93JIqex38k-xAAAC
-[2026-06-07T05:51:00.782Z] [INFO] Socket connected: uMm1UzJOuj_XBP85AAAG
-[2026-06-07T05:51:00.785Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:51:00.789Z] [INFO] Socket connected: t0HtdTMQZQLGtwSFAAAH
-[2026-06-07T05:51:00.792Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T05:51:17.327Z] [INFO] Socket connected: LouDBXBbDyMNhggRAAAJ
-[2026-06-07T05:51:17.331Z] [INFO] User registered: sessionId=xo85e84cmdb, handle=2d666323e85a
-[2026-06-07T05:51:24.113Z] [INFO] Socket connected: hYQzC_eYWQ22_BxjAAAL
-[2026-06-07T05:51:24.118Z] [WARN] Socket disconnected: LouDBXBbDyMNhggRAAAJ
-[2026-06-07T05:51:24.122Z] [INFO] User registered: sessionId=xo85e84cmdb, handle=2d666323e85a
-[2026-06-07T05:51:38.548Z] [WARN] Socket disconnected: hYQzC_eYWQ22_BxjAAAL
-[2026-06-07T05:51:43.952Z] [INFO] Socket connected: sNXpGCbBc_SLzjWGAAAN
-[2026-06-07T05:51:43.987Z] [INFO] User registered: sessionId=xo85e84cmdb, handle=2d666323e85a
-[2026-06-07T05:51:58.845Z] [WARN] Socket disconnected: sNXpGCbBc_SLzjWGAAAN
-[2026-06-07T05:55:04.205Z] [WARN] Socket disconnected: uMm1UzJOuj_XBP85AAAG
-[2026-06-07T05:55:04.470Z] [INFO] Socket connected: SamJS7xKamVOaSC5AAAP
-[2026-06-07T05:55:04.471Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:55:12.140Z] [WARN] Socket disconnected: SamJS7xKamVOaSC5AAAP
-[2026-06-07T05:55:12.410Z] [INFO] Socket connected: h0fB2iPMkvmWxJj2AAAR
-[2026-06-07T05:55:12.437Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:55:15.261Z] [WARN] Socket disconnected: h0fB2iPMkvmWxJj2AAAR
-[2026-06-07T05:55:15.375Z] [INFO] Socket connected: YwcDDR8CrVbRudrxAAAT
-[2026-06-07T05:55:15.381Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:55:59.543Z] [INFO] MongoDB connected successfully
-[2026-06-07T05:55:59.571Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T05:55:59.844Z] [INFO] MongoDB connected successfully
-[2026-06-07T05:56:00.300Z] [INFO] Socket connected: dNw8r6eSzr1hlAHPAAAB
-[2026-06-07T05:56:00.302Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:56:00.480Z] [INFO] Socket connected: O0ZfahWQgOpwHEF_AAAD
-[2026-06-07T05:56:00.481Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T05:56:06.375Z] [INFO] MongoDB connected successfully
-[2026-06-07T05:56:06.408Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T05:56:06.472Z] [INFO] Socket connected: iS9aENabvyLE4OjeAAAB
-[2026-06-07T05:56:06.474Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:56:06.518Z] [WARN] Socket disconnected: iS9aENabvyLE4OjeAAAB
-[2026-06-07T05:56:06.615Z] [INFO] MongoDB connected successfully
-[2026-06-07T05:56:07.241Z] [INFO] Socket connected: -H8wUcCtVH3UguoDAAAD
-[2026-06-07T05:56:07.242Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T05:56:20.770Z] [WARN] Socket disconnected: -H8wUcCtVH3UguoDAAAD
-[2026-06-07T05:56:20.778Z] [INFO] Socket connected: Zz03aBfNzsmB0sihAAAF
-[2026-06-07T05:56:20.780Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T05:56:20.849Z] [INFO] Socket connected: vVqEOJN2r88PC8IUAAAH
-[2026-06-07T05:56:20.851Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:56:48.773Z] [WARN] Socket disconnected: Zz03aBfNzsmB0sihAAAF
-[2026-06-07T05:56:48.775Z] [WARN] Socket disconnected: vVqEOJN2r88PC8IUAAAH
-[2026-06-07T05:56:48.783Z] [INFO] Socket connected: UkLCuN4o5T5cxzXvAAAK
-[2026-06-07T05:56:48.784Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T05:56:48.787Z] [INFO] Socket connected: hUsEa-F6_S76zIz1AAAL
-[2026-06-07T05:56:48.789Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:56:59.525Z] [WARN] Socket disconnected: hUsEa-F6_S76zIz1AAAL
-[2026-06-07T05:57:03.155Z] [INFO] Socket connected: S0vyAdQOxRnLKlaDAAAN
-[2026-06-07T05:57:03.157Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:57:24.149Z] [INFO] Friend alias updated: 9ee3a339f6d2 set alias for 8030f1dfde65 to "My Besties Love"
-[2026-06-07T05:57:36.123Z] [INFO] Friend alias updated: 8030f1dfde65 set alias for 9ee3a339f6d2 to "Love"
-[2026-06-07T05:57:52.004Z] [INFO] Room 8030f1dfde65_9ee3a339f6d2 closed. re89714607 left; bk69xuabhe6 idle.
-[2026-06-07T05:57:52.010Z] [INFO] User left queue: re89714607
-[2026-06-07T05:57:53.846Z] [INFO] User left queue: re89714607
-[2026-06-07T05:57:57.949Z] [INFO] User left queue: bk69xuabhe6
-[2026-06-07T05:57:59.724Z] [INFO] User left queue: bk69xuabhe6
-[2026-06-07T05:58:52.118Z] [WARN] Socket disconnected: UkLCuN4o5T5cxzXvAAAK
-[2026-06-07T05:58:52.145Z] [WARN] Socket disconnected: S0vyAdQOxRnLKlaDAAAN
-[2026-06-07T05:58:53.129Z] [INFO] Socket connected: YSM9qkeqiP-426mMAAAQ
-[2026-06-07T05:58:53.144Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T05:58:53.167Z] [INFO] Socket connected: QbI9A81rjdmMbIZXAAAR
-[2026-06-07T05:58:53.185Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T05:59:01.769Z] [WARN] Socket disconnected: YSM9qkeqiP-426mMAAAQ
-[2026-06-07T05:59:01.771Z] [WARN] Socket disconnected: QbI9A81rjdmMbIZXAAAR
-[2026-06-07T05:59:01.783Z] [INFO] Socket connected: mYkglg3opWK-7vqNAAAU
-[2026-06-07T05:59:01.784Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T05:59:01.789Z] [INFO] Socket connected: KNJgptqvu8XVJmkbAAAV
-[2026-06-07T05:59:01.790Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:02:51.141Z] [WARN] Socket disconnected: KNJgptqvu8XVJmkbAAAV
-[2026-06-07T06:02:52.353Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:02:52.381Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:02:52.412Z] [INFO] Socket connected: fc7xHduzuXu-O_NdAAAB
-[2026-06-07T06:02:52.414Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:02:52.523Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:02:52.528Z] [INFO] Socket connected: OMOwV03XH-_x-RntAAAD
-[2026-06-07T06:02:52.529Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:02:59.624Z] [WARN] Socket disconnected: OMOwV03XH-_x-RntAAAD
-[2026-06-07T06:02:59.767Z] [INFO] Socket connected: kShlmKgnHBwKMMP_AAAF
-[2026-06-07T06:02:59.770Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:03:05.594Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:03:05.629Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:03:05.706Z] [INFO] Socket connected: dNOFebezHp5hkXC-AAAB
-[2026-06-07T06:03:05.709Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:03:05.803Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:03:05.825Z] [INFO] Socket connected: FnOOR1aTTVEkoFkSAAAD
-[2026-06-07T06:03:05.827Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:03:49.778Z] [WARN] Socket disconnected: dNOFebezHp5hkXC-AAAB
-[2026-06-07T06:03:49.791Z] [WARN] Socket disconnected: FnOOR1aTTVEkoFkSAAAD
-[2026-06-07T06:03:49.793Z] [INFO] Socket connected: 3_Kt3Z9gSfcKzDGCAAAF
-[2026-06-07T06:03:49.798Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:03:49.836Z] [INFO] Socket connected: Ftka684gsgp6_DdSAAAH
-[2026-06-07T06:03:49.838Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:04:27.771Z] [WARN] Socket disconnected: 3_Kt3Z9gSfcKzDGCAAAF
-[2026-06-07T06:04:27.772Z] [WARN] Socket disconnected: Ftka684gsgp6_DdSAAAH
-[2026-06-07T06:04:27.780Z] [INFO] Socket connected: -nRAOsHEx7PG-ViHAAAK
-[2026-06-07T06:04:27.781Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:04:27.785Z] [INFO] Socket connected: BGsX88jErYyfF84CAAAL
-[2026-06-07T06:04:27.786Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:04:54.286Z] [INFO] Chat request sent: 9ee3a339f6d2 -> 8030f1dfde65
-[2026-06-07T06:05:08.125Z] [INFO] Chat request declined: 8030f1dfde65 declined 9ee3a339f6d2
-[2026-06-07T06:06:13.458Z] [WARN] Socket disconnected: BGsX88jErYyfF84CAAAL
-[2026-06-07T06:06:13.798Z] [INFO] Socket connected: rc2yjWLWgeTG75nTAAAN
-[2026-06-07T06:06:13.806Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:06:16.370Z] [WARN] Socket disconnected: -nRAOsHEx7PG-ViHAAAK
-[2026-06-07T06:06:16.486Z] [INFO] Socket connected: PHKRxfnnSBDYEac_AAAP
-[2026-06-07T06:06:16.488Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:12:06.501Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:12:06.529Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:12:06.660Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:12:06.771Z] [INFO] Socket connected: LuBCSX1iZMFlXdJsAAAC
-[2026-06-07T06:12:06.773Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:12:06.781Z] [INFO] Socket connected: paD_gYbhcFkhYF4NAAAD
-[2026-06-07T06:12:06.786Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:12:31.765Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:12:31.797Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:12:31.884Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:12:32.783Z] [INFO] Socket connected: xEPageU0ZVlLedA7AAAC
-[2026-06-07T06:12:32.786Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:12:32.801Z] [INFO] Socket connected: aaJ262baKTUGwnzIAAAD
-[2026-06-07T06:12:32.819Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:12:49.064Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:12:49.097Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:12:49.366Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:12:49.774Z] [INFO] Socket connected: 0Rj1aW_te9soz1AxAAAB
-[2026-06-07T06:12:49.776Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:12:50.775Z] [INFO] Socket connected: bCA4dcpqWr9VNwPaAAAD
-[2026-06-07T06:12:50.776Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:13:20.584Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:13:20.612Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:13:20.740Z] [INFO] Socket connected: OT0qfXBmkmdEoB5ZAAAB
-[2026-06-07T06:13:20.742Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:13:20.763Z] [INFO] Socket connected: HvksUhdP9ODGsKZ_AAAD
-[2026-06-07T06:13:20.765Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:13:20.796Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:13:41.656Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:13:41.693Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:13:41.907Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:13:42.788Z] [INFO] Socket connected: Ekqk4XiX3VCKcNo2AAAC
-[2026-06-07T06:13:42.790Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:13:42.798Z] [INFO] Socket connected: LvQREPQTQexX8k-XAAAD
-[2026-06-07T06:13:42.799Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:13:58.229Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:13:58.289Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:13:58.510Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:13:58.784Z] [INFO] Socket connected: BQYsTU00cFDqeu4CAAAC
-[2026-06-07T06:13:58.786Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:13:58.795Z] [INFO] Socket connected: 8GeyUgsZgEBQMpnYAAAD
-[2026-06-07T06:13:58.802Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:14:36.398Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:14:36.439Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:14:36.468Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:14:36.787Z] [INFO] Socket connected: dlrHnBKX_WekbmGEAAAC
-[2026-06-07T06:14:36.789Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:14:36.799Z] [INFO] Socket connected: EK3WnHdREkbm70dqAAAD
-[2026-06-07T06:14:36.808Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:15:25.475Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:15:25.526Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:15:25.540Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:15:25.793Z] [INFO] Socket connected: 1aRcnTu-I8a5erZNAAAC
-[2026-06-07T06:15:25.797Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:15:25.804Z] [INFO] Socket connected: xtqqnBHP-QImUZrYAAAD
-[2026-06-07T06:15:25.808Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:15:41.564Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:15:41.600Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:15:41.935Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:15:42.779Z] [INFO] Socket connected: BSg7THP1TQAQiPgEAAAC
-[2026-06-07T06:15:42.781Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:15:42.789Z] [INFO] Socket connected: tfUFELcOdlWlUqOqAAAD
-[2026-06-07T06:15:42.794Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:16:35.823Z] [WARN] Socket disconnected: BSg7THP1TQAQiPgEAAAC
-[2026-06-07T06:16:36.007Z] [INFO] Socket connected: r-wReKw0X6yikmxJAAAF
-[2026-06-07T06:16:36.022Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:16:42.164Z] [INFO] Chat request sent: 8030f1dfde65 -> 9ee3a339f6d2
-[2026-06-07T06:16:49.391Z] [INFO] Chat request accepted: 9ee3a339f6d2 accepted 8030f1dfde65
-[2026-06-07T06:19:08.773Z] [INFO] Room 8030f1dfde65_9ee3a339f6d2 closed. re89714607 left; bk69xuabhe6 idle.
-[2026-06-07T06:19:08.774Z] [WARN] Socket disconnected: r-wReKw0X6yikmxJAAAF
-[2026-06-07T06:19:08.784Z] [WARN] Socket disconnected: tfUFELcOdlWlUqOqAAAD
-[2026-06-07T06:19:08.786Z] [INFO] Socket connected: WAWzZE6kit_Yfu7RAAAH
-[2026-06-07T06:19:08.788Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:19:08.826Z] [INFO] Socket connected: KKuuIeXj4sMqt9QsAAAJ
-[2026-06-07T06:19:08.828Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:21:07.361Z] [WARN] Socket disconnected: WAWzZE6kit_Yfu7RAAAH
-[2026-06-07T06:21:07.505Z] [INFO] Socket connected: yrZXfOrkO0-2j7QkAAAL
-[2026-06-07T06:21:07.512Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:21:09.978Z] [WARN] Socket disconnected: KKuuIeXj4sMqt9QsAAAJ
-[2026-06-07T06:21:10.256Z] [INFO] Socket connected: fFW2dDm5G5j0T9t8AAAN
-[2026-06-07T06:21:10.259Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:21:46.916Z] [INFO] Chat request sent: 9ee3a339f6d2 -> 8030f1dfde65
-[2026-06-07T06:22:28.717Z] [INFO] Chat request accepted: 8030f1dfde65 accepted 9ee3a339f6d2
-[2026-06-07T06:23:07.765Z] [INFO] Room 8030f1dfde65_9ee3a339f6d2 closed. re89714607 left; bk69xuabhe6 idle.
-[2026-06-07T06:23:07.766Z] [WARN] Socket disconnected: yrZXfOrkO0-2j7QkAAAL
-[2026-06-07T06:23:07.776Z] [INFO] Socket connected: 3kbrOZi7qHrJLMJlAAAP
-[2026-06-07T06:23:07.780Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:23:07.783Z] [WARN] Socket disconnected: fFW2dDm5G5j0T9t8AAAN
-[2026-06-07T06:23:07.825Z] [INFO] Socket connected: ffSbyoWRdi3GCGyQAAAR
-[2026-06-07T06:23:07.828Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:24:56.765Z] [WARN] Socket disconnected: 3kbrOZi7qHrJLMJlAAAP
-[2026-06-07T06:24:56.773Z] [WARN] Socket disconnected: ffSbyoWRdi3GCGyQAAAR
-[2026-06-07T06:24:56.774Z] [INFO] Socket connected: AaUkiFX3vRL1RvS9AAAT
-[2026-06-07T06:24:56.779Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:24:56.784Z] [INFO] Socket connected: sAYdfcVWxyDiWO3jAAAV
-[2026-06-07T06:24:56.788Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:25:16.084Z] [WARN] Socket disconnected: sAYdfcVWxyDiWO3jAAAV
-[2026-06-07T06:25:16.362Z] [INFO] Socket connected: A3hP8vHfjPRqTcedAAAX
-[2026-06-07T06:25:16.365Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:25:18.576Z] [WARN] Socket disconnected: AaUkiFX3vRL1RvS9AAAT
-[2026-06-07T06:25:18.761Z] [INFO] Socket connected: ulkMso4u4XhZCcsnAAAZ
-[2026-06-07T06:25:18.768Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:32:59.318Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:32:59.369Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:32:59.394Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:32:59.595Z] [INFO] Socket connected: g9SU8TP5XVPoDVzuAAAB
-[2026-06-07T06:32:59.598Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:32:59.773Z] [INFO] Socket connected: 4UhRZbREF4W1Z1KjAAAD
-[2026-06-07T06:32:59.774Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:33:09.313Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:33:09.361Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:33:09.443Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:33:09.784Z] [INFO] Socket connected: JdUJ6GDnuwGZ_X8fAAAC
-[2026-06-07T06:33:09.786Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:33:09.792Z] [INFO] Socket connected: n-uleWOsqSCdkpxXAAAD
-[2026-06-07T06:33:09.794Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:33:23.399Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:33:23.461Z] [INFO] 🚀 Server running on http://localhost:5000
-[2026-06-07T06:33:23.783Z] [INFO] Socket connected: 36i0hPVfacfXh1CwAAAB
-[2026-06-07T06:33:23.786Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:33:23.794Z] [INFO] MongoDB connected successfully
-[2026-06-07T06:33:24.776Z] [INFO] Socket connected: -VfsAMAmTjHkDjveAAAD
-[2026-06-07T06:33:24.778Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:34:21.184Z] [WARN] Socket disconnected: -VfsAMAmTjHkDjveAAAD
-[2026-06-07T06:34:21.483Z] [INFO] Socket connected: _gccjIEDZ9uq0yvoAAAF
-[2026-06-07T06:34:21.485Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
-[2026-06-07T06:34:24.195Z] [WARN] Socket disconnected: 36i0hPVfacfXh1CwAAAB
-[2026-06-07T06:34:24.359Z] [INFO] Socket connected: _bw9RIe3ZoVrxjvxAAAH
-[2026-06-07T06:34:24.369Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
-[2026-06-07T06:34:29.323Z] [WARN] Socket disconnected: _gccjIEDZ9uq0yvoAAAF
-[2026-06-07T06:34:29.503Z] [INFO] Socket connected: UwRwyH6nnQvbxrEWAAAJ
-[2026-06-07T06:34:29.505Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T06:37:17.623Z] [INFO] User queued: bk69xuabhe6 | mode=video
+[2026-06-07T06:37:29.097Z] [INFO] User queued: re89714607 | mode=video
+[2026-06-07T06:37:29.104Z] [INFO] Room created 22e9edd7-11be-4799-bde7-de6d74ab1ffb for re89714607 & bk69xuabhe6 | mode=video
+[2026-06-07T06:38:42.168Z] [INFO] Room 22e9edd7-11be-4799-bde7-de6d74ab1ffb closed. re89714607 left; bk69xuabhe6 idle.
+[2026-06-07T06:38:51.574Z] [INFO] User left queue: re89714607
+[2026-06-07T06:38:58.387Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T06:39:06.839Z] [INFO] Chat request sent: 9ee3a339f6d2 -> 8030f1dfde65
+[2026-06-07T06:39:23.186Z] [INFO] Chat request accepted: 8030f1dfde65 accepted 9ee3a339f6d2
+[2026-06-07T06:41:18.771Z] [INFO] Room 8030f1dfde65_9ee3a339f6d2 closed. re89714607 left; bk69xuabhe6 idle.
+[2026-06-07T06:41:18.773Z] [INFO] User left queue: re89714607
+[2026-06-07T06:41:21.448Z] [INFO] User left queue: re89714607
+[2026-06-07T06:41:25.759Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T06:41:28.658Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T06:41:31.461Z] [INFO] User queued: bk69xuabhe6 | mode=chat
+[2026-06-07T06:41:32.757Z] [INFO] User queued: re89714607 | mode=chat
+[2026-06-07T06:41:32.760Z] [INFO] Room created da22c624-0123-4757-abd5-7256bc2874e9 for re89714607 & bk69xuabhe6 | mode=chat
+[2026-06-07T06:43:47.461Z] [INFO] Room da22c624-0123-4757-abd5-7256bc2874e9 closed. re89714607 left; bk69xuabhe6 idle.
+[2026-06-07T06:43:49.485Z] [INFO] User left queue: re89714607
+[2026-06-07T06:43:53.654Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T06:44:03.493Z] [WARN] Socket disconnected: _bw9RIe3ZoVrxjvxAAAH
+[2026-06-07T06:44:03.658Z] [INFO] Socket connected: tRq-Ycdjt1ycXtHpAAAL
+[2026-06-07T06:44:03.660Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T06:44:30.576Z] [INFO] Chat request sent: 9ee3a339f6d2 -> 8030f1dfde65
+[2026-06-07T06:44:34.992Z] [INFO] Chat request accepted: 8030f1dfde65 accepted 9ee3a339f6d2
+[2026-06-07T06:44:47.587Z] [INFO] Room 8030f1dfde65_9ee3a339f6d2 closed. re89714607 left; bk69xuabhe6 idle.
+[2026-06-07T06:44:47.590Z] [INFO] User left queue: re89714607
+[2026-06-07T06:44:50.910Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T06:44:52.866Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T06:44:54.735Z] [INFO] User left queue: re89714607
+[2026-06-07T06:47:32.329Z] [INFO] User queued: bk69xuabhe6 | mode=chat
+[2026-06-07T06:47:33.985Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T06:47:57.058Z] [INFO] User queued: re89714607 | mode=video
+[2026-06-07T06:48:00.252Z] [INFO] User left queue: re89714607
+[2026-06-07T06:50:19.392Z] [WARN] Socket disconnected: tRq-Ycdjt1ycXtHpAAAL
+[2026-06-07T06:50:19.543Z] [INFO] Socket connected: dBYMgz1uS-1Gv-qvAAAN
+[2026-06-07T06:50:19.545Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T06:50:20.736Z] [WARN] Socket disconnected: dBYMgz1uS-1Gv-qvAAAN
+[2026-06-07T06:50:20.862Z] [INFO] Socket connected: 0WJ_NZhTbZgphRndAAAP
+[2026-06-07T06:50:20.864Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T06:50:20.899Z] [WARN] Socket disconnected: 0WJ_NZhTbZgphRndAAAP
+[2026-06-07T06:50:21.011Z] [INFO] Socket connected: -8X91GvLP2DFCdGzAAAR
+[2026-06-07T06:50:21.013Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T06:50:21.110Z] [WARN] Socket disconnected: -8X91GvLP2DFCdGzAAAR
+[2026-06-07T06:50:21.223Z] [INFO] Socket connected: _yLgQRyG4RSGPmkJAAAT
+[2026-06-07T06:50:21.225Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T06:50:28.383Z] [INFO] User queued: re89714607 | mode=chat
+[2026-06-07T06:50:34.509Z] [INFO] User queued: bk69xuabhe6 | mode=chat
+[2026-06-07T06:50:34.511Z] [INFO] Room created 5a838183-0b52-4fe3-a8bc-70b4723d2456 for re89714607 & bk69xuabhe6 | mode=chat
+[2026-06-07T06:51:47.600Z] [INFO] Room 5a838183-0b52-4fe3-a8bc-70b4723d2456 closed. bk69xuabhe6 left; re89714607 idle.
+[2026-06-07T06:51:47.602Z] [WARN] Socket disconnected: UwRwyH6nnQvbxrEWAAAJ
+[2026-06-07T06:51:47.604Z] [WARN] Socket disconnected: _yLgQRyG4RSGPmkJAAAT
+[2026-06-07T06:51:50.184Z] [INFO] Socket connected: GgpyIYylI6jsKVsEAAAV
+[2026-06-07T06:51:50.297Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T06:51:50.672Z] [INFO] Socket connected: Ozao2IJbBbvg_70jAAAX
+[2026-06-07T06:51:50.678Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T06:52:50.327Z] [WARN] Socket disconnected: Ozao2IJbBbvg_70jAAAX
+[2026-06-07T06:52:50.778Z] [INFO] Socket connected: j_xazKXUthJPO196AAAZ
+[2026-06-07T06:52:50.788Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T06:52:53.925Z] [WARN] Socket disconnected: j_xazKXUthJPO196AAAZ
+[2026-06-07T06:52:53.927Z] [WARN] Socket disconnected: GgpyIYylI6jsKVsEAAAV
+[2026-06-07T06:52:55.982Z] [INFO] Socket connected: Dzg8aYMO2ZLmzw56AAAb
+[2026-06-07T06:52:55.984Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T06:52:56.166Z] [INFO] Socket connected: T5Fk56RjRwVv__ysAAAd
+[2026-06-07T06:52:56.172Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T06:52:56.208Z] [WARN] Socket disconnected: T5Fk56RjRwVv__ysAAAd
+[2026-06-07T06:52:57.034Z] [INFO] Socket connected: EDBmaLrtJpyycF3CAAAf
+[2026-06-07T06:52:57.051Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T07:15:59.736Z] [WARN] Socket disconnected: EDBmaLrtJpyycF3CAAAf
+[2026-06-07T07:15:59.742Z] [WARN] Socket disconnected: Dzg8aYMO2ZLmzw56AAAb
+[2026-06-07T07:16:02.196Z] [INFO] Socket connected: od0Xe7AvBbJwI64YAAAh
+[2026-06-07T07:16:02.198Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T07:16:02.249Z] [INFO] Socket connected: Qcub25kwM9mJTzDNAAAj
+[2026-06-07T07:16:02.277Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T07:16:02.927Z] [WARN] Socket disconnected: Qcub25kwM9mJTzDNAAAj
+[2026-06-07T07:16:02.929Z] [WARN] Socket disconnected: od0Xe7AvBbJwI64YAAAh
+[2026-06-07T07:16:04.872Z] [INFO] Socket connected: PPd9exiKDL4aoqrhAAAm
+[2026-06-07T07:16:04.873Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T07:16:04.877Z] [INFO] Socket connected: TWeM-Xbl4dHRpWv_AAAn
+[2026-06-07T07:16:04.886Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T07:17:27.269Z] [WARN] Socket disconnected: TWeM-Xbl4dHRpWv_AAAn
+[2026-06-07T07:17:27.272Z] [WARN] Socket disconnected: PPd9exiKDL4aoqrhAAAm
+[2026-06-07T07:17:28.931Z] [INFO] Socket connected: iLmbL36Xm483F7y5AAAp
+[2026-06-07T07:17:28.937Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T07:17:28.941Z] [INFO] Socket connected: MmJisUZ4dJJjebrJAAAr
+[2026-06-07T07:17:28.942Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T07:18:37.336Z] [WARN] Socket disconnected: MmJisUZ4dJJjebrJAAAr
+[2026-06-07T07:18:37.338Z] [WARN] Socket disconnected: iLmbL36Xm483F7y5AAAp
+[2026-06-07T07:18:38.946Z] [INFO] Socket connected: V4Novpzk--zovrzAAAAu
+[2026-06-07T07:18:38.955Z] [INFO] Socket connected: 466VZxZXkGRdSsAHAAAv
+[2026-06-07T07:18:38.956Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T07:18:38.961Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T07:19:45.828Z] [WARN] Socket disconnected: 466VZxZXkGRdSsAHAAAv
+[2026-06-07T07:19:45.829Z] [WARN] Socket disconnected: V4Novpzk--zovrzAAAAu
+[2026-06-07T08:36:28.198Z] [INFO] Socket connected: Yl__yz5gftVNAGE3AAAy
+[2026-06-07T08:36:28.202Z] [INFO] Socket connected: BvquJWdiEdd_-Qo8AAAz
+[2026-06-07T08:36:28.207Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T08:36:28.222Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T08:36:30.985Z] [WARN] Socket disconnected: BvquJWdiEdd_-Qo8AAAz
+[2026-06-07T08:36:30.988Z] [WARN] Socket disconnected: Yl__yz5gftVNAGE3AAAy
+[2026-06-07T09:12:35.443Z] [INFO] Socket connected: ZoDdoq2zScCJQsotAAA2
+[2026-06-07T09:12:36.747Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:12:36.900Z] [INFO] Socket connected: bV4NvqMQMa1kOL0NAAA3
+[2026-06-07T09:12:39.324Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:12:40.219Z] [WARN] Socket disconnected: bV4NvqMQMa1kOL0NAAA3
+[2026-06-07T09:12:40.765Z] [INFO] Socket connected: KZw24_oG32NWXWSpAAA5
+[2026-06-07T09:12:40.767Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:14:47.069Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:14:47.079Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:14:47.112Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T09:14:47.782Z] [INFO] Socket connected: 5fFB0RhLVFDIWpK7AAAB
+[2026-06-07T09:14:47.784Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:14:49.772Z] [INFO] Socket connected: dXRDYtQdv6-Va_d1AAAD
+[2026-06-07T09:14:49.775Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:15:25.779Z] [WARN] Socket disconnected: dXRDYtQdv6-Va_d1AAAD
+[2026-06-07T09:15:25.826Z] [INFO] Socket connected: 5V3JRVWe8ETzd21eAAAF
+[2026-06-07T09:15:25.829Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:15:57.164Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:16:56.408Z] [WARN] SMTP credentials not set. Simulated OTP email sending for: test@example.com
+[2026-06-07T09:22:55.385Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:22:55.490Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T09:22:55.625Z] [INFO] Socket connected: BANq234dwE7047vlAAAB
+[2026-06-07T09:22:55.637Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:22:55.698Z] [INFO] Socket connected: Htb2dI0JVmcjJ8MtAAAD
+[2026-06-07T09:22:55.711Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:22:55.858Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:23:05.226Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:23:05.305Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T09:23:05.632Z] [INFO] Socket connected: mDCJ1UqOrA14drPuAAAB
+[2026-06-07T09:23:05.640Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:23:05.659Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:23:05.685Z] [INFO] Socket connected: 9_-w-0JIKsJZ_tCUAAAD
+[2026-06-07T09:23:05.698Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:23:21.166Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:23:21.290Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T09:23:21.836Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:23:22.785Z] [INFO] Socket connected: DxJm3mzX1Xi8EYO1AAAB
+[2026-06-07T09:23:22.792Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:23:23.783Z] [INFO] Socket connected: S7RufKcaRmuzTTbRAAAD
+[2026-06-07T09:23:23.814Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:24:31.777Z] [WARN] Socket disconnected: S7RufKcaRmuzTTbRAAAD
+[2026-06-07T09:24:31.791Z] [INFO] Socket connected: ZDjB7MyHoaRvOKiyAAAF
+[2026-06-07T09:24:31.793Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:26:04.766Z] [WARN] Socket disconnected: ZDjB7MyHoaRvOKiyAAAF
+[2026-06-07T09:26:04.782Z] [INFO] Socket connected: 7x3RMmx09Xjt5_oAAAAH
+[2026-06-07T09:26:04.790Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:26:23.922Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:26:23.947Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:26:24.080Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T09:26:24.808Z] [INFO] Socket connected: cUEV65hhL0OzlS4NAAAB
+[2026-06-07T09:26:24.823Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:26:25.779Z] [INFO] Socket connected: jnNazhAsG5LluawCAAAD
+[2026-06-07T09:26:25.782Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:29:56.023Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:30:47.972Z] [INFO] Socket connected: -S6yTjrta-dxR-_yAAAF
+[2026-06-07T09:30:47.984Z] [INFO] User registered: sessionId=s6kwc4gd0ta, handle=f8c094df49dd
+[2026-06-07T09:31:59.411Z] [WARN] Socket disconnected: -S6yTjrta-dxR-_yAAAF
+[2026-06-07T09:33:03.406Z] [WARN] Socket disconnected: cUEV65hhL0OzlS4NAAAB
+[2026-06-07T09:33:04.070Z] [INFO] Socket connected: dTi-gWBmQZvMX87VAAAH
+[2026-06-07T09:33:04.078Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:33:13.111Z] [WARN] Socket disconnected: dTi-gWBmQZvMX87VAAAH
+[2026-06-07T09:33:14.345Z] [INFO] Socket connected: 9y44RxoYV8SPQaHdAAAJ
+[2026-06-07T09:33:14.369Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:33:27.700Z] [WARN] Socket disconnected: 9y44RxoYV8SPQaHdAAAJ
+[2026-06-07T09:35:16.937Z] [WARN] SMTP credentials not set. Simulated OTP email sending for: test@example.com
+[2026-06-07T09:35:42.480Z] [INFO] Socket connected: jwdsSXaoe-OinEVhAAAL
+[2026-06-07T09:35:42.495Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:35:43.649Z] [WARN] Socket disconnected: jwdsSXaoe-OinEVhAAAL
+[2026-06-07T09:35:47.776Z] [INFO] Socket connected: quqbJLs0DvhIseVgAAAN
+[2026-06-07T09:35:47.783Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:35:53.150Z] [WARN] Socket disconnected: jnNazhAsG5LluawCAAAD
+[2026-06-07T09:35:54.775Z] [INFO] Socket connected: v3Xnmd2MeWNbk6_mAAAP
+[2026-06-07T09:35:54.784Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:36:01.575Z] [INFO] User queued: re89714607 | mode=video
+[2026-06-07T09:36:10.694Z] [INFO] User queued: bk69xuabhe6 | mode=video
+[2026-06-07T09:36:10.705Z] [INFO] Room created 1ea19e02-ec25-4157-8ca3-29d759013ca0 for bk69xuabhe6 & re89714607 | mode=video
+[2026-06-07T09:38:45.667Z] [INFO] Room 1ea19e02-ec25-4157-8ca3-29d759013ca0 closed. re89714607 left; bk69xuabhe6 idle.
+[2026-06-07T09:40:30.743Z] [INFO] User left queue: re89714607
+[2026-06-07T09:41:24.439Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T09:44:59.771Z] [WARN] Socket disconnected: quqbJLs0DvhIseVgAAAN
+[2026-06-07T09:44:59.772Z] [WARN] Socket disconnected: v3Xnmd2MeWNbk6_mAAAP
+[2026-06-07T09:44:59.784Z] [INFO] Socket connected: tqvcWfrun3nQLZepAAAR
+[2026-06-07T09:44:59.787Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:44:59.811Z] [INFO] Socket connected: I-pPpH0Y7ochBjYkAAAT
+[2026-06-07T09:44:59.815Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:46:57.861Z] [INFO] Socket connected: zTCrjP5rH31haH5LAAAV
+[2026-06-07T09:46:57.863Z] [INFO] User registered: sessionId=s6kwc4gd0ta, handle=f8c094df49dd
+[2026-06-07T09:47:21.182Z] [INFO] User queued: s6kwc4gd0ta | mode=video
+[2026-06-07T09:47:56.605Z] [WARN] Socket disconnected: I-pPpH0Y7ochBjYkAAAT
+[2026-06-07T09:47:57.786Z] [INFO] Socket connected: aHDd4QWdPgLIqXZKAAAX
+[2026-06-07T09:47:57.794Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:47:58.377Z] [WARN] Socket disconnected: zTCrjP5rH31haH5LAAAV
+[2026-06-07T09:48:00.771Z] [INFO] User queued: bk69xuabhe6 | mode=video
+[2026-06-07T09:49:09.037Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T09:49:38.800Z] [INFO] User queued: re89714607 | mode=video
+[2026-06-07T09:50:24.739Z] [INFO] User left queue: re89714607
+[2026-06-07T09:50:29.327Z] [INFO] User queued: bk69xuabhe6 | mode=chat
+[2026-06-07T09:50:31.961Z] [INFO] User queued: re89714607 | mode=chat
+[2026-06-07T09:50:31.965Z] [INFO] Room created 8ee79705-01b6-4230-bb78-1f221f4c265f for bk69xuabhe6 & re89714607 | mode=chat
+[2026-06-07T09:51:44.809Z] [INFO] Room 8ee79705-01b6-4230-bb78-1f221f4c265f closed. bk69xuabhe6 left; re89714607 idle.
+[2026-06-07T09:51:46.314Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T09:51:52.341Z] [INFO] User left queue: re89714607
+[2026-06-07T09:51:58.849Z] [INFO] Chat request sent: 8030f1dfde65 -> 9ee3a339f6d2
+[2026-06-07T09:52:04.742Z] [INFO] Chat request accepted: 9ee3a339f6d2 accepted 8030f1dfde65
+[2026-06-07T09:52:25.742Z] [INFO] Friend video request sent from 8030f1dfde65 to 9ee3a339f6d2
+[2026-06-07T09:52:25.750Z] [INFO] Friend video request declined by 9ee3a339f6d2 for 8030f1dfde65
+[2026-06-07T09:52:32.564Z] [INFO] Friend video request sent from 9ee3a339f6d2 to 8030f1dfde65
+[2026-06-07T09:52:32.571Z] [INFO] Friend video request declined by 8030f1dfde65 for 9ee3a339f6d2
+[2026-06-07T09:52:36.372Z] [INFO] Friend video request sent from 9ee3a339f6d2 to 8030f1dfde65
+[2026-06-07T09:52:36.380Z] [INFO] Friend video request declined by 8030f1dfde65 for 9ee3a339f6d2
+[2026-06-07T09:53:07.829Z] [INFO] Room 8030f1dfde65_9ee3a339f6d2 closed. re89714607 left; bk69xuabhe6 idle.
+[2026-06-07T09:53:07.831Z] [WARN] Socket disconnected: tqvcWfrun3nQLZepAAAR
+[2026-06-07T09:53:08.356Z] [INFO] Socket connected: JhEhGhotb-7s4UONAAAZ
+[2026-06-07T09:53:08.361Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:53:09.609Z] [WARN] Socket disconnected: aHDd4QWdPgLIqXZKAAAX
+[2026-06-07T09:53:09.994Z] [INFO] Socket connected: BH9DWUu4tu2dTI7lAAAb
+[2026-06-07T09:53:09.997Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:54:07.662Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:54:07.671Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:54:07.703Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T09:54:07.811Z] [INFO] Socket connected: VRpFTunxdffF-yJaAAAC
+[2026-06-07T09:54:07.814Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:54:07.823Z] [INFO] Socket connected: -0K6GDtIVe-WXUWnAAAD
+[2026-06-07T09:54:07.829Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:54:22.276Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:55:55.387Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:55:55.424Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T09:55:55.559Z] [INFO] Socket connected: MBy6AIb1xFmTonOtAAAB
+[2026-06-07T09:55:55.562Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T09:55:55.622Z] [INFO] MongoDB connected successfully
+[2026-06-07T09:55:55.867Z] [INFO] Socket connected: uXjEta9m_-QuavGkAAAD
+[2026-06-07T09:55:55.869Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T09:57:02.013Z] [INFO] Chat request sent: 8030f1dfde65 -> 9ee3a339f6d2
+[2026-06-07T09:57:05.284Z] [INFO] Chat request accepted: 9ee3a339f6d2 accepted 8030f1dfde65
+[2026-06-07T09:57:14.575Z] [INFO] Friend video request sent from 8030f1dfde65 to 9ee3a339f6d2
+[2026-06-07T09:57:14.580Z] [INFO] Friend video request declined by 9ee3a339f6d2 for 8030f1dfde65
+[2026-06-07T10:00:41.162Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:00:41.352Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T10:00:41.862Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:00:42.789Z] [INFO] Socket connected: UjBq24GPD2iytqZMAAAB
+[2026-06-07T10:00:42.800Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:00:43.772Z] [INFO] Socket connected: SsM-oN6JVhbptfNEAAAD
+[2026-06-07T10:00:43.797Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:00:49.174Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:00:49.263Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T10:00:49.329Z] [INFO] Socket connected: 1vp3kopuFaB6g-4DAAAB
+[2026-06-07T10:00:49.336Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:00:49.616Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:00:52.778Z] [INFO] Socket connected: CYqJjBR_OboWJ_tPAAAD
+[2026-06-07T10:00:52.790Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:00:59.261Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:00:59.352Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T10:00:59.635Z] [INFO] Socket connected: qky8s6Vfnf6rEIXKAAAB
+[2026-06-07T10:00:59.641Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:00:59.673Z] [INFO] Socket connected: Des_wC1jkcLeVWaZAAAD
+[2026-06-07T10:00:59.720Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:00:59.821Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:01:05.924Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:01:06.058Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T10:01:06.181Z] [INFO] Socket connected: scbyln0zi4bhIK3_AAAC
+[2026-06-07T10:01:06.192Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:01:06.216Z] [INFO] Socket connected: JTsdIUUleLKHgPVFAAAD
+[2026-06-07T10:01:06.219Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:01:06.685Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:01:14.881Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:01:15.024Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T10:01:15.150Z] [INFO] Socket connected: _P-pgY35IpfMvhuDAAAC
+[2026-06-07T10:01:15.176Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:01:15.199Z] [INFO] Socket connected: W6PGHh5T-8IZIWG7AAAD
+[2026-06-07T10:01:15.227Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:01:15.756Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:01:21.823Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:01:21.912Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T10:01:22.110Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:01:22.123Z] [INFO] Socket connected: hkQ31qzgURk5iMzFAAAC
+[2026-06-07T10:01:22.128Z] [INFO] Socket connected: P4YdJuR9Sdh9xdUvAAAD
+[2026-06-07T10:01:22.137Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:01:22.148Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:01:29.194Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:01:29.333Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T10:01:29.664Z] [INFO] Socket connected: AXsXPkiBJvMziP6LAAAB
+[2026-06-07T10:01:29.672Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:01:29.724Z] [INFO] Socket connected: ZqZjvWpC8eeYeDI7AAAD
+[2026-06-07T10:01:29.729Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:01:29.858Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:01:47.090Z] [WARN] Socket disconnected: AXsXPkiBJvMziP6LAAAB
+[2026-06-07T10:01:47.114Z] [WARN] Socket disconnected: ZqZjvWpC8eeYeDI7AAAD
+[2026-06-07T10:01:49.501Z] [INFO] Socket connected: fcXROoiVkfTAb-GfAAAG
+[2026-06-07T10:01:49.608Z] [INFO] Socket connected: kornhiHRaA8k0yBeAAAH
+[2026-06-07T10:01:49.628Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:01:49.652Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:02:19.807Z] [WARN] Socket disconnected: fcXROoiVkfTAb-GfAAAG
+[2026-06-07T10:02:19.841Z] [WARN] Socket disconnected: kornhiHRaA8k0yBeAAAH
+[2026-06-07T10:02:19.850Z] [INFO] Socket connected: EbvWrgSF7kRhxlIiAAAJ
+[2026-06-07T10:02:19.858Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:02:19.940Z] [INFO] Socket connected: Lm5-Uf_Q-XqRJFNcAAAL
+[2026-06-07T10:02:19.949Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:02:28.771Z] [WARN] Socket disconnected: Lm5-Uf_Q-XqRJFNcAAAL
+[2026-06-07T10:02:28.787Z] [WARN] Socket disconnected: EbvWrgSF7kRhxlIiAAAJ
+[2026-06-07T10:02:28.789Z] [INFO] Socket connected: 1e_ZQdU6Iu2CPORvAAAN
+[2026-06-07T10:02:28.797Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:02:28.834Z] [INFO] Socket connected: Sx4syreZaf-Hf3brAAAP
+[2026-06-07T10:02:28.845Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:02:47.770Z] [WARN] Socket disconnected: 1e_ZQdU6Iu2CPORvAAAN
+[2026-06-07T10:02:47.773Z] [WARN] Socket disconnected: Sx4syreZaf-Hf3brAAAP
+[2026-06-07T10:02:47.792Z] [INFO] Socket connected: ruzzONntWUIMprQNAAAS
+[2026-06-07T10:02:47.797Z] [INFO] Socket connected: yiP7gb1mQG3bL8wsAAAT
+[2026-06-07T10:02:47.801Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:02:47.807Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:03:15.268Z] [INFO] User queued: re89714607 | mode=chat
+[2026-06-07T10:03:16.826Z] [INFO] User queued: bk69xuabhe6 | mode=chat
+[2026-06-07T10:03:16.836Z] [INFO] Room created 2af9a76b-cfef-40e5-9fe8-dfdab03cbc54 for re89714607 & bk69xuabhe6 | mode=chat
+[2026-06-07T10:03:21.250Z] [INFO] Room 2af9a76b-cfef-40e5-9fe8-dfdab03cbc54 closed. bk69xuabhe6 left; re89714607 idle.
+[2026-06-07T10:03:23.177Z] [INFO] Room created 8e673e98-5e56-4b9e-b7d0-7b920f286bdc for bk69xuabhe6 & re89714607 | mode=chat
+[2026-06-07T10:03:24.584Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=chat | lat=18.5044, lng=73.9136
+[2026-06-07T10:03:24.591Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=chat | lat=18.5044, lng=73.9136
+[2026-06-07T10:03:24.599Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=chat | lat=18.5044, lng=73.9136
+[2026-06-07T10:03:24.606Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=chat | lat=18.5044, lng=73.9136
+[2026-06-07T10:03:25.645Z] [INFO] Room 8e673e98-5e56-4b9e-b7d0-7b920f286bdc closed. re89714607 left; bk69xuabhe6 idle.
+[2026-06-07T10:03:27.589Z] [INFO] User left queue: re89714607
+[2026-06-07T10:03:31.324Z] [INFO] User left queue: bk69xuabhe6
+[2026-06-07T10:03:31.959Z] [WARN] Socket disconnected: yiP7gb1mQG3bL8wsAAAT
+[2026-06-07T10:03:31.977Z] [WARN] Socket disconnected: ruzzONntWUIMprQNAAAS
+[2026-06-07T10:03:32.023Z] [INFO] Socket connected: 66U_IZB56OJz-OJmAAAW
+[2026-06-07T10:03:32.032Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:03:32.072Z] [INFO] Socket connected: 4d-bpTbyWOpY-11kAAAX
+[2026-06-07T10:03:32.086Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:03:37.992Z] [INFO] Chat request sent: 9ee3a339f6d2 -> 8030f1dfde65
+[2026-06-07T10:03:40.768Z] [INFO] Chat request accepted: 8030f1dfde65 accepted 9ee3a339f6d2
+[2026-06-07T10:03:41.380Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=chat | lat=18.4503885, lng=73.8004075
+[2026-06-07T10:03:41.390Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=chat | lat=18.4503885, lng=73.8004075
+[2026-06-07T10:03:45.936Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=video | lat=18.4503885, lng=73.8004075
+[2026-06-07T10:03:45.952Z] [INFO] Friend video request sent from 8030f1dfde65 to 9ee3a339f6d2
+[2026-06-07T10:03:50.318Z] [INFO] Room 8030f1dfde65_9ee3a339f6d2 closed. bk69xuabhe6 left; re89714607 idle.
+[2026-06-07T10:03:50.319Z] [WARN] Socket disconnected: 66U_IZB56OJz-OJmAAAW
+[2026-06-07T10:03:50.324Z] [WARN] Socket disconnected: 4d-bpTbyWOpY-11kAAAX
+[2026-06-07T10:03:50.353Z] [INFO] Socket connected: a2qBSvZJaPlTKEq4AAAa
+[2026-06-07T10:03:50.359Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:03:50.386Z] [INFO] Socket connected: 6b7GHyQaSSqtjzNtAAAb
+[2026-06-07T10:03:50.419Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:03:55.028Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=video | lat=18.4503885, lng=73.8004075
+[2026-06-07T10:03:55.034Z] [INFO] Friend video request sent from 8030f1dfde65 to 9ee3a339f6d2
+[2026-06-07T10:04:05.460Z] [INFO] Friend video request declined by 9ee3a339f6d2 for 8030f1dfde65
+[2026-06-07T10:04:09.303Z] [WARN] Socket disconnected: 6b7GHyQaSSqtjzNtAAAb
+[2026-06-07T10:04:09.336Z] [WARN] Socket disconnected: a2qBSvZJaPlTKEq4AAAa
+[2026-06-07T10:04:09.376Z] [INFO] Socket connected: YXYL83dOx3ea0nUzAAAe
+[2026-06-07T10:04:09.385Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:04:09.418Z] [INFO] Socket connected: GCSZP6YPDcxHEgCiAAAf
+[2026-06-07T10:04:09.434Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:04:12.978Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=video | lat=18.5044, lng=73.9136
+[2026-06-07T10:04:12.988Z] [INFO] Friend video request sent from 9ee3a339f6d2 to 8030f1dfde65
+[2026-06-07T10:04:12.992Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=video | lat=18.5044, lng=73.9136
+[2026-06-07T10:04:13.000Z] [INFO] Friend video request sent from 9ee3a339f6d2 to 8030f1dfde65
+[2026-06-07T10:04:13.009Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=video | lat=18.5044, lng=73.9136
+[2026-06-07T10:04:13.016Z] [INFO] Friend video request sent from 9ee3a339f6d2 to 8030f1dfde65
+[2026-06-07T10:04:27.701Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=video | lat=18.4503885, lng=73.8004075
+[2026-06-07T10:04:27.738Z] [ERROR] friend-video-request-response failed: getRoom is not defined
+[2026-06-07T10:04:54.994Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=video | lat=18.5044, lng=73.9136
+[2026-06-07T10:04:55.005Z] [INFO] Friend video request sent from 8030f1dfde65 to 9ee3a339f6d2
+[2026-06-07T10:04:55.757Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=video | lat=18.45044259446741, lng=73.80061508202131
+[2026-06-07T10:04:55.762Z] [INFO] Friend video request sent from 8030f1dfde65 to 9ee3a339f6d2
+[2026-06-07T10:04:59.077Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=video | lat=18.45044259446741, lng=73.80061508202131
+[2026-06-07T10:04:59.207Z] [ERROR] friend-video-request-response failed: getRoom is not defined
+[2026-06-07T10:08:09.936Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:08:10.070Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T10:08:10.594Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:08:10.820Z] [INFO] Socket connected: JJcCyDMraMPoUGAfAAAB
+[2026-06-07T10:08:10.827Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:08:11.776Z] [INFO] Socket connected: IIQr1y9kUExlBUN9AAAD
+[2026-06-07T10:08:11.778Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:08:28.766Z] [WARN] Socket disconnected: JJcCyDMraMPoUGAfAAAB
+[2026-06-07T10:08:28.771Z] [WARN] Socket disconnected: IIQr1y9kUExlBUN9AAAD
+[2026-06-07T10:08:28.781Z] [INFO] Socket connected: H3uCZNhckjvwYJHSAAAG
+[2026-06-07T10:08:28.783Z] [INFO] Socket connected: 10AyB-AafHpNiptPAAAH
+[2026-06-07T10:08:28.785Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:08:28.789Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:09:52.762Z] [WARN] Socket disconnected: H3uCZNhckjvwYJHSAAAG
+[2026-06-07T10:09:52.764Z] [WARN] Socket disconnected: 10AyB-AafHpNiptPAAAH
+[2026-06-07T10:09:52.773Z] [INFO] Socket connected: kEW49TzqpDmPI69NAAAK
+[2026-06-07T10:09:52.775Z] [INFO] Socket connected: H2S6AAX_Qz2LnPgVAAAL
+[2026-06-07T10:09:52.777Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:09:52.781Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:10:11.767Z] [WARN] Socket disconnected: H2S6AAX_Qz2LnPgVAAAL
+[2026-06-07T10:10:11.769Z] [WARN] Socket disconnected: kEW49TzqpDmPI69NAAAK
+[2026-06-07T10:10:11.779Z] [INFO] Socket connected: nrHoSU2SCTKB_04wAAAO
+[2026-06-07T10:10:11.781Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:10:11.784Z] [INFO] Socket connected: ydRHol-_JHA1hV_mAAAP
+[2026-06-07T10:10:11.786Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:11:11.764Z] [WARN] Socket disconnected: nrHoSU2SCTKB_04wAAAO
+[2026-06-07T10:11:12.807Z] [INFO] Socket connected: gfkAevd2pZ6avhTgAAAR
+[2026-06-07T10:11:12.811Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:11:16.090Z] [WARN] Socket disconnected: ydRHol-_JHA1hV_mAAAP
+[2026-06-07T10:11:16.667Z] [INFO] Socket connected: YPcc9UNiSfGShZKKAAAT
+[2026-06-07T10:11:16.670Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:11:21.917Z] [INFO] Chat request sent: 8030f1dfde65 -> 9ee3a339f6d2
+[2026-06-07T10:11:24.162Z] [INFO] Chat request accepted: 9ee3a339f6d2 accepted 8030f1dfde65
+[2026-06-07T10:11:30.965Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=chat | lat=18.4503885, lng=73.8004075
+[2026-06-07T10:11:30.969Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=video | lat=18.4503885, lng=73.8004075
+[2026-06-07T10:11:30.972Z] [INFO] Friend video request sent from 8030f1dfde65 to 9ee3a339f6d2
+[2026-06-07T10:11:33.914Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=video | lat=18.4503885, lng=73.8004075
+[2026-06-07T10:11:33.925Z] [ERROR] friend-video-request-response failed: getRoom is not defined
+[2026-06-07T10:11:50.079Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=video | lat=18.4503885, lng=73.8004075
+[2026-06-07T10:11:50.083Z] [INFO] Friend video request sent from 9ee3a339f6d2 to 8030f1dfde65
+[2026-06-07T10:11:50.086Z] [INFO] Friend video request declined by 8030f1dfde65 for 9ee3a339f6d2
+[2026-06-07T10:12:26.648Z] [INFO] Room 8030f1dfde65_9ee3a339f6d2 closed. bk69xuabhe6 left; re89714607 idle.
+[2026-06-07T10:12:26.650Z] [WARN] Socket disconnected: YPcc9UNiSfGShZKKAAAT
+[2026-06-07T10:12:51.538Z] [WARN] SMTP credentials not set. Simulated OTP email sending for: test@example.com
+[2026-06-07T10:13:41.145Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:13:41.187Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T10:13:41.443Z] [INFO] MongoDB connected successfully
+[2026-06-07T10:13:41.786Z] [INFO] Socket connected: vmOPyCO4uvxXG_MYAAAB
+[2026-06-07T10:13:41.790Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:15:25.501Z] [WARN] Socket disconnected: vmOPyCO4uvxXG_MYAAAB
+[2026-06-07T10:15:25.685Z] [INFO] Socket connected: pVFssKT4IhbgL5LZAAAD
+[2026-06-07T10:15:25.688Z] [INFO] User registered: sessionId=re89714607, handle=8030f1dfde65
+[2026-06-07T10:15:32.348Z] [INFO] Socket connected: 8dlbWVGTmerozXOvAAAF
+[2026-06-07T10:15:32.352Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:15:32.625Z] [WARN] Socket disconnected: 8dlbWVGTmerozXOvAAAF
+[2026-06-07T10:15:32.905Z] [INFO] Socket connected: xsTd-q_ZYmfIa4RiAAAH
+[2026-06-07T10:15:32.911Z] [INFO] User registered: sessionId=bk69xuabhe6, handle=9ee3a339f6d2
+[2026-06-07T10:15:38.893Z] [INFO] Chat request sent: 8030f1dfde65 -> 9ee3a339f6d2
+[2026-06-07T10:15:42.998Z] [INFO] Chat request accepted: 9ee3a339f6d2 accepted 8030f1dfde65
+[2026-06-07T10:15:50.269Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=chat | lat=18.5044, lng=73.9136
+[2026-06-07T10:15:50.274Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=video | lat=18.5044, lng=73.9136
+[2026-06-07T10:15:50.278Z] [INFO] Friend video request sent from 8030f1dfde65 to 9ee3a339f6d2
+[2026-06-07T10:15:51.077Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=chat | lat=18.450403013149796, lng=73.80038770934121
+[2026-06-07T10:15:52.998Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=video | lat=18.450403013149796, lng=73.80038770934121
+[2026-06-07T10:15:53.027Z] [INFO] Upgraded friend room 8030f1dfde65_9ee3a339f6d2 to video mode
+[2026-06-07T10:15:53.165Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=video | lat=18.450403013149796, lng=73.80038770934121
+[2026-06-07T10:15:53.169Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=video | lat=18.450403013149796, lng=73.80038770934121
+[2026-06-07T10:16:28.341Z] [INFO] Friend video call cancelled in room 8030f1dfde65_9ee3a339f6d2
+[2026-06-07T10:16:41.743Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=video | lat=18.450403013149796, lng=73.80038770934121
+[2026-06-07T10:16:41.744Z] [INFO] Friend video request sent from 9ee3a339f6d2 to 8030f1dfde65
+[2026-06-07T10:16:46.659Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=video | lat=18.450403013149796, lng=73.80038770934121
+[2026-06-07T10:16:46.684Z] [INFO] Upgraded friend room 8030f1dfde65_9ee3a339f6d2 to video mode
+[2026-06-07T10:16:46.771Z] [INFO] Recorded location history for handle=8030f1dfde65 | mode=video | lat=18.450403013149796, lng=73.80038770934121
+[2026-06-07T10:16:46.773Z] [INFO] Recorded location history for handle=9ee3a339f6d2 | mode=video | lat=18.450403013149796, lng=73.80038770934121
+[2026-06-07T10:20:43.046Z] [INFO] Friend video call cancelled in room 8030f1dfde65_9ee3a339f6d2

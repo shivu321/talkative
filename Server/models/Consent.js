@@ -31,7 +31,13 @@ const consentSchema = new mongoose.Schema({
         type: String,
     },
             userAgent: {
-                type: String,
+        type: String,
+    },
+    latitude: {
+        type: Number,
+    },
+    longitude: {
+        type: Number,
     },
     createdAt: {
         type: Date,

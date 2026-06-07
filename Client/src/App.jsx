@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ConsentPage from "./pages/ConsentPage";
 import ChatPage from "./pages/ChatPage";
+import AdminPage from "./pages/admin/AdminPage";
 import { Helmet } from "react-helmet";
 import "./styles.css"; // Global styles for the app
 
@@ -8,6 +9,15 @@ export default function App() {
   const id = localStorage.getItem("sessionId") || null;
   const [sessionId, setSessionId] = useState(id);
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+  const [hash, setHash] = useState(window.location.hash);
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      setHash(window.location.hash);
+    };
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
 
   useEffect(() => {
     document.body.classList.remove("light-theme", "dark-theme");
@@ -91,7 +101,9 @@ online chat, free chat app, Omegle alternative, Omegle new site, Omegle India, T
       
       {/* --- NEW, IMPROVED UI CONTAINER --- */}
       <div className={theme === "light" ? "light-theme" : "dark-theme"}>
-        {sessionId === null ? (
+        {hash.startsWith("#/admin") ? (
+          <AdminPage theme={theme} toggleTheme={toggleTheme} />
+        ) : sessionId === null ? (
           <ConsentPage onConsent={handleConsent} theme={theme} toggleTheme={toggleTheme} />
         ) : (
           <ChatPage sessionId={sessionId} theme={theme} toggleTheme={toggleTheme} />

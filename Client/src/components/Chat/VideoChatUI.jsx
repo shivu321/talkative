@@ -6,6 +6,7 @@ export default function VideoChatUI({
   remoteStream,
   videoError,
   partnerPresent,
+  partnerName = "Stranger",
 }) {
   const localMainRef = useRef(null);
   const localPreviewRef = useRef(null);
@@ -13,6 +14,16 @@ export default function VideoChatUI({
   const remotePreviewRef = useRef(null);
 
   const [isLocalMain, setIsLocalMain] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+
+  const toggleMute = () => {
+    if (localStream) {
+      localStream.getAudioTracks().forEach((track) => {
+        track.enabled = !track.enabled;
+      });
+      setIsMuted((prev) => !prev);
+    }
+  };
 
   // Attach LOCAL stream
   useEffect(() => {
@@ -26,12 +37,16 @@ export default function VideoChatUI({
 
   // Attach REMOTE stream
   useEffect(() => {
-    [remoteMainRef.current, remotePreviewRef.current].forEach((el) => {
-      if (!el) return;
-      el.srcObject = remoteStream || null;
-      el.muted = false; // remote should always have audio
-      el.play?.().catch(() => {});
-    });
+    if (remoteMainRef.current) {
+      remoteMainRef.current.srcObject = remoteStream || null;
+      remoteMainRef.current.muted = false; // Main plays sound
+      remoteMainRef.current.play?.().catch(() => {});
+    }
+    if (remotePreviewRef.current) {
+      remotePreviewRef.current.srcObject = remoteStream || null;
+      remotePreviewRef.current.muted = true; // Mute preview to prevent echo
+      remotePreviewRef.current.play?.().catch(() => {});
+    }
   }, [remoteStream]);
 
   return (
@@ -70,7 +85,7 @@ export default function VideoChatUI({
         <div className="position-absolute top-0 start-0 m-3 d-flex gap-2" style={{ zIndex: 5 }}>
           <span className="badge bg-dark bg-opacity-75 px-3 py-2 border border-secondary border-opacity-50 text-white rounded-pill small">
             <i className={`bi bi-person-fill me-1 ${isLocalMain ? "text-primary" : "text-danger"}`}></i>
-            {isLocalMain ? "You (Main)" : "Stranger"}
+            {isLocalMain ? "You (Main)" : partnerName}
           </span>
           {partnerPresent && (
             <span className="badge bg-success bg-opacity-75 px-3 py-2 border border-success border-opacity-50 text-white rounded-pill small">
@@ -106,6 +121,7 @@ export default function VideoChatUI({
             ref={remotePreviewRef}
             autoPlay
             playsInline
+            muted
             className={`w-100 h-100 ${isLocalMain ? "" : "d-none"}`}
             style={{ objectFit: "cover" }}
           />
@@ -118,8 +134,29 @@ export default function VideoChatUI({
             style={{ objectFit: "cover" }}
           />
           <div className="position-absolute bottom-0 start-0 m-1 bg-black bg-opacity-65 text-white px-2 py-0.5 rounded-pill" style={{ fontSize: "10px" }}>
-            {isLocalMain ? "Stranger" : "You"}
+            {isLocalMain ? partnerName : "You"}
           </div>
+        </div>
+
+        {/* Controls Overlay (Bottom Left) */}
+        <div className="position-absolute" style={{ bottom: "1rem", left: "1rem", zIndex: 10 }}>
+          <button
+            onClick={toggleMute}
+            className="btn rounded-circle d-flex align-items-center justify-content-center border-0 shadow-lg"
+            style={{
+              width: "48px",
+              height: "48px",
+              background: isMuted ? "rgba(220, 53, 69, 0.85)" : "rgba(255, 255, 255, 0.15)",
+              border: "1px solid rgba(255, 255, 255, 0.25)",
+              color: "#fff",
+              backdropFilter: "blur(5px)",
+              transition: "all 0.2s",
+            }}
+            type="button"
+            title={isMuted ? "Unmute Microphone" : "Mute Microphone"}
+          >
+            <i className={`bi ${isMuted ? "bi-mic-mute-fill text-danger" : "bi-mic-fill"}`} style={{ fontSize: "1.3rem" }} />
+          </button>
         </div>
 
         {/* Waiting / Connection overlay */}

@@ -14,6 +14,7 @@ import logger from "../../logger.js";
 import Friendship from "../../models/Friendship.js";
 import Consent from "../../models/Consent.js";
 import Message from "../../models/Message.js";
+import ConnectionHistory from "../../models/ConnectionHistory.js";
 import {
   activeUsers,
   handleToSessionId,
@@ -21,6 +22,7 @@ import {
   stripPrefix,
   setActiveUser,
   setRoom,
+  getRoom,
   checkCooldown,
   setCooldown,
   pairKey,
@@ -200,8 +202,7 @@ async function sendChatRequest(socket, myHandle, friendId) {
     return;
   }
 
-  // Start cooldown and notify both parties
-  setCooldown(key);
+  // Notify both parties without starting cooldown immediately
   friendEntry.socket.emit("friend-chat-incoming-request", { fromHandle: myHandle });
   socket.emit("friend-chat-request-sent", { toHandle: targetHandle });
   logger.info(`Chat request sent: ${myHandle} -> ${targetHandle}`);
@@ -221,12 +222,16 @@ async function respondToChatRequest(socket, mySid, myHandle, fromHandle, accepte
   const requesterEntry = getOnlineFriendEntry(targetHandle);
 
   if (!accepted) {
+    // Cooldown is activated ONLY when declined (disallowed)
+    const key = pairKey(myHandle, targetHandle);
+    setCooldown(key);
+
     requesterEntry?.socket.emit("friend-chat-request-declined", {
       friendId: myHandle,
       reason: "declined",
       message: "Your chat request was declined.",
     });
-    logger.info(`Chat request declined: ${myHandle} declined ${targetHandle}`);
+    logger.info(`Chat request declined: ${myHandle} declined ${targetHandle}. Cooldown activated.`);
     return;
   }
 
@@ -323,6 +328,70 @@ async function initFriendChat(socket, sid, myHandle, friendId) {
   }
 }
 
+
+// ─── Location saving helper ───────────────────────────────────────────────────
+
+async function saveUserLocation(sessionId, latitude, longitude, mode) {
+  if (latitude !== undefined && longitude !== undefined) {
+    await Consent.findOneAndUpdate({ sessionId }, { latitude, longitude });
+    const handle = getHandle(sessionId);
+    const activeUser = activeUsers.get(sessionId);
+    const ip = activeUser?.socket?.handshake?.address || "";
+    await ConnectionHistory.create({
+      sessionId,
+      handle,
+      mode,
+      latitude,
+      longitude,
+      ip,
+    });
+    logger.info(`Recorded location history for handle=${handle} | mode=${mode} | lat=${latitude}, lng=${longitude}`);
+  }
+}
+
+// ─── Upgrade friend chat to video helper ───────────────────────────────────────
+
+async function upgradeFriendChatToVideo(socketA, sidA, handleA, socketB, sidB, handleB, roomId) {
+  const [genderA, genderB] = await Promise.all([
+    getGenderForHandle(handleA),
+    getGenderForHandle(handleB),
+  ]);
+
+  // Update room mode
+  const room = getRoom(roomId);
+  if (room) {
+    room.mode = "video";
+  }
+
+  const stateA = activeUsers.get(sidA) || {};
+  const stateB = activeUsers.get(sidB) || {};
+  setActiveUser(sidA, { ...stateA, mode: "video" });
+  setActiveUser(sidB, { ...stateB, mode: "video" });
+
+  // Load chat history
+  const chatLogs = await fetchChatHistory(handleA, handleB);
+  const logsForA = formatLogsFor(chatLogs, handleA);
+  const logsForB = formatLogsFor(chatLogs, handleB);
+
+  // Emit matched with mode "video" to both to initiate WebRTC call
+  socketA.emit("matched", {
+    roomId,
+    partnerId: handleB,
+    mode: "video",
+    messages: logsForA,
+    isFriendChat: true,
+    partnerGender: genderB,
+  });
+  socketB.emit("matched", {
+    roomId,
+    partnerId: handleA,
+    mode: "video",
+    messages: logsForB,
+    isFriendChat: true,
+    partnerGender: genderA,
+  });
+}
+
 // ─── Attach handlers ──────────────────────────────────────────────────────────
 
 /**
@@ -361,5 +430,82 @@ export function attachFriendChatHandlers(socket, ensureRegistered) {
     } catch (e) {
       logger.error("Friend chat init failed: " + e.message);
     }
+  });
+
+  // ── Friend Video Chat switch events ──────────────────────────────────────────
+
+  socket.on("friend-video-request", async ({ friendId, lat, lng }) => {
+    if (!ensureRegistered()) return;
+    const myHandle = getHandle(socket.sessionId);
+    const targetHandle = stripPrefix(friendId);
+    const friendEntry = getOnlineFriendEntry(targetHandle);
+
+    try {
+      // Save requester's location
+      await saveUserLocation(socket.sessionId, lat, lng, "video");
+
+      if (friendEntry) {
+        friendEntry.socket.emit("friend-video-incoming-request", { fromHandle: myHandle });
+        logger.info(`Friend video request sent from ${myHandle} to ${targetHandle}`);
+      } else {
+        socket.emit("friend-video-request-failed", { message: "Friend is offline" });
+      }
+    } catch (e) {
+      logger.error("friend-video-request failed: " + e.message);
+    }
+  });
+
+  socket.on("friend-video-request-response", async ({ fromHandle, accepted, lat, lng }) => {
+    if (!ensureRegistered()) return;
+    const sid = socket.sessionId;
+    const myHandle = getHandle(sid);
+    const targetHandle = stripPrefix(fromHandle);
+    const requesterEntry = getOnlineFriendEntry(targetHandle);
+
+    try {
+      if (!accepted) {
+        if (requesterEntry) {
+          requesterEntry.socket.emit("friend-video-request-declined", { friendId: myHandle });
+        }
+        logger.info(`Friend video request declined by ${myHandle} for ${targetHandle}`);
+        return;
+      }
+
+      // Save responder's location
+      await saveUserLocation(sid, lat, lng, "video");
+
+      if (requesterEntry) {
+        const roomId = [myHandle, targetHandle].sort().join("_");
+        await upgradeFriendChatToVideo(
+          socket,
+          sid,
+          myHandle,
+          requesterEntry.socket,
+          requesterEntry.sessionId,
+          targetHandle,
+          roomId
+        );
+        logger.info(`Upgraded friend room ${roomId} to video mode`);
+      }
+    } catch (e) {
+      logger.error("friend-video-request-response failed: " + e.message);
+    }
+  });
+
+  socket.on("friend-video-cancel", ({ roomId }) => {
+    if (!ensureRegistered()) return;
+    const room = getRoom(roomId);
+    if (!room) return;
+
+    room.mode = "chat";
+
+    const stateA = activeUsers.get(room.a.sessionId);
+    const stateB = activeUsers.get(room.b.sessionId);
+    if (stateA) setActiveUser(room.a.sessionId, { ...stateA, mode: "chat" });
+    if (stateB) setActiveUser(room.b.sessionId, { ...stateB, mode: "chat" });
+
+    room.a.socket.emit("friend-video-cancelled");
+    room.b.socket.emit("friend-video-cancelled");
+    logger.info(`Friend video call cancelled in room ${roomId}`);
   });
 }

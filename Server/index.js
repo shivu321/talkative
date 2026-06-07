@@ -11,6 +11,7 @@ import cors from "cors";
 import logger from "./logger.js";
 
 import consentRoutes from "./routes/consentRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 import socketHandler from "./socket/socketHandler.js";
 import Consent from "./models/Consent.js";
 import crypto from "crypto";
@@ -83,6 +84,7 @@ app.use(cors(corsOptions));
 
 // Routes
 app.use("/consent", rateLimiter, consentRoutes);
+app.use("/admin", adminRoutes);
 
 // ✅ MongoDB Connection
 try {

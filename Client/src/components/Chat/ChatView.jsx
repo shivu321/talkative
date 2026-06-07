@@ -29,6 +29,8 @@ export default function ChatView(props) {
   const friendObj = friendRequests?.friends?.find(f => (typeof f === 'string' ? f === partnerId : f.handle === partnerId));
   const partnerAlias = friendObj && typeof friendObj !== 'string' ? friendObj.alias : "";
   const partnerHandle = partnerAlias ? `${partnerAlias} (talkative_${partnerId})` : partnerId ? `talkative_${partnerId}` : "Strangers";
+  const isFriend = friendRequests?.friends?.some(f => (typeof f === 'string' ? f === partnerId : f.handle === partnerId));
+  const friendName = partnerAlias || (isFriend ? `talkative_${partnerId}` : "Stranger");
 
   return (
     <div className="d-flex flex-column flex-grow-1 py-3 px-2">
@@ -134,15 +136,39 @@ export default function ChatView(props) {
                 </button>
 
                 {isFriendChat ? (
-                  <button
-                    className="btn btn-outline-danger px-4 py-2 rounded-pill d-flex align-items-center gap-2 fw-semibold"
-                    onClick={handleEnd}
-                    style={{ fontSize: "0.9rem" }}
-                    type="button"
-                  >
-                    <i className="bi bi-box-arrow-left"></i>
-                    Leave Chat
-                  </button>
+                  <div className="d-flex align-items-center">
+                    {isFriendOnline && isFriendshipAccepted && mode !== "video" && (
+                      <button
+                        className="btn btn-glowing-primary px-4 py-2 rounded-pill d-flex align-items-center gap-2 fw-semibold me-2"
+                        onClick={props.onStartFriendVideoChat}
+                        style={{ fontSize: "0.9rem" }}
+                        type="button"
+                      >
+                        <i className="bi bi-camera-video-fill"></i>
+                        Video Call
+                      </button>
+                    )}
+                    {isFriendOnline && isFriendshipAccepted && mode === "video" && (
+                      <button
+                        className="btn btn-outline-warning px-4 py-2 rounded-pill d-flex align-items-center gap-2 fw-semibold me-2"
+                        onClick={props.onCancelFriendVideoChat}
+                        style={{ fontSize: "0.9rem" }}
+                        type="button"
+                      >
+                        <i className="bi bi-telephone-minus-fill"></i>
+                        Cancel Video
+                      </button>
+                    )}
+                    <button
+                      className="btn btn-outline-danger px-4 py-2 rounded-pill d-flex align-items-center gap-2 fw-semibold"
+                      onClick={handleEnd}
+                      style={{ fontSize: "0.9rem" }}
+                      type="button"
+                    >
+                      <i className="bi bi-box-arrow-left"></i>
+                      Leave Chat
+                    </button>
+                  </div>
                 ) : (
                   <button
                     className="btn btn-glowing-accent px-4 py-2 rounded-pill d-flex align-items-center gap-2 fw-semibold"
@@ -222,6 +248,7 @@ export default function ChatView(props) {
                   remoteStream={props.remoteStream}
                   videoError={props.videoError}
                   partnerPresent={props.partnerPresent}
+                  partnerName={friendName}
                 />
               ) : (
                 <TextChatUI {...props} />

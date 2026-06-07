@@ -172,6 +172,35 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (function() {
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        if (!isLocalhost) {
+          // Disable right click context menu
+          document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+          });
+          // Disable common developer shortcut keys
+          document.addEventListener('keydown', function(e) {
+            // F12
+            if (e.keyCode === 123) {
+              e.preventDefault();
+              return false;
+            }
+            // Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+Shift+C
+            if (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) {
+              e.preventDefault();
+              return false;
+            }
+            // Ctrl+U (View Source)
+            if (e.ctrlKey && e.keyCode === 85) {
+              e.preventDefault();
+              return false;
+            }
+          });
+        }
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

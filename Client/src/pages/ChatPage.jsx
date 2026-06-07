@@ -69,6 +69,7 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
   const [isFriendChat, setIsFriendChat] = useState(false);
   const [isFriendOnline, setIsFriendOnline] = useState(false);
   const [isFriendshipAccepted, setIsFriendshipAccepted] = useState(false);
+  const [incomingVideoRequest, setIncomingVideoRequest] = useState(null);
 
   // ── Policy / legal state ────────────────────────────────────────────────────
   const [showPrivacy, setShowPrivacy] = useState(false);
@@ -162,7 +163,19 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
       handleDismissOutgoingRequest();
 
       const finalMode = matchedMode || mode;
+      setMode(finalMode);
+
       if (finalMode === "video") {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            socket.emit("save-video-location", { lat: latitude, lng: longitude });
+          },
+          (err) => {
+            console.warn("Geolocation access denied or failed for video chat:", err);
+          }
+        );
+
         const meIsCaller = myHandleRef.current < pid;
         ensureLocalStream()
           .then(() => {
@@ -170,9 +183,18 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
             if (meIsCaller) createPeerAsCaller(pid);
           })
           .catch((e) => console.error(e));
+      } else {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            socket.emit("save-chat-location", { lat: latitude, lng: longitude });
+          },
+          (err) => {
+            console.warn("Geolocation access denied or failed for chat:", err);
+          }
+        );
       }
     });
-
 
     // ── Messaging ─────────────────────────────────────────────────────────────
 
@@ -233,6 +255,29 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
       setRoomId(rid || "offline_room");
       setPartnerPresent(isOnline);
       setMode("chat");
+    });
+
+    socket.on("friend-video-incoming-request", ({ fromHandle }) => {
+      setIncomingVideoRequest({ fromHandle });
+    });
+
+    socket.on("friend-video-request-declined", ({ friendId }) => {
+      setBanner(null);
+      setIncomingVideoRequest(null);
+      alert(`talkative_${friendId} declined your video call request.`);
+    });
+
+    socket.on("friend-video-request-failed", ({ message }) => {
+      setBanner(null);
+      setIncomingVideoRequest(null);
+      alert(`Video call failed: ${message}`);
+    });
+
+    socket.on("friend-video-cancelled", () => {
+      cleanupPeer();
+      stopLocalStream();
+      setMode("chat");
+      setBanner("Video call ended. Returned to text chat.");
     });
 
     // ── Policy ────────────────────────────────────────────────────────────────
@@ -302,6 +347,7 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
   }
 
   function handleEnd() {
+    declineIncomingVideoRequestIfAny();
     socketRef.current?.emit("endChat");
     socketRef.current?.emit("next");
     socketRef.current?.emit("leaveQueue");
@@ -320,11 +366,23 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
     nextBusyRef.current = false;
   }
 
-  function handleNext() {
+  async function handleNext() {
+    declineIncomingVideoRequestIfAny();
     if (nextBusyRef.current) return;
     nextBusyRef.current = true;
     cleanupPeer();
-    stopLocalStream();
+    
+    if (mode !== "video") {
+      stopLocalStream();
+    } else {
+      // Ensure the camera stream is running for the queue preview
+      try {
+        await ensureLocalStream();
+      } catch (e) {
+        console.warn("Could not ensure local stream in handleNext:", e);
+      }
+    }
+
     setMessages([]);
     setInput("");
     setStatus("idle");
@@ -378,6 +436,71 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
     displayedIdsRef.current.clear();
     nextBusyRef.current = false;
   }
+
+  const declineIncomingVideoRequestIfAny = () => {
+    if (incomingVideoRequest) {
+      socketRef.current?.emit("friend-video-request-response", {
+        fromHandle: incomingVideoRequest.fromHandle,
+        accepted: false,
+      });
+      setIncomingVideoRequest(null);
+    }
+  };
+
+  const handleRespondVideoRequest = (accepted) => {
+    if (!incomingVideoRequest) return;
+    const { fromHandle } = incomingVideoRequest;
+    if (!accepted) {
+      socketRef.current?.emit("friend-video-request-response", {
+        fromHandle,
+        accepted: false,
+      });
+      setIncomingVideoRequest(null);
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          socketRef.current?.emit("friend-video-request-response", {
+            fromHandle,
+            accepted: true,
+            lat: latitude,
+            lng: longitude,
+          });
+          setIncomingVideoRequest(null);
+        },
+        (err) => {
+          alert("Location access is required to accept video calls. Decline instead.");
+          socketRef.current?.emit("friend-video-request-response", {
+            fromHandle,
+            accepted: false,
+          });
+          setIncomingVideoRequest(null);
+        }
+      );
+    }
+  };
+
+  const handleStartFriendVideoChat = () => {
+    declineIncomingVideoRequestIfAny();
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        socketRef.current?.emit("friend-video-request", {
+          friendId: partnerId,
+          lat: latitude,
+          lng: longitude,
+        });
+        setBanner("Waiting for friend to accept video call...");
+      },
+      (err) => {
+        alert("Geolocation permission is required to start a video chat. Please enable location services in your browser.");
+      }
+    );
+  };
+
+  const handleCancelFriendVideoChat = () => {
+    socketRef.current?.emit("friend-video-cancel", { roomId });
+  };
 
   function handleAcceptRequest(fromUserId) {
     if (!guardPolicy()) return;
@@ -481,6 +604,8 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
           mySessionId={myHandle || sessionId}
           partnerId={partnerId}
           partnerGender={partnerGender}
+          onStartFriendVideoChat={handleStartFriendVideoChat}
+          onCancelFriendVideoChat={handleCancelFriendVideoChat}
         />
       );
     }
@@ -582,6 +707,64 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
       {/* Legal modals */}
       <PrivacyModal show={showPrivacy} handleClose={() => setShowPrivacy(false)} />
       <TermsModal show={showTerms} handleClose={() => setShowTerms(false)} />
+
+      {/* Custom Incoming Video Request Modal */}
+      {incomingVideoRequest && (
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+          style={{ zIndex: 2000, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)" }}
+        >
+          <div
+            className="glass-panel p-4 rounded-4 shadow-lg text-center"
+            style={{
+              maxWidth: "380px",
+              width: "90%",
+              border: "1px solid rgba(255,255,255,0.12)",
+              animation: "slideUpFade 0.3s ease-out",
+            }}
+          >
+            <div
+              className="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle"
+              style={{
+                width: "72px",
+                height: "72px",
+                background: "rgba(109, 117, 242, 0.12)",
+                border: "1.5px solid rgba(109,117,242,0.3)",
+              }}
+            >
+              <i className="bi bi-camera-video-fill text-primary" style={{ fontSize: "2rem" }} />
+            </div>
+
+            <h5 className="fw-bold mb-1" style={{ color: "var(--text-main)" }}>Video Call Request</h5>
+            <p className="mb-1">
+              <strong style={{ color: "var(--primary-color)", fontSize: "1rem" }}>
+                {resolveDisplayName(incomingVideoRequest.fromHandle)}
+              </strong>
+            </p>
+            <p className="text-muted small mb-4">wants to start a video chat with you.</p>
+
+            <div className="d-flex gap-3 justify-content-center">
+              <button
+                className="btn btn-glowing-primary px-4 py-2 rounded-pill fw-semibold"
+                onClick={() => handleRespondVideoRequest(true)}
+                type="button"
+              >
+                <i className="bi bi-camera-video me-1" />
+                Accept
+              </button>
+              <button
+                className="btn btn-outline-danger px-4 py-2 rounded-pill fw-semibold"
+                style={{ borderColor: "rgba(220,53,69,0.4)", color: "var(--text-main)" }}
+                onClick={() => handleRespondVideoRequest(false)}
+                type="button"
+              >
+                <i className="bi bi-telephone-x me-1" />
+                Decline
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Chat-request overlays */}
       <ChatRequestPopups
