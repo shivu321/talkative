@@ -3,6 +3,7 @@ import {
 } from "uuid";
 import Consent from "../models/Consent.js";
 import logger from "../logger.js";
+import crypto from "crypto";
 
 export const saveConsent = async (req, res) => {
     try {
@@ -44,15 +45,18 @@ export const saveConsent = async (req, res) => {
         });
         if (existingConsent) {
             existingConsent.gender = gender;
+            existingConsent.handle = crypto.createHash("sha256").update(sessionId).digest("hex").slice(0, 12);
             await existingConsent.save();
-            logger.info(`Consent already exists for sessionId=${sessionId}, updated gender`);
+            logger.info(`Consent already exists for sessionId=${sessionId}, updated gender and handle`);
             return res.status(200).json({
                 success: true,
                 sessionId: existingConsent?.sessionId,
+                handle: existingConsent?.handle,
                 message: "Consent already registered"
             });
         }
 
+        const handle = crypto.createHash("sha256").update(sessionId).digest("hex").slice(0, 12);
         // Create new consent only if it does not exist
         const consent = new Consent({
             sessionId,
@@ -60,16 +64,18 @@ export const saveConsent = async (req, res) => {
             acceptedPrivacyPolicy,
             acceptedTerms,
             gender,
+            handle,
             ip: req.ip,
             userAgent: req.headers["user-agent"],
         });
 
         await consent.save();
-        logger.info(`Consent saved for sessionId=${consent.sessionId}`);
+        logger.info(`Consent saved for sessionId=${consent.sessionId}, handle=${consent.handle}`);
 
         res.status(201).json({
             success: true,
-            sessionId: consent.sessionId
+            sessionId: consent.sessionId,
+            handle: consent.handle
         });
     } catch (e) {
         logger.error("Consent save failed: " + e.message);

@@ -17,13 +17,18 @@ export default function ChatView(props) {
     isFriendOnline,
     isFriendshipAccepted,
     onSendRequestDirectly,
+    onAcceptRequest,
+    onDeclineRequest,
     partnerId,
     mySessionId,
     partnerPresent,
-    partnerGender
+    partnerGender,
+    friendRequests
   } = props;
 
-  const partnerHandle = partnerId ? `talkative_${partnerId}` : "Strangers";
+  const friendObj = friendRequests?.friends?.find(f => (typeof f === 'string' ? f === partnerId : f.handle === partnerId));
+  const partnerAlias = friendObj && typeof friendObj !== 'string' ? friendObj.alias : "";
+  const partnerHandle = partnerAlias ? `${partnerAlias} (talkative_${partnerId})` : partnerId ? `talkative_${partnerId}` : "Strangers";
 
   return (
     <div className="d-flex flex-column flex-grow-1 py-3 px-2">
@@ -107,16 +112,13 @@ export default function ChatView(props) {
                   </button>
                 )}
 
-                {!isFriendChat && partnerId && (
-                  <button
-                    className="btn btn-sm btn-glowing-accent py-1 px-3 rounded-pill ms-2 fw-semibold"
-                    onClick={() => onSendRequestDirectly(partnerId)}
+                {!isFriendChat && partnerId && friendRequests?.friends?.some(f => (typeof f === 'string' ? f === partnerId : f.handle === partnerId)) && (
+                  <span 
+                    className="badge bg-success rounded-pill px-3 py-1.5 ms-2 fw-semibold d-inline-flex align-items-center gap-1"
                     style={{ fontSize: "0.75rem" }}
-                    type="button"
                   >
-                    <i className="bi bi-person-plus-fill me-1"></i>
-                    Send Friend Request
-                  </button>
+                    <i className="bi bi-people-fill"></i> Friends
+                  </span>
                 )}
               </div>
               

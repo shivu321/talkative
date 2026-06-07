@@ -13,6 +13,8 @@ export default function ConsentPage({ onConsent, theme, toggleTheme }) {
   const [showTerms, setShowTerms] = useState(false);
   const [gender, setGender] = useState("");
 
+  const [myHandle, setMyHandle] = useState("");
+
   // Initialize or generate the sessionId on component load so we can show it
   const [mySessionId] = useState(() => {
     let sid = localStorage.getItem("sessionId");
@@ -21,6 +23,15 @@ export default function ConsentPage({ onConsent, theme, toggleTheme }) {
     }
     return sid;
   });
+
+  React.useEffect(() => {
+    const msgBuffer = new TextEncoder().encode(mySessionId);
+    crypto.subtle.digest("SHA-256", msgBuffer).then((hashBuffer) => {
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+      setMyHandle(hashHex.slice(0, 12));
+    });
+  }, [mySessionId]);
 
   const submit = async () => {
     if (!gender) {
@@ -79,12 +90,14 @@ export default function ConsentPage({ onConsent, theme, toggleTheme }) {
         {/* User Unique Handle Display */}
         <div className="mb-4 d-inline-flex align-items-center justify-content-center gap-2 py-2 px-3 rounded-pill" style={{ background: "var(--input-bg)", border: "1px dashed var(--glass-border)" }}>
           <span className="text-muted small">Your unique handle:</span>
-          <strong className="small" style={{ letterSpacing: "0.5px", color: "var(--text-main)" }}>talkative_{mySessionId}</strong>
+          <strong className="small" style={{ letterSpacing: "0.5px", color: "var(--text-main)" }}>talkative_{myHandle || "..."}</strong>
           <button
             className="btn btn-sm btn-link p-0 hover-scale"
             onClick={() => {
-              navigator.clipboard.writeText(`talkative_${mySessionId}`);
-              alert("Copied handle to clipboard!");
+              if (myHandle) {
+                navigator.clipboard.writeText(`talkative_${myHandle}`);
+                alert("Copied handle to clipboard!");
+              }
             }}
             type="button"
             title="Copy Handle"

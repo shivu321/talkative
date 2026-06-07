@@ -64,7 +64,16 @@ export default function TextChatUI(props) {
     <div className="d-flex flex-column h-100 bg-transparent">
       {/* Chat Messages */}
       <div className="message-list-container flex-grow-1 mb-3 p-3 overflow-auto">
-        <MessageList messages={messages} partnerTyping={partnerTyping} />
+        <MessageList 
+          messages={messages} 
+          partnerTyping={partnerTyping} 
+          friendRequests={props.friendRequests}
+          partnerId={props.partnerId}
+          isFriendChat={props.isFriendChat}
+          onSendRequestDirectly={props.onSendRequestDirectly}
+          onAcceptRequest={props.onAcceptRequest}
+          onDeclineRequest={props.onDeclineRequest}
+        />
       </div>
 
       {/* Validation Warning Alert */}

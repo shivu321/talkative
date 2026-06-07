@@ -41,6 +41,21 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
   const [validationMessage, SetValidationMessage] = useState("");
 
   const [friendRequests, setFriendRequests] = useState({ sent: [], received: [], friends: [] });
+  const [myHandle, setMyHandle] = useState("");
+  const myHandleRef = useRef("");
+
+  useEffect(() => {
+    if (!sessionId) return;
+    const msgBuffer = new TextEncoder().encode(sessionId);
+    crypto.subtle.digest("SHA-256", msgBuffer).then((hashBuffer) => {
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      const hashHex = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+      const h = hashHex.slice(0, 12);
+      setMyHandle(h);
+      myHandleRef.current = h;
+    });
+  }, [sessionId]);
+
   const [isFriendChat, setIsFriendChat] = useState(false);
   const [isFriendOnline, setIsFriendOnline] = useState(false);
   const [isFriendshipAccepted, setIsFriendshipAccepted] = useState(false);
@@ -51,10 +66,19 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
   const [showPolicyNotification, setShowPolicyNotification] = useState(false);
   const [policyNotificationMessage, setPolicyNotificationMessage] = useState("");
 
+  // Chat request confirmation state
+  const [incomingChatRequest, setIncomingChatRequest] = useState(null); // { fromHandle }
+  const [outgoingChatRequest, setOutgoingChatRequest] = useState(null); // { toHandle, status: "pending"|"declined"|"cooldown", message?, remaining? }
+  const cooldownIntervalRef = useRef(null);
+
   // -----------------------------------------
   // Message validation
   // -----------------------------------------
   const validateChatMessage = (inputVal) => {
+    const isNowFriend = isFriendChat || friendRequests.friends?.some(f => (typeof f === "string" ? f === partnerId : f.handle === partnerId));
+    if (isNowFriend) {
+      return { flag: false, message: "" };
+    }
     const text = inputVal.trim();
     const digitRegex = /\d/;
     const numberWords =
@@ -159,6 +183,23 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
       setPolicyNotificationMessage(message);
     });
 
+    // Chat request events
+    socket.on("friend-chat-incoming-request", ({ fromHandle }) => {
+      setIncomingChatRequest({ fromHandle });
+    });
+
+    socket.on("friend-chat-request-sent", ({ toHandle }) => {
+      setOutgoingChatRequest({ toHandle, status: "pending" });
+    });
+
+    socket.on("friend-chat-request-declined", ({ friendId, reason, message: msg }) => {
+      setOutgoingChatRequest({ toHandle: friendId, status: "declined", message: msg || "Request was declined." });
+    });
+
+    socket.on("friend-chat-request-cooldown", ({ remaining, message: msg }) => {
+      setOutgoingChatRequest(prev => ({ ...prev, status: "cooldown", message: msg, remaining }));
+    });
+
     socket.on("friend-chat-init-response", ({ isFriend, friendId, messages: historicalMessages, isOnline, roomId: rid, partnerGender: pGender }) => {
       setIsFriendChat(true);
       setIsFriendshipAccepted(isFriend);
@@ -194,7 +235,7 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
         const finalMode = matchedMode || mode;
 
         if (finalMode === "video") {
-          const meIsCaller = sessionId < pid;
+          const meIsCaller = myHandleRef.current < pid;
           ensureLocalStream()
             .then(() => {
               cleanupPeer(); // close previous peer
@@ -211,7 +252,8 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
     );
 
     socket.on("message", (m) => {
-      if (m?.from && m.from === sessionId) return;
+      console.log("socket message received on client:", m, "myHandleRef.current:", myHandleRef.current);
+      if (m?.from && m.from === myHandleRef.current) return;
       const id =
         m?.messageId ||
         `${m?.from || ""}-${m?.text || ""}-${m?.createdAt || ""}`;
@@ -519,7 +561,19 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
       return;
     }
     if (!socketRef.current) return;
-    socketRef.current.emit("friend-chat-init", { friendId });
+    // Send a confirmation request to the friend first
+    setOutgoingChatRequest(null);
+    socketRef.current.emit("friend-chat-request", { friendId });
+  };
+
+  const handleRespondChatRequest = (fromHandle, accepted) => {
+    if (!socketRef.current) return;
+    setIncomingChatRequest(null);
+    socketRef.current.emit("friend-chat-request-response", { fromHandle, accepted });
+  };
+
+  const handleDismissOutgoingRequest = () => {
+    setOutgoingChatRequest(null);
   };
 
   const handleAcceptRequest = (fromUserId) => {
@@ -543,6 +597,11 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
     }
     if (!socketRef.current) return;
     socketRef.current.emit("friend-request-send", { toUserId });
+  };
+
+  const handleSetFriendAlias = (friendId, alias) => {
+    if (!socketRef.current) return;
+    socketRef.current.emit("friend-alias-set", { friendId, alias });
   };
 
   // -----------------------------------------
@@ -597,7 +656,9 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
         isFriendshipAccepted,
         friendRequests,
         onSendRequestDirectly: handleSendRequestDirectly,
-        mySessionId: sessionId,
+        onAcceptRequest: handleAcceptRequest,
+        onDeclineRequest: handleDeclineRequest,
+        mySessionId: myHandle || sessionId,
         partnerId,
         partnerGender,
       };
@@ -613,7 +674,10 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
         onAcceptRequest={handleAcceptRequest}
         onDeclineRequest={handleDeclineRequest}
         onSendRequestDirectly={handleSendRequestDirectly}
-        mySessionId={sessionId}
+        onSetFriendAlias={handleSetFriendAlias}
+        mySessionId={myHandle || sessionId}
+        outgoingChatRequest={outgoingChatRequest}
+        onDismissOutgoingRequest={handleDismissOutgoingRequest}
       />
     );
   };
@@ -690,6 +754,106 @@ export default function ChatPage({ sessionId, theme, toggleTheme }) {
         handleClose={() => setShowPrivacy(false)}
       />
       <TermsModal show={showTerms} handleClose={() => setShowTerms(false)} />
+
+      {/* ===== INCOMING CHAT REQUEST POPUP ===== */}
+      {incomingChatRequest && (
+        <div
+          className="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+          style={{ zIndex: 2000, background: "rgba(0,0,0,0.6)", backdropFilter: "blur(8px)" }}
+        >
+          <div
+            className="glass-panel p-4 rounded-4 shadow-lg text-center"
+            style={{ maxWidth: "380px", width: "90%", border: "1px solid rgba(255,255,255,0.12)", animation: "slideUpFade 0.3s ease-out" }}
+          >
+            <div
+              className="d-inline-flex align-items-center justify-content-center mb-3 rounded-circle"
+              style={{ width: "72px", height: "72px", background: "rgba(109, 117, 242, 0.12)", border: "1.5px solid rgba(109,117,242,0.3)" }}
+            >
+              <i className="bi bi-chat-dots-fill" style={{ fontSize: "2rem", color: "var(--primary-color)" }}></i>
+            </div>
+            <h5 className="fw-bold mb-1" style={{ color: "var(--text-main)" }}>Chat Request</h5>
+            <p className="text-muted small mb-1">
+              <strong style={{ color: "var(--primary-color)" }}>talkative_{incomingChatRequest.fromHandle}</strong>
+            </p>
+            <p className="text-muted small mb-4">wants to start a chat with you.</p>
+            <div className="d-flex gap-3 justify-content-center">
+              <button
+                className="btn btn-glowing-primary px-4 py-2 rounded-pill fw-semibold"
+                onClick={() => handleRespondChatRequest(incomingChatRequest.fromHandle, true)}
+                type="button"
+              >
+                <i className="bi bi-check-lg me-1"></i> Allow
+              </button>
+              <button
+                className="btn btn-outline-danger px-4 py-2 rounded-pill fw-semibold"
+                style={{ borderColor: "rgba(220,53,69,0.4)", color: "var(--text-main)" }}
+                onClick={() => handleRespondChatRequest(incomingChatRequest.fromHandle, false)}
+                type="button"
+              >
+                <i className="bi bi-x-lg me-1"></i> Decline
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===== OUTGOING CHAT REQUEST STATUS TOAST ===== */}
+      {outgoingChatRequest && (
+        <div
+          className="position-fixed bottom-0 end-0 m-4"
+          style={{ zIndex: 1900, maxWidth: "320px", width: "90%" }}
+        >
+          <div
+            className="glass-panel p-3 rounded-4 shadow-lg d-flex align-items-start gap-3"
+            style={{
+              border: outgoingChatRequest.status === "declined" || outgoingChatRequest.status === "cooldown"
+                ? "1px solid rgba(220,53,69,0.3)"
+                : "1px solid rgba(109,117,242,0.3)",
+              animation: "slideUpFade 0.3s ease-out"
+            }}
+          >
+            <div className="flex-shrink-0 mt-1">
+              {outgoingChatRequest.status === "pending" && (
+                <div className="spinner-border spinner-border-sm text-primary" role="status"></div>
+              )}
+              {outgoingChatRequest.status === "declined" && (
+                <i className="bi bi-x-circle-fill text-danger fs-5"></i>
+              )}
+              {outgoingChatRequest.status === "cooldown" && (
+                <i className="bi bi-clock-fill text-warning fs-5"></i>
+              )}
+            </div>
+            <div className="flex-grow-1">
+              <div className="fw-semibold small mb-1" style={{ color: "var(--text-main)" }}>
+                {outgoingChatRequest.status === "pending" && "Waiting for response…"}
+                {outgoingChatRequest.status === "declined" && "Request Declined"}
+                {outgoingChatRequest.status === "cooldown" && "Cooldown Active"}
+              </div>
+              <div className="text-muted" style={{ fontSize: "0.8rem" }}>
+                {outgoingChatRequest.status === "pending"
+                  ? `Sent to talkative_${outgoingChatRequest.toHandle}`
+                  : outgoingChatRequest.message}
+              </div>
+            </div>
+            <button
+              className="btn btn-link p-0 ms-1 flex-shrink-0"
+              style={{ color: "var(--text-muted)", border: "none", background: "none" }}
+              onClick={handleDismissOutgoingRequest}
+              type="button"
+              title="Dismiss"
+            >
+              <i className="bi bi-x-lg" style={{ fontSize: "0.85rem" }}></i>
+            </button>
+          </div>
+        </div>
+      )}
+
+      <style>{`
+        @keyframes slideUpFade {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }

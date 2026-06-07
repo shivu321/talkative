@@ -12,6 +12,8 @@ import logger from "./logger.js";
 
 import consentRoutes from "./routes/consentRoutes.js";
 import socketHandler from "./socket/socketHandler.js";
+import Consent from "./models/Consent.js";
+import crypto from "crypto";
 
 dotenv.config();
 
@@ -89,6 +91,18 @@ try {
         useUnifiedTopology: true,
     });
     logger.info("MongoDB connected successfully");
+
+    // Run handle migration
+    const count = await Consent.countDocuments({ handle: { $exists: false } });
+    if (count > 0) {
+        logger.info(`Migrating ${count} consents to have handles...`);
+        const consents = await Consent.find({ handle: { $exists: false } });
+        for (const doc of consents) {
+            doc.handle = crypto.createHash("sha256").update(doc.sessionId).digest("hex").slice(0, 12);
+            await doc.save({ validateBeforeSave: false });
+        }
+        logger.info("Consent handles migration completed.");
+    }
 } catch (err) {
     logger.error("MongoDB connection error: " + err.message);
 }
@@ -119,3 +133,4 @@ const PORT = process.env.PORT || 5000;
 httpServer.listen(PORT, () => {
             logger.info(`🚀 Server running on http://localhost:${PORT}`);
 });
+// Nodemon trigger comment

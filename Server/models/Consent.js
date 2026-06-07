@@ -23,6 +23,10 @@ const consentSchema = new mongoose.Schema({
         enum: ["male", "female", "other"],
         required: true,
     },
+    handle: {
+        type: String,
+        index: true,
+    },
     ip: {
         type: String,
     },

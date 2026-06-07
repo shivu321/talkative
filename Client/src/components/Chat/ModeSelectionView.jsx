@@ -10,8 +10,13 @@ export default function ModeSelectionView({
   onAcceptRequest,
   onDeclineRequest,
   onSendRequestDirectly,
-  mySessionId
+  onSetFriendAlias,
+  mySessionId,
+  outgoingChatRequest,
+  onDismissOutgoingRequest
 }) {
+  const [editingFriend, setEditingFriend] = useState(null);
+  const [aliasInput, setAliasInput] = useState("");
   const [friendInput, setFriendInput] = useState("");
   const [showNotifications, setShowNotifications] = useState(false);
   const [activeTab, setActiveTab] = useState("received"); // "received" or "sent"
@@ -230,20 +235,27 @@ export default function ModeSelectionView({
           </div>
 
           {/* Tabs */}
-          <div className="d-flex p-3 gap-2 justify-content-center border-bottom border-secondary border-opacity-10">
+          <div className="d-flex p-3 gap-1.5 justify-content-center border-bottom border-secondary border-opacity-10">
             <button 
-              className={`btn btn-sm flex-grow-1 rounded-pill ${activeTab === "received" ? "btn-light text-dark border-secondary" : "btn-outline-secondary"}`}
+              className={`btn btn-xs flex-grow-1 rounded-pill py-1.5 ${activeTab === "received" ? "btn-light text-dark border-secondary" : "btn-outline-secondary"}`}
               onClick={() => setActiveTab("received")}
-              style={{ color: activeTab === "received" ? "" : "var(--text-main)", borderColor: "var(--glass-border)" }}
+              style={{ color: activeTab === "received" ? "" : "var(--text-main)", borderColor: "var(--glass-border)", fontSize: "0.72rem" }}
             >
               Received ({friendRequests.received?.length || 0})
             </button>
             <button 
-              className={`btn btn-sm flex-grow-1 rounded-pill ${activeTab === "sent" ? "btn-light text-dark border-secondary" : "btn-outline-secondary"}`}
+              className={`btn btn-xs flex-grow-1 rounded-pill py-1.5 ${activeTab === "sent" ? "btn-light text-dark border-secondary" : "btn-outline-secondary"}`}
               onClick={() => setActiveTab("sent")}
-              style={{ color: activeTab === "sent" ? "" : "var(--text-main)", borderColor: "var(--glass-border)" }}
+              style={{ color: activeTab === "sent" ? "" : "var(--text-main)", borderColor: "var(--glass-border)", fontSize: "0.72rem" }}
             >
               Sent ({friendRequests.sent?.length || 0})
+            </button>
+            <button 
+              className={`btn btn-xs flex-grow-1 rounded-pill py-1.5 ${activeTab === "friends" ? "btn-light text-dark border-secondary" : "btn-outline-secondary"}`}
+              onClick={() => setActiveTab("friends")}
+              style={{ color: activeTab === "friends" ? "" : "var(--text-main)", borderColor: "var(--glass-border)", fontSize: "0.72rem" }}
+            >
+              Friends ({friendRequests.friends?.length || 0})
             </button>
           </div>
 
@@ -279,7 +291,7 @@ export default function ModeSelectionView({
               ) : (
                 <div className="text-center text-muted small py-5">No received requests.</div>
               )
-            ) : (
+            ) : activeTab === "sent" ? (
               friendRequests.sent && friendRequests.sent.length > 0 ? (
                 friendRequests.sent.map((reqUser) => (
                   <div key={reqUser} className="d-flex justify-content-between align-items-center p-3 rounded-3 bg-white bg-opacity-5 border border-white border-opacity-5">
@@ -297,6 +309,116 @@ export default function ModeSelectionView({
                 ))
               ) : (
                 <div className="text-center text-muted small py-5">No sent requests.</div>
+              )
+            ) : (
+              friendRequests.friends && friendRequests.friends.length > 0 ? (
+                friendRequests.friends.map((friendObj) => {
+                  const friendHandle = typeof friendObj === "string" ? friendObj : friendObj.handle;
+                  const friendAlias = typeof friendObj === "string" ? "" : friendObj.alias;
+                  const isEditing = editingFriend === friendHandle;
+
+                  return (
+                    <div key={friendHandle} className="d-flex justify-content-between align-items-center p-3 rounded-3 bg-white bg-opacity-5 border border-white border-opacity-5 gap-2">
+                      <div className="flex-grow-1 text-start overflow-hidden d-flex flex-column justify-content-center">
+                        {isEditing ? (
+                          <div className="d-flex align-items-center gap-2 w-100">
+                            <input
+                              type="text"
+                              className="form-control form-control-sm rounded-pill px-3 py-1 flex-grow-1"
+                              value={aliasInput}
+                              onChange={(e) => setAliasInput(e.target.value)}
+                              placeholder="Nickname / Alias"
+                              style={{ fontSize: "0.8rem", color: "var(--text-main)", background: "var(--input-bg)", border: "1px solid var(--glass-border)" }}
+                              autoFocus
+                              onKeyDown={(e) => {
+                                if (e.key === "Enter") {
+                                  onSetFriendAlias(friendHandle, aliasInput);
+                                  setEditingFriend(null);
+                                } else if (e.key === "Escape") {
+                                  setEditingFriend(null);
+                                }
+                              }}
+                            />
+                            <button
+                              className="btn btn-sm btn-success rounded-circle p-1 d-flex align-items-center justify-content-center flex-shrink-0"
+                              style={{ width: "26px", height: "26px" }}
+                              onClick={() => {
+                                onSetFriendAlias(friendHandle, aliasInput);
+                                setEditingFriend(null);
+                              }}
+                              type="button"
+                              title="Save Alias"
+                            >
+                              <i className="bi bi-check-lg" style={{ fontSize: "0.8rem" }}></i>
+                            </button>
+                            <button
+                              className="btn btn-sm btn-outline-secondary rounded-circle p-1 d-flex align-items-center justify-content-center flex-shrink-0"
+                              style={{ width: "26px", height: "26px", color: "var(--text-main)", borderColor: "var(--glass-border)" }}
+                              onClick={() => setEditingFriend(null)}
+                              type="button"
+                              title="Cancel"
+                            >
+                              <i className="bi bi-x-lg" style={{ fontSize: "0.8rem" }}></i>
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="d-flex align-items-center flex-wrap">
+                            <span className="small fw-semibold text-truncate" style={{ maxWidth: "150px", color: "var(--text-main)" }} title={friendAlias || `talkative_${friendHandle}`}>
+                              {friendAlias || `talkative_${friendHandle}`}
+                            </span>
+                            {friendAlias && (
+                              <span className="small text-muted ms-1 text-truncate" style={{ fontSize: "0.72rem", maxWidth: "90px" }}>
+                                (talkative_{friendHandle})
+                              </span>
+                            )}
+                            <button
+                              className="btn btn-link p-0 ms-2 hover-scale border-0 bg-transparent"
+                              onClick={() => {
+                                setEditingFriend(friendHandle);
+                                setAliasInput(friendAlias || "");
+                              }}
+                              type="button"
+                              title="Edit Nickname"
+                            >
+                              <i className="bi bi-pencil-fill text-muted" style={{ fontSize: "0.75rem" }}></i>
+                            </button>
+                          </div>
+                        )}
+                      </div>
+                      
+                      {!isEditing && (() => {
+                        const isPendingThis = outgoingChatRequest?.status === "pending" && outgoingChatRequest?.toHandle === friendHandle;
+                        const isCooldownThis = outgoingChatRequest?.status === "cooldown";
+                        return (
+                          <button
+                            className={`btn btn-sm ${isPendingThis ? "btn-outline-secondary" : "btn-glowing-accent"} py-1.5 px-3 rounded-pill flex-shrink-0`}
+                            style={{ fontSize: "0.75rem" }}
+                            disabled={isPendingThis || isCooldownThis}
+                            onClick={() => {
+                              setShowNotifications(false);
+                              onConnectWithFriend(friendHandle);
+                            }}
+                            type="button"
+                          >
+                            {isPendingThis ? (
+                              <>
+                                <span className="spinner-border spinner-border-sm me-1" style={{ width: "10px", height: "10px" }}></span>
+                                Waiting…
+                              </>
+                            ) : (
+                              <>
+                                <i className="bi bi-chat-fill me-1"></i>
+                                Chat
+                              </>
+                            )}
+                          </button>
+                        );
+                      })()}
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="text-center text-muted small py-5">No friends added yet.</div>
               )
             )}
           </div>
