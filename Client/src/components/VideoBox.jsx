@@ -1,40 +1,59 @@
 import React, { useEffect, useRef } from "react";
 
-export default function VideoBox({ localStream, remoteStream }) {
+export default function VideoBox({ localStream, remoteStream, videoError }) {
   const localRef = useRef();
   const remoteRef = useRef();
 
   useEffect(() => {
-    if (localRef.current && localStream)
+    if (localRef.current && localStream) {
       localRef.current.srcObject = localStream;
+    }
   }, [localStream]);
 
   useEffect(() => {
-    if (remoteRef.current && remoteStream)
+    if (remoteRef.current && remoteStream) {
       remoteRef.current.srcObject = remoteStream;
+    }
   }, [remoteStream]);
 
   return (
-    <div className="d-flex gap-2">
-      <div>
-        <video
-          ref={localRef}
-          autoPlay
-          muted
-          playsInline
-          style={{ width: "250px", borderRadius: 8, background: "#000" }}
-        />
-        <div className="text-center small">You</div>
-      </div>
-      <div>
+    <div className="position-relative w-100 h-100 bg-black rounded overflow-hidden">
+      {/* Remote video (partner) */}
+      {remoteStream ? (
         <video
           ref={remoteRef}
           autoPlay
           playsInline
-          style={{ width: "250px", borderRadius: 8, background: "#000" }}
+          style={{ width: "100%", height: "100%", objectFit: "cover" }}
         />
-        <div className="text-center small">Stranger</div>
-      </div>
+      ) : (
+        <div className="d-flex justify-content-center align-items-center text-white h-100">
+          Waiting for stranger...
+        </div>
+      )}
+
+      {/* Local video (you) */}
+      {localStream && !videoError && (
+        <div
+          className="position-absolute bottom-0 end-0 m-3 border border-2 border-white rounded overflow-hidden bg-black shadow"
+          style={{ width: "25%", minWidth: "150px", maxWidth: "240px" }}
+        >
+          <video
+            ref={localRef}
+            autoPlay
+            muted
+            playsInline
+            style={{ width: "100%", height: "100%", objectFit: "cover" }}
+          />
+        </div>
+      )}
+
+      {/* Error case */}
+      {videoError && (
+        <div className="position-absolute top-50 start-50 translate-middle text-danger bg-dark bg-opacity-75 px-3 py-2 rounded">
+          {videoError}
+        </div>
+      )}
     </div>
   );
 }

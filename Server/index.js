@@ -18,19 +18,19 @@ dotenv.config();
 const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
-    cors: {
-        origin: "*"
-    },
+            cors: {
+        origin: "https://talkative.co.in",
+            methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        },
 });
 
 // Middleware
 app.use(express.json());
-app.use(
-    cors({
-        origin: "http://localhost:5173",
-        credentials: true,
-    })
-);
+app.use(cors({
+                origin: "https://talkative.co.in",
+                methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+    }));
 
 // Routes
 app.use("/consent", consentRoutes);
@@ -70,5 +70,5 @@ socketHandler(io);
 // Start server
 const PORT = process.env.PORT || 5000;
 httpServer.listen(PORT, () => {
-    logger.info(`🚀 Server running on http://localhost:${PORT}`);
+            logger.info(`🚀 Server running on http://localhost:${PORT}`);
 });

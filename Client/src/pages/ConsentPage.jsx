@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API } from "../api";
 import PrivacyModal from "../components/PrivacyModal";
@@ -20,10 +20,8 @@ export default function ConsentPage({ onConsent }) {
     let sessionId = localStorage.getItem("sessionId");
     if (!sessionId) {
       sessionId = Math.random().toString(36).substring(2, 15);
-      localStorage.setItem("sessionId", sessionId);
     }
     setLoading(true);
-
     try {
       const res = await axios.post(`${API}/consent`, {
         is18Plus: age,
@@ -32,6 +30,9 @@ export default function ConsentPage({ onConsent }) {
         sessionId: sessionId,
       });
       const id = res.data?.sessionId;
+      if (!sessionId) {
+        localStorage.setItem("sessionId", sessionId);
+      }
       onConsent(id);
       // navigate("/chat");
     } catch (e) {
