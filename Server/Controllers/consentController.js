@@ -12,8 +12,23 @@ export const saveConsent = async (req, res) => {
             is18Plus,
             acceptedPrivacyPolicy,
             acceptedTerms,
-            sessionId
+            sessionId,
+            gender
         } = req.body;
+
+        // Security validation to prevent NoSQL injection and parameter pollution
+        if (!sessionId || typeof sessionId !== "string" || sessionId.length > 50 || !/^[A-Za-z0-9]+$/.test(sessionId)) {
+            logger.warn("Consent request with invalid or malicious sessionId format");
+            return res.status(400).json({
+                message: "Invalid session ID format"
+            });
+        }
+
+        if (!gender || !["male", "female", "other"].includes(gender)) {
+            return res.status(400).json({
+                message: "Gender selection is required"
+            });
+        }
 
         if (!is18Plus || !acceptedPrivacyPolicy || !acceptedTerms) {
             logger.warn("Consent missing fields");
@@ -28,7 +43,9 @@ export const saveConsent = async (req, res) => {
             sessionId
         });
         if (existingConsent) {
-            logger.info(`Consent already exists for sessionId=${sessionId}`);
+            existingConsent.gender = gender;
+            await existingConsent.save();
+            logger.info(`Consent already exists for sessionId=${sessionId}, updated gender`);
             return res.status(200).json({
                 success: true,
                 sessionId: existingConsent?.sessionId,
@@ -42,6 +59,7 @@ export const saveConsent = async (req, res) => {
             is18Plus,
             acceptedPrivacyPolicy,
             acceptedTerms,
+            gender,
             ip: req.ip,
             userAgent: req.headers["user-agent"],
         });
@@ -59,4 +77,4 @@ export const saveConsent = async (req, res) => {
             error: e.message
         });
     }
-};
+}; // End of saveConsent controller

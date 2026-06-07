@@ -17,10 +17,15 @@ const consentSchema = new mongoose.Schema({
     is18Plus: {
         type: Boolean,
         required: true,
-        },
-        ip: {
-                type: String,
-            },
+    },
+    gender: {
+        type: String,
+        enum: ["male", "female", "other"],
+        required: true,
+    },
+    ip: {
+        type: String,
+    },
             userAgent: {
                 type: String,
     },

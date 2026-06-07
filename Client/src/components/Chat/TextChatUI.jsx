@@ -20,6 +20,9 @@ export default function TextChatUI(props) {
     SetMessageFlag,
     validationMessage,
     SetValidationMessage,
+    isFriendChat,
+    isFriendOnline,
+    isFriendshipAccepted,
   } = props;
 
   const [emojiData, setEmojiData] = useState(null);
@@ -41,6 +44,21 @@ export default function TextChatUI(props) {
     }
     setShowEmoji((v) => !v);
   };
+
+  let inputPlaceholder = "Type a message...";
+  if (!canSend) {
+    if (isFriendChat) {
+      if (!isFriendshipAccepted) {
+        inputPlaceholder = "You are not friends. Send a request to chat.";
+      } else if (!isFriendOnline) {
+        inputPlaceholder = "Friend is offline. Messaging is disabled.";
+      } else {
+        inputPlaceholder = "Connecting to friend...";
+      }
+    } else {
+      inputPlaceholder = "Partner has left the conversation.";
+    }
+  }
 
   return (
     <div className="d-flex flex-column h-100 bg-transparent">
@@ -74,6 +92,7 @@ export default function TextChatUI(props) {
             onClick={toggleEmojiPicker}
             style={{ width: "42px", height: "42px", background: "rgba(255, 255, 255, 0.08)", transition: "background 0.2s" }}
             type="button"
+            disabled={!canSend}
           >
             <span style={{ fontSize: "1.2rem" }}>😊</span>
           </button>
@@ -111,11 +130,11 @@ export default function TextChatUI(props) {
             </div>
           )}
 
-          {/* Message Input */}
           <input
-            className="form-control border-0 flex-grow-1 px-3 py-2 rounded-pill shadow-none text-white bg-transparent"
+            className="form-control border-0 flex-grow-1 px-3 py-2 rounded-pill shadow-none bg-transparent"
             style={{
               fontSize: "15px",
+              color: "var(--text-main)"
             }}
             value={input}
             onChange={handleInputChange}
@@ -126,7 +145,7 @@ export default function TextChatUI(props) {
               !messageFlag &&
               sendMsg()
             }
-            placeholder={canSend ? "Type a message..." : "Partner has left the conversation."}
+            placeholder={inputPlaceholder}
             disabled={!canSend}
           />
 

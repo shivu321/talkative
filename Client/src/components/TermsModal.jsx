@@ -12,7 +12,7 @@ export default function TermsModal({ show, handleClose }) {
         {/* --- Terms and Conditions Section --- */}
         <h4 className="mb-3">Terms and Conditions for Talkative</h4>
         <p>
-          <strong>Last Updated:</strong> August 25, 2025
+          <strong>Last Updated:</strong> June 7, 2026
         </p>
         <p>
           Welcome to Talkative! By accessing or using our application and
@@ -48,8 +48,10 @@ export default function TermsModal({ show, handleClose }) {
           <li>Impersonate any person or entity.</li>
           <li>Infringe on intellectual property rights.</li>
           <li>
-            Distribute spam, viruses, or use automated systems (bots, spiders)
-            to access the service.
+            Distribute spam, links, phone numbers, email addresses, numbers represented as words (One–Ten), or user handles containing '@' or '_' characters (outside of our system-generated session handle pattern). Our system automatically monitors and blocks these violations.
+          </li>
+          <li>
+            Attempt to spam or bypass direct matchmaking and friend request limits.
           </li>
         </ul>
 
@@ -75,7 +77,7 @@ export default function TermsModal({ show, handleClose }) {
         </p>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-light" className="px-4 rounded-pill" onClick={handleClose}>
+        <Button variant="outline-secondary" className="px-4 rounded-pill" style={{ color: "var(--text-main)", borderColor: "var(--glass-border)" }} onClick={handleClose}>
           Close
         </Button>
       </Modal.Footer>

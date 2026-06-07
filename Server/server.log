@@ -2341,3 +2341,169 @@
 [2026-06-07T04:29:57.675Z] [WARN] Socket disconnected: ElwKiXSCdwVsW4uSAAAL
 [2026-06-07T04:29:57.882Z] [INFO] Socket connected: 3mdBoqZxT142VEMIAAAb
 [2026-06-07T04:29:57.885Z] [INFO] User registered: sessionId=6tenpjhni1y
+[2026-06-07T04:31:27.770Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:31:27.779Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:31:27.912Z] [INFO] Socket connected: r1w60IJZhhhZUW82AAAB
+[2026-06-07T04:31:27.912Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:31:27.919Z] [INFO] User registered: sessionId=6tenpjhni1y
+[2026-06-07T04:31:28.012Z] [INFO] Socket connected: ur-d2ai5oYxtnB7iAAAD
+[2026-06-07T04:31:28.020Z] [INFO] User registered: sessionId=s6kwc4gd0ta
+[2026-06-07T04:31:28.082Z] [INFO] Socket connected: LAXrnwy4eAFYvjMqAAAF
+[2026-06-07T04:31:28.087Z] [INFO] User registered: sessionId=i6g4u0u6shm
+[2026-06-07T04:31:30.266Z] [INFO] Socket connected: NRadPPuXDNtu0UvQAAAH
+[2026-06-07T04:31:30.277Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:32:48.485Z] [WARN] Socket disconnected: NRadPPuXDNtu0UvQAAAH
+[2026-06-07T04:32:49.005Z] [INFO] Socket connected: AoogLk5OUiHgZ7WKAAAJ
+[2026-06-07T04:32:49.008Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:32:53.502Z] [WARN] Socket disconnected: LAXrnwy4eAFYvjMqAAAF
+[2026-06-07T04:32:54.967Z] [WARN] Socket disconnected: r1w60IJZhhhZUW82AAAB
+[2026-06-07T04:33:02.316Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:33:02.321Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:33:02.358Z] [INFO] Socket connected: 39E3yD90gfDzEOogAAAB
+[2026-06-07T04:33:02.360Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:33:02.524Z] [INFO] Socket connected: vAkQrFv0RlYxwzwEAAAD
+[2026-06-07T04:33:02.527Z] [INFO] User registered: sessionId=s6kwc4gd0ta
+[2026-06-07T04:34:59.398Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:34:59.405Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:35:00.144Z] [INFO] Socket connected: a7iPep_hF5Kt-FhBAAAB
+[2026-06-07T04:35:00.147Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:35:00.196Z] [WARN] Socket disconnected: a7iPep_hF5Kt-FhBAAAB
+[2026-06-07T04:35:01.860Z] [INFO] Socket connected: IyJP8PFWYfL9GaeeAAAD
+[2026-06-07T04:35:01.862Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:36:22.440Z] [INFO] Received consent request
+[2026-06-07T04:36:22.481Z] [INFO] Consent saved for sessionId=3fk3b50xwul
+[2026-06-07T04:36:22.526Z] [INFO] Socket connected: WqvzfCbqM_kEzGBcAAAF
+[2026-06-07T04:36:22.530Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:36:33.102Z] [INFO] User queued: vm0804k37c | mode=chat
+[2026-06-07T04:36:38.471Z] [INFO] User queued: 3fk3b50xwul | mode=chat
+[2026-06-07T04:36:38.475Z] [INFO] Room created b1cf45eb-6989-467c-9f2c-3afec7c3384e for 3fk3b50xwul & vm0804k37c | mode=chat
+[2026-06-07T04:38:13.670Z] [INFO] Room b1cf45eb-6989-467c-9f2c-3afec7c3384e closed. 3fk3b50xwul left; vm0804k37c idle.
+[2026-06-07T04:38:13.677Z] [WARN] Socket disconnected: WqvzfCbqM_kEzGBcAAAF
+[2026-06-07T04:38:13.709Z] [INFO] Socket connected: 9Is_CIR6aIVi79a_AAAH
+[2026-06-07T04:38:13.719Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:38:13.889Z] [WARN] Socket disconnected: IyJP8PFWYfL9GaeeAAAD
+[2026-06-07T04:38:13.970Z] [INFO] Socket connected: _dEKv1igSBB2wQBCAAAJ
+[2026-06-07T04:38:13.992Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:39:00.399Z] [INFO] Room created ae945ee5-0c47-41d3-9f1c-af89c196738a for 3fk3b50xwul & vm0804k37c | mode=video
+[2026-06-07T04:39:12.693Z] [INFO] Room ae945ee5-0c47-41d3-9f1c-af89c196738a closed. vm0804k37c left; 3fk3b50xwul idle.
+[2026-06-07T04:39:12.697Z] [WARN] Socket disconnected: _dEKv1igSBB2wQBCAAAJ
+[2026-06-07T04:39:12.986Z] [INFO] Socket connected: ZlgexAiSSdxzHlD5AAAL
+[2026-06-07T04:39:12.992Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:39:17.544Z] [WARN] Socket disconnected: 9Is_CIR6aIVi79a_AAAH
+[2026-06-07T04:39:17.724Z] [INFO] Socket connected: Zu0p8h3Ucv2poXlfAAAN
+[2026-06-07T04:39:17.726Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:39:17.753Z] [WARN] Socket disconnected: Zu0p8h3Ucv2poXlfAAAN
+[2026-06-07T04:39:17.883Z] [INFO] Socket connected: uupN7slOqLnXhoX8AAAP
+[2026-06-07T04:39:17.885Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:39:18.835Z] [WARN] Socket disconnected: uupN7slOqLnXhoX8AAAP
+[2026-06-07T04:39:18.937Z] [INFO] Socket connected: IBcXt2MWASAEp3uAAAAR
+[2026-06-07T04:39:18.939Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:39:19.070Z] [WARN] Socket disconnected: IBcXt2MWASAEp3uAAAAR
+[2026-06-07T04:39:19.172Z] [INFO] Socket connected: SvxBXlc62AQmBNfJAAAT
+[2026-06-07T04:39:19.174Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:39:20.720Z] [INFO] User queued: 3fk3b50xwul | mode=chat
+[2026-06-07T04:39:22.633Z] [INFO] User queued: vm0804k37c | mode=chat
+[2026-06-07T04:39:22.636Z] [INFO] Room created f268c40d-e351-4874-9407-60a5238970b6 for 3fk3b50xwul & vm0804k37c | mode=chat
+[2026-06-07T04:40:04.773Z] [INFO] Room f268c40d-e351-4874-9407-60a5238970b6 closed. 3fk3b50xwul left; vm0804k37c idle.
+[2026-06-07T04:40:04.775Z] [WARN] Socket disconnected: SvxBXlc62AQmBNfJAAAT
+[2026-06-07T04:40:04.781Z] [WARN] Socket disconnected: ZlgexAiSSdxzHlD5AAAL
+[2026-06-07T04:40:04.785Z] [INFO] Socket connected: RSZRCUX8qS43BBShAAAV
+[2026-06-07T04:40:04.789Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:40:04.797Z] [INFO] Socket connected: 57BdFJSbr3OjoD7VAAAX
+[2026-06-07T04:40:04.798Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:41:38.978Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:41:38.985Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:41:39.254Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:41:39.778Z] [INFO] Socket connected: uiDddbfdFC6eGQrUAAAC
+[2026-06-07T04:41:39.780Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:41:39.783Z] [INFO] Socket connected: YiaGkRbCs_XwucaJAAAD
+[2026-06-07T04:41:39.786Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:41:49.598Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:41:49.605Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:41:49.780Z] [INFO] Socket connected: rFOSOfkoER9K4xwgAAAB
+[2026-06-07T04:41:49.782Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:41:49.781Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:41:49.789Z] [INFO] Socket connected: 94Gt7XcVXOlTOSSJAAAD
+[2026-06-07T04:41:49.790Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:41:56.763Z] [WARN] Socket disconnected: rFOSOfkoER9K4xwgAAAB
+[2026-06-07T04:41:56.776Z] [INFO] Socket connected: usqqbLlwj5yw1BWEAAAF
+[2026-06-07T04:41:56.779Z] [WARN] Socket disconnected: 94Gt7XcVXOlTOSSJAAAD
+[2026-06-07T04:41:56.783Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:41:56.802Z] [INFO] Socket connected: jGL_NGgI5eFhiJ_rAAAH
+[2026-06-07T04:41:56.805Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:42:18.763Z] [WARN] Socket disconnected: usqqbLlwj5yw1BWEAAAF
+[2026-06-07T04:42:18.769Z] [WARN] Socket disconnected: jGL_NGgI5eFhiJ_rAAAH
+[2026-06-07T04:42:18.772Z] [INFO] Socket connected: A4T1huZGciwP8epqAAAJ
+[2026-06-07T04:42:18.775Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:42:18.789Z] [INFO] Socket connected: -LyECv4Ui5uv7WxPAAAL
+[2026-06-07T04:42:18.791Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:47:57.854Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:47:57.865Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:47:58.060Z] [INFO] Socket connected: y2hS_uigabbQFeNJAAAB
+[2026-06-07T04:47:58.063Z] [INFO] User registered: sessionId=3fk3b50xwul
+[2026-06-07T04:47:58.251Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:47:58.773Z] [INFO] Socket connected: Jib46hyX0AqOggh9AAAD
+[2026-06-07T04:47:58.774Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:48:01.796Z] [WARN] Socket disconnected: y2hS_uigabbQFeNJAAAB
+[2026-06-07T04:48:11.749Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:48:11.756Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:48:11.975Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:48:12.788Z] [INFO] Socket connected: xINbisBNmYhzlVe1AAAB
+[2026-06-07T04:48:12.791Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:49:30.069Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:49:30.076Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:49:30.308Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:49:30.788Z] [INFO] Socket connected: HoMkzxtWc-KsHucWAAAB
+[2026-06-07T04:49:30.790Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T04:59:44.455Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:59:44.460Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T04:59:44.616Z] [INFO] MongoDB connected successfully
+[2026-06-07T04:59:44.780Z] [INFO] Socket connected: Gdy_k5rAZdvlR0b4AAAB
+[2026-06-07T04:59:44.783Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T05:00:14.809Z] [WARN] Socket disconnected: Gdy_k5rAZdvlR0b4AAAB
+[2026-06-07T05:00:14.838Z] [INFO] Socket connected: zsyw91R5ZIR71KTLAAAD
+[2026-06-07T05:00:14.843Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T05:00:39.211Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:00:39.222Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T05:00:39.403Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:00:39.464Z] [INFO] Socket connected: GrYyjJzRVD42IZMdAAAB
+[2026-06-07T05:00:39.466Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T05:06:17.776Z] [WARN] Socket disconnected: GrYyjJzRVD42IZMdAAAB
+[2026-06-07T05:06:17.784Z] [INFO] Socket connected: -2ACOGzjUNKLvOFlAAAD
+[2026-06-07T05:06:17.786Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T05:07:20.795Z] [INFO] User vm0804k37c accepted updated policies.
+[2026-06-07T05:07:31.872Z] [INFO] Received consent request
+[2026-06-07T05:07:31.909Z] [INFO] Consent saved for sessionId=ioet0tlhzi
+[2026-06-07T05:07:31.949Z] [INFO] Socket connected: y1M_goPCMHYCs4G3AAAF
+[2026-06-07T05:07:31.951Z] [INFO] User registered: sessionId=ioet0tlhzi
+[2026-06-07T05:07:39.113Z] [INFO] User queued: ioet0tlhzi | mode=chat
+[2026-06-07T05:07:42.879Z] [INFO] User queued: vm0804k37c | mode=chat
+[2026-06-07T05:07:42.882Z] [INFO] Room created f5d9b95e-4a6a-430a-985f-6169936922b8 for vm0804k37c & ioet0tlhzi | mode=chat
+[2026-06-07T05:09:33.767Z] [INFO] Room f5d9b95e-4a6a-430a-985f-6169936922b8 closed. ioet0tlhzi left; vm0804k37c idle.
+[2026-06-07T05:09:33.768Z] [WARN] Socket disconnected: y1M_goPCMHYCs4G3AAAF
+[2026-06-07T05:09:33.777Z] [WARN] Socket disconnected: -2ACOGzjUNKLvOFlAAAD
+[2026-06-07T05:09:33.778Z] [INFO] Socket connected: IGFQa4KQOtaHl23QAAAH
+[2026-06-07T05:09:33.781Z] [INFO] User registered: sessionId=ioet0tlhzi
+[2026-06-07T05:09:33.820Z] [INFO] Socket connected: x6LZ0dW3rm03MHMvAAAJ
+[2026-06-07T05:09:33.821Z] [INFO] User registered: sessionId=vm0804k37c
+[2026-06-07T05:12:43.933Z] [INFO] Friend request sent: vm0804k37c -> ioet0tlhzi
+[2026-06-07T05:13:35.966Z] [WARN] Socket disconnected: x6LZ0dW3rm03MHMvAAAJ
+[2026-06-07T05:13:38.305Z] [WARN] Socket disconnected: IGFQa4KQOtaHl23QAAAH
+[2026-06-07T05:16:21.187Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:16:21.194Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T05:16:21.406Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:16:29.335Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:16:29.340Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T05:16:29.575Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:16:40.995Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:16:41.000Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T05:16:41.229Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:17:02.565Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:17:02.570Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T05:17:02.764Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:17:26.003Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:17:26.009Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T05:17:26.232Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:19:07.499Z] [INFO] MongoDB connected successfully
+[2026-06-07T05:19:07.504Z] [INFO] 🚀 Server running on http://localhost:5000
+[2026-06-07T05:19:07.768Z] [INFO] MongoDB connected successfully

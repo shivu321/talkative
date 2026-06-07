@@ -11,7 +11,7 @@ export default function PrivacyPolicyModal({ show, handleClose }) {
       <Modal.Body>
         <h4 className="mb-3">Privacy Policy for Talkative</h4>
         <p>
-          <strong>Last Updated:</strong> August 25, 2025
+          <strong>Last Updated:</strong> June 7, 2026
         </p>
         <p>
           Talkative ("we," "us," or "our") is committed to protecting your
@@ -41,9 +41,9 @@ export default function PrivacyPolicyModal({ show, handleClose }) {
           </li>
           <li>
             <strong>Chat & Video Content:</strong> Text messages and video streams
-            are transmitted between users. We do not store or record these
-            conversations after the session ends, except for data related to
-            user reports for moderation purposes.
+            are transmitted between users. For direct Friend Chats, text messages
+            are securely saved to our database to provide a persistent, historical chat viewer.
+            Anonymous stranger chat sessions (text and video) are peer-to-peer and are NOT stored or recorded on our servers.
           </li>
           <li>
             <strong>Usage Data:</strong> We automatically collect non-personal
@@ -128,7 +128,7 @@ export default function PrivacyPolicyModal({ show, handleClose }) {
 
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="outline-light" className="px-4 rounded-pill" onClick={handleClose}>
+        <Button variant="outline-secondary" className="px-4 rounded-pill" style={{ color: "var(--text-main)", borderColor: "var(--glass-border)" }} onClick={handleClose}>
           Close
         </Button>
       </Modal.Footer>

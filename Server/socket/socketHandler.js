@@ -2,6 +2,8 @@
 import { v4 as uuidv4 } from "uuid";
 import logger from "../logger.js";
 import Message from "../models/Message.js";
+import Friendship from "../models/Friendship.js";
+import Consent from "../models/Consent.js";
 
 const activeUsers = new Map(); // sessionId -> { socket, status, roomId?, mode? }
 let queue = []; // array of sessionIds (we dedupe proactively)
@@ -69,6 +71,29 @@ function socketHandler(io) {
       socket.emit("registered", {
         sessionId,
       });
+
+      // Check for updated policy consent
+      Consent.findOne({ sessionId })
+        .then((consentDoc) => {
+          if (consentDoc) {
+            // Save gender to active user state
+            const state = activeUsers.get(sessionId);
+            if (state) {
+              state.gender = consentDoc.gender || "other";
+              activeUsers.set(sessionId, state);
+            }
+
+            const policyUpdateDate = new Date("2026-06-07T00:00:00.000Z");
+            if (consentDoc.createdAt < policyUpdateDate) {
+              socket.emit("policy-updated-notification", {
+                message: "Notice: Our Privacy Policy and Terms & Conditions were updated on June 7, 2026. Please review and accept the new terms.",
+                updatedAt: "2026-06-07T00:00:00.000Z"
+              });
+            }
+          }
+        })
+        .catch((err) => logger.error("Consent check failed: " + err.message));
+
       const totalOnline = activeUsers.size;
       io.emit("onlineCount", { total: totalOnline });
     });
@@ -243,6 +268,247 @@ function socketHandler(io) {
       });
     });
 
+    // ==========================================================================
+    // Friendship System Socket Events
+    // ==========================================================================
+
+    // a) Send friend request
+    socket.on("friend-request-send", async ({ toUserId }) => {
+      if (!ensureRegistered()) return;
+      const sid = socket.sessionId;
+      if (!toUserId) return;
+
+      const targetId = toUserId.replace(/^talkative_/, "").trim();
+
+      if (sid === targetId) {
+        return socket.emit("error", { code: "SELF_REQ", message: "You cannot add yourself" });
+      }
+
+      try {
+        const targetUser = await Consent.findOne({ sessionId: targetId });
+        if (!targetUser) {
+          return socket.emit("error", { code: "USER_NOT_FOUND", message: "User handle not found" });
+        }
+
+        let friendship = await Friendship.findOne({
+          $or: [
+            { requester: sid, receiver: targetId },
+            { requester: targetId, receiver: sid }
+          ]
+        });
+
+        if (friendship) {
+          if (friendship.status === "accepted") {
+            return socket.emit("error", { code: "ALREADY_FRIENDS", message: "Already friends" });
+          } else if (friendship.requester === sid) {
+            return socket.emit("error", { code: "REQ_PENDING", message: "Friend request already sent" });
+          } else {
+            friendship.status = "accepted";
+            await friendship.save();
+            socket.emit("friend-request-accepted", { friendId: targetId });
+            relay(targetId, "friend-request-accepted", { friendId: sid });
+            return;
+          }
+        }
+
+        friendship = new Friendship({
+          requester: sid,
+          receiver: targetId,
+          status: "pending"
+        });
+        await friendship.save();
+
+        logger.info(`Friend request sent: ${sid} -> ${targetId}`);
+        socket.emit("friend-request-sent-success", { toUserId: targetId });
+        relay(targetId, "friend-request-received", { fromUserId: sid });
+      } catch (e) {
+        logger.error("Friend request failed: " + e.message);
+        socket.emit("error", { code: "REQ_FAILED", message: "Failed to send request" });
+      }
+    });
+
+    // b) Accept friend request
+    socket.on("friend-request-accept", async ({ fromUserId }) => {
+      if (!ensureRegistered()) return;
+      const sid = socket.sessionId;
+      const targetId = fromUserId.replace(/^talkative_/, "").trim();
+
+      try {
+        const friendship = await Friendship.findOne({
+          requester: targetId,
+          receiver: sid,
+          status: "pending"
+        });
+
+        if (!friendship) {
+          return socket.emit("error", { code: "REQ_NOT_FOUND", message: "No pending request found" });
+        }
+
+        friendship.status = "accepted";
+        await friendship.save();
+
+        logger.info(`Friend request accepted: ${targetId} <-> ${sid}`);
+        socket.emit("friend-request-accepted", { friendId: targetId });
+        relay(targetId, "friend-request-accepted", { friendId: sid });
+      } catch (e) {
+        logger.error("Accept request failed: " + e.message);
+      }
+    });
+
+    // c) Decline / Cancel request
+    socket.on("friend-request-decline", async ({ fromUserId }) => {
+      if (!ensureRegistered()) return;
+      const sid = socket.sessionId;
+      const targetId = fromUserId.replace(/^talkative_/, "").trim();
+
+      try {
+        await Friendship.deleteOne({
+          $or: [
+            { requester: targetId, receiver: sid, status: "pending" },
+            { requester: sid, receiver: targetId, status: "pending" }
+          ]
+        });
+        socket.emit("friend-request-declined", { friendId: targetId });
+        relay(targetId, "friend-request-declined", { friendId: sid });
+      } catch (e) {
+        logger.error("Decline request failed: " + e.message);
+      }
+    });
+
+    // d) Get requests lists
+    socket.on("friend-requests-get", async () => {
+      if (!ensureRegistered()) return;
+      const sid = socket.sessionId;
+
+      try {
+        const requests = await Friendship.find({
+          $or: [{ requester: sid }, { receiver: sid }]
+        });
+
+        const sent = requests.filter(r => r.requester === sid && r.status === "pending").map(r => r.receiver);
+        const received = requests.filter(r => r.receiver === sid && r.status === "pending").map(r => r.requester);
+        const friends = requests.filter(r => r.status === "accepted").map(r => r.requester === sid ? r.receiver : r.requester);
+
+        socket.emit("friend-requests-list", { sent, received, friends });
+      } catch (e) {
+        logger.error("Fetch requests failed: " + e.message);
+      }
+    });
+
+    // d2) Accept updated policy consent
+    socket.on("policy-accepted", async () => {
+      if (!ensureRegistered()) return;
+      const sid = socket.sessionId;
+      try {
+        await Consent.updateOne({ sessionId: sid }, { createdAt: new Date() });
+        logger.info(`User ${sid} accepted updated policies.`);
+      } catch (e) {
+        logger.error("Failed to update policy consent date: " + e.message);
+      }
+    });
+
+    // e) Initialize friend chat session
+    socket.on("friend-chat-init", async ({ friendId }) => {
+      if (!ensureRegistered()) return;
+      const sid = socket.sessionId;
+      const targetId = friendId.replace(/^talkative_/, "").trim();
+
+      try {
+        const friendship = await Friendship.findOne({
+          $or: [
+            { requester: sid, receiver: targetId, status: "accepted" },
+            { requester: targetId, receiver: sid, status: "accepted" }
+          ]
+        });
+
+        const targetConsent = await Consent.findOne({ sessionId: targetId });
+        const targetGender = targetConsent?.gender || "other";
+
+        const chatLogs = await Message.find({
+          $or: [
+            { senderId: sid, receiverId: targetId },
+            { senderId: targetId, receiverId: sid }
+          ]
+        }).sort({ createdAt: 1 });
+
+        const formattedLogs = chatLogs.map(m => ({
+          from: m.senderId === sid ? "me" : m.senderId,
+          text: m.text,
+          createdAt: m.createdAt
+        }));
+
+        if (!friendship) {
+          return socket.emit("friend-chat-init-response", {
+            isFriend: false,
+            friendId: targetId,
+            messages: [],
+            isOnline: false
+          });
+        }
+
+        const friendState = activeUsers.get(targetId);
+        const isOnline = !!(friendState && friendState.socket?.connected);
+
+        if (isOnline) {
+          const roomId = [sid, targetId].sort().join("_");
+          
+          socket.join(roomId);
+          friendState.socket.join(roomId);
+
+          rooms.set(roomId, {
+            a: { socket, sessionId: sid },
+            b: { socket: friendState.socket, sessionId: targetId },
+            mode: "chat"
+          });
+
+          // Preserve existing activeUsers fields including gender
+          const myCurrentState = activeUsers.get(sid) || {};
+          const friendCurrentState = activeUsers.get(targetId) || {};
+
+          activeUsers.set(sid, { ...myCurrentState, socket, status: "busy", roomId, mode: "chat" });
+          activeUsers.set(targetId, { ...friendCurrentState, socket: friendState.socket, status: "busy", roomId, mode: "chat" });
+
+          socket.emit("friend-chat-init-response", {
+            isFriend: true,
+            friendId: targetId,
+            messages: formattedLogs,
+            isOnline: true,
+            roomId,
+            partnerGender: targetGender
+          });
+
+          // Reuse the core "matched" event so client matching loads the history cleanly
+          socket.emit("matched", {
+            roomId,
+            partnerId: targetId,
+            mode: "chat",
+            messages: formattedLogs,
+            isFriendChat: true,
+            partnerGender: targetGender
+          });
+
+          friendState.socket.emit("matched", {
+            roomId,
+            partnerId: sid,
+            mode: "chat",
+            messages: formattedLogs,
+            isFriendChat: true,
+            partnerGender: myCurrentState.gender || "other"
+          });
+        } else {
+          socket.emit("friend-chat-init-response", {
+            isFriend: true,
+            friendId: targetId,
+            messages: formattedLogs,
+            isOnline: false,
+            partnerGender: targetGender
+          });
+        }
+      } catch (e) {
+        logger.error("Friend chat init failed: " + e.message);
+      }
+    });
+
     // 7) Disconnect
     socket.on("disconnect", () => {
       // prune from queue
@@ -359,14 +625,17 @@ function socketHandler(io) {
           mode,
         });
 
+        const myGender = aState.gender || "other";
+        const partnerGender = bState.gender || "other";
+
         activeUsers.set(sa.sessionId, {
-          socket: sa,
+          ...aState,
           status: "busy",
           roomId,
           mode,
         });
         activeUsers.set(sb.sessionId, {
-          socket: sb,
+          ...bState,
           status: "busy",
           roomId,
           mode,
@@ -381,11 +650,13 @@ function socketHandler(io) {
         sa.emit("matched", {
           roomId,
           partnerId: sb.sessionId,
+          partnerGender: partnerGender,
           mode,
         });
         sb.emit("matched", {
           roomId,
           partnerId: sa.sessionId,
+          partnerGender: myGender,
           mode,
         });
 
@@ -396,6 +667,7 @@ function socketHandler(io) {
     }
   }
 
+  // Socket utility relayer
   function relay(toSessionId, event, payload) {
     const dest = activeUsers.get(toSessionId)?.socket;
     if (!dest) return;

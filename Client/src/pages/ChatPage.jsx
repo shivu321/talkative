@@ -6,10 +6,12 @@ import { SOCKET_URL } from "../api";
 import ModeSelectionView from "../components/Chat/ModeSelectionView";
 import QueueView from "../components/Chat/QueueView";
 import ChatView from "../components/Chat/ChatView";
+import PrivacyModal from "../components/PrivacyModal";
+import TermsModal from "../components/TermsModal";
 
 const uid = () => Math.random().toString(36).slice(2) + Date.now().toString(36);
 
-export default function ChatPage({ sessionId }) {
+export default function ChatPage({ sessionId, theme, toggleTheme }) {
   const socketRef = useRef(null);
   const peerRef = useRef(null);
 
@@ -38,6 +40,17 @@ export default function ChatPage({ sessionId }) {
   const [messageFlag, SetMessageFlag] = useState(false);
   const [validationMessage, SetValidationMessage] = useState("");
 
+  const [friendRequests, setFriendRequests] = useState({ sent: [], received: [], friends: [] });
+  const [isFriendChat, setIsFriendChat] = useState(false);
+  const [isFriendOnline, setIsFriendOnline] = useState(false);
+  const [isFriendshipAccepted, setIsFriendshipAccepted] = useState(false);
+  const [partnerGender, setPartnerGender] = useState(null);
+
+  const [showPrivacy, setShowPrivacy] = useState(false);
+  const [showTerms, setShowTerms] = useState(false);
+  const [showPolicyNotification, setShowPolicyNotification] = useState(false);
+  const [policyNotificationMessage, setPolicyNotificationMessage] = useState("");
+
   // -----------------------------------------
   // Message validation
   // -----------------------------------------
@@ -51,6 +64,11 @@ export default function ChatPage({ sessionId }) {
     const emailRegex = /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z]{2,}\b/i;
     const phoneRegex = /\b(?:\+?\d{1,3}[-.\s]?)?(?:\d[-.\s]?){8,}\d\b/;
 
+    if (text.includes("@") || text.includes("_"))
+      return {
+        flag: true,
+        message: "❌ Usernames or handles containing '@' or '_' are not allowed.",
+      };
     if (digitRegex.test(text))
       return { flag: true, message: "❌ Numbers are not allowed." };
     if (numberWords.test(text))
@@ -96,14 +114,9 @@ export default function ChatPage({ sessionId }) {
       setBanner(null);
     });
 
-    socket.on("registered", () =>
-      setBanner("Registered. Select a mode to start.")
-    );
-
-    socket.on("error", (err) => {
-      const msg =
-        typeof err === "string" ? err : err?.message || "Unknown error";
-      setBanner(`Error: ${msg}`);
+    socket.on("registered", () => {
+      setBanner("Registered. Select a mode to start.");
+      socket.emit("friend-requests-get");
     });
 
     socket.on("queued", () => {
@@ -111,19 +124,72 @@ export default function ChatPage({ sessionId }) {
       setBanner("Searching for a partner...");
     });
 
+    socket.on("error", (err) => {
+      const msg =
+        typeof err === "string" ? err : err?.message || "Unknown error";
+      setBanner(`Error: ${msg}`);
+      alert(`Error: ${msg}`);
+    });
+
+    socket.on("friend-requests-list", ({ sent, received, friends }) => {
+      setFriendRequests({ sent, received, friends });
+    });
+
+    socket.on("friend-request-received", ({ fromUserId }) => {
+      alert(`New friend request received from talkative_${fromUserId}!`);
+      socketRef.current?.emit("friend-requests-get");
+    });
+
+    socket.on("friend-request-accepted", ({ friendId }) => {
+      alert(`You are now friends with talkative_${friendId}!`);
+      socketRef.current?.emit("friend-requests-get");
+    });
+
+    socket.on("friend-request-declined", () => {
+      socketRef.current?.emit("friend-requests-get");
+    });
+
+    socket.on("friend-request-sent-success", ({ toUserId }) => {
+      alert(`Friend request sent successfully to talkative_${toUserId}!`);
+      socketRef.current?.emit("friend-requests-get");
+    });
+
+    socket.on("policy-updated-notification", ({ message }) => {
+      setShowPolicyNotification(true);
+      setPolicyNotificationMessage(message);
+    });
+
+    socket.on("friend-chat-init-response", ({ isFriend, friendId, messages: historicalMessages, isOnline, roomId: rid, partnerGender: pGender }) => {
+      setIsFriendChat(true);
+      setIsFriendshipAccepted(isFriend);
+      setIsFriendOnline(isOnline);
+      setPartnerId(friendId);
+      setPartnerGender(pGender || "other");
+      setMessages(historicalMessages || []);
+      setStatus("connected");
+      setRoomId(rid || "offline_room");
+      setPartnerPresent(isOnline);
+      setMode("chat");
+    });
+
     socket.on(
       "matched",
-      ({ roomId: rid, partnerId: pid, mode: matchedMode }) => {
+      ({ roomId: rid, partnerId: pid, mode: matchedMode, messages: historicalMessages, isFriendChat: matchedIsFriendChat, partnerGender: pGender }) => {
         displayedIdsRef.current.clear();
         setShowEmoji(false);
         setPartnerPresent(true);
         setPartnerTyping(false);
-        setMessages([]);
+        setMessages(historicalMessages || []);
         setBanner(null);
         sendBusyRef.current = false;
         setStatus("connected");
         setRoomId(rid);
         setPartnerId(pid);
+        setPartnerGender(pGender || "other");
+
+        setIsFriendChat(!!matchedIsFriendChat);
+        setIsFriendshipAccepted(!!matchedIsFriendChat);
+        setIsFriendOnline(!!matchedIsFriendChat);
 
         const finalMode = matchedMode || mode;
 
@@ -159,6 +225,7 @@ export default function ChatPage({ sessionId }) {
     socket.on("partner-left", () => {
       setPartnerPresent(false);
       setPartnerTyping(false);
+      setIsFriendOnline(false);
       const sysId = uid();
       displayedIdsRef.current.add(sysId);
       setMessages((prev) => [
@@ -349,6 +416,10 @@ export default function ChatPage({ sessionId }) {
   // Chat handlers
   // -----------------------------------------
   const handleModeSelect = async (m) => {
+    if (showPolicyNotification) {
+      alert("Please accept the updated Privacy Policy and Terms & Conditions at the top of the page first.");
+      return;
+    }
     setMode(m);
     setBanner(null);
     setMessages([]);
@@ -439,8 +510,39 @@ export default function ChatPage({ sessionId }) {
     setPartnerPresent(false);
     setPartnerTyping(false);
     displayedIdsRef.current.clear();
-    sendBusyRef.current = false;
     nextBusyRef.current = false;
+  };
+
+  const handleConnectWithFriend = (friendId) => {
+    if (showPolicyNotification) {
+      alert("Please accept the updated Privacy Policy and Terms & Conditions at the top of the page first.");
+      return;
+    }
+    if (!socketRef.current) return;
+    socketRef.current.emit("friend-chat-init", { friendId });
+  };
+
+  const handleAcceptRequest = (fromUserId) => {
+    if (showPolicyNotification) {
+      alert("Please accept the updated Privacy Policy and Terms & Conditions at the top of the page first.");
+      return;
+    }
+    if (!socketRef.current) return;
+    socketRef.current.emit("friend-request-accept", { fromUserId });
+  };
+
+  const handleDeclineRequest = (fromUserId) => {
+    if (!socketRef.current) return;
+    socketRef.current.emit("friend-request-decline", { fromUserId });
+  };
+
+  const handleSendRequestDirectly = (toUserId) => {
+    if (showPolicyNotification) {
+      alert("Please accept the updated Privacy Policy and Terms & Conditions at the top of the page first.");
+      return;
+    }
+    if (!socketRef.current) return;
+    socketRef.current.emit("friend-request-send", { toUserId });
   };
 
   // -----------------------------------------
@@ -473,7 +575,11 @@ export default function ChatPage({ sessionId }) {
         partnerTyping,
         input,
         showEmoji,
-        canSend: mode === "chat" && partnerPresent && status === "connected",
+        canSend:
+          status === "connected" &&
+          (isFriendChat
+            ? isFriendshipAccepted && isFriendOnline
+            : partnerPresent),
         handleTyping,
         sendMsg,
         setShowEmoji,
@@ -484,6 +590,16 @@ export default function ChatPage({ sessionId }) {
         SetMessageFlag,
         validationMessage,
         SetValidationMessage,
+        theme,
+        toggleTheme,
+        isFriendChat,
+        isFriendOnline,
+        isFriendshipAccepted,
+        friendRequests,
+        onSendRequestDirectly: handleSendRequestDirectly,
+        mySessionId: sessionId,
+        partnerId,
+        partnerGender,
       };
       return <ChatView {...chatViewProps} />;
     }
@@ -492,16 +608,88 @@ export default function ChatPage({ sessionId }) {
         banner={banner}
         onModeSelect={handleModeSelect}
         totalOnline={typedText}
+        onConnectWithFriend={handleConnectWithFriend}
+        friendRequests={friendRequests}
+        onAcceptRequest={handleAcceptRequest}
+        onDeclineRequest={handleDeclineRequest}
+        onSendRequestDirectly={handleSendRequestDirectly}
+        mySessionId={sessionId}
       />
     );
   };
 
   return (
     <div
-      className="container-fluid d-flex flex-column"
-      style={{ minHeight: "100vh", backgroundColor: "#f8f9fa" }}
+      className="container-fluid d-flex flex-column bg-transparent position-relative"
+      style={{ minHeight: "100vh" }}
     >
+      {/* Theme Toggle Button for Selection Screen */}
+      {status === "idle" && (
+        <div className="position-absolute top-0 end-0 m-3" style={{ zIndex: 100 }}>
+          <button
+            className="btn btn-outline-light rounded-circle border-0 d-flex align-items-center justify-content-center shadow-sm"
+            onClick={toggleTheme}
+            style={{ width: "42px", height: "42px", color: "var(--text-main)", background: "var(--glass-bg)", border: "1px solid var(--glass-border)" }}
+            type="button"
+            title="Toggle Theme"
+          >
+            <i className={theme === "light" ? "bi bi-moon-stars-fill" : "bi bi-sun-fill"}></i>
+          </button>
+        </div>
+      )}
+
+      {/* Policy Update Notification Banner */}
+      {showPolicyNotification && status === "idle" && (
+        <div 
+          className="alert alert-info border-0 rounded-4 p-3 m-3 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 glass-panel"
+          style={{ 
+            color: 'var(--text-main)', 
+            border: '1px solid rgba(109, 117, 242, 0.3)',
+            boxShadow: '0 0 15px rgba(109, 117, 242, 0.15)',
+            marginTop: '70px',
+            zIndex: 10
+          }}
+        >
+          <div className="d-flex align-items-center gap-2">
+            <i className="bi bi-shield-fill-info text-primary fs-5 animate-pulse"></i>
+            <span className="small fw-semibold text-start">{policyNotificationMessage}</span>
+          </div>
+          <div className="d-flex gap-2 flex-shrink-0">
+            <button 
+              className="btn btn-sm btn-outline-secondary rounded-pill py-1 px-3"
+              style={{ color: "var(--text-main)", borderColor: "var(--glass-border)", fontSize: "0.8rem" }}
+              onClick={() => setShowPrivacy(true)}
+            >
+              Privacy Policy
+            </button>
+            <button 
+              className="btn btn-sm btn-outline-secondary rounded-pill py-1 px-3"
+              style={{ color: "var(--text-main)", borderColor: "var(--glass-border)", fontSize: "0.8rem" }}
+              onClick={() => setShowTerms(true)}
+            >
+              Terms & Conditions
+            </button>
+            <button 
+              className="btn btn-sm btn-glowing-primary rounded-pill py-1.5 px-4"
+              style={{ fontSize: "0.8rem" }}
+              onClick={() => {
+                setShowPolicyNotification(false);
+                socketRef.current?.emit("policy-accepted");
+              }}
+            >
+              Accept & Dismiss
+            </button>
+          </div>
+        </div>
+      )}
+
       {renderContent()}
+
+      <PrivacyModal
+        show={showPrivacy}
+        handleClose={() => setShowPrivacy(false)}
+      />
+      <TermsModal show={showTerms} handleClose={() => setShowTerms(false)} />
     </div>
   );
 }

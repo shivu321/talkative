@@ -16,6 +16,8 @@ import socketHandler from "./socket/socketHandler.js";
 dotenv.config();
 
 const app = express();
+app.disable("x-powered-by"); // Security: Disable signature disclosures
+
 const httpServer = createServer(app);
 const allowedOrigins = [
     process.env.CLIENT_ORIGIN,
@@ -49,12 +51,36 @@ const io = new Server(httpServer, {
     },
 });
 
+// Security: Custom in-memory rate-limiter middleware for consent route (preventing abuse/flooding)
+const rateLimitWindow = 15 * 60 * 1000; // 15 minutes
+const rateLimitMax = 100; // Limit each IP to 100 requests per window
+const ipRequestMap = new Map();
+
+const rateLimiter = (req, res, next) => {
+    const ip = req.ip || req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+    const now = Date.now();
+    
+    if (!ipRequestMap.has(ip)) {
+        ipRequestMap.set(ip, []);
+    }
+    
+    const timestamps = ipRequestMap.get(ip).filter(t => now - t < rateLimitWindow);
+    timestamps.push(now);
+    ipRequestMap.set(ip, timestamps);
+    
+    if (timestamps.length > rateLimitMax) {
+        logger.warn(`Rate limit exceeded for IP: ${ip}`);
+        return res.status(429).json({ message: "Too many requests. Please try again later." });
+    }
+    next();
+};
+
 // Middleware
-app.use(express.json());
+app.use(express.json({ limit: "10kb" })); // Security: Limit body size to prevent JSON DoS
 app.use(cors(corsOptions));
 
 // Routes
-app.use("/consent", consentRoutes);
+app.use("/consent", rateLimiter, consentRoutes);
 
 // ✅ MongoDB Connection
 try {

@@ -30,7 +30,7 @@ export default function MessageList({ messages = [], partnerTyping }) {
                 ? 'bg-secondary bg-opacity-10 text-muted small fst-italic rounded-pill px-4'
                 : msg.from === 'me'
                 ? 'chat-bubble-me rounded-4 rounded-end-0 text-white'
-                : 'chat-bubble-partner rounded-4 rounded-start-0 text-white'
+                : 'chat-bubble-partner rounded-4 rounded-start-0'
             }`}
             style={{ 
               maxWidth: '82%', 
